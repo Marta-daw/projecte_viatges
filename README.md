@@ -2,9 +2,9 @@
 Projecte de javascript, php i html/css
 
 # Integrant de l'equip
-Ivan Benitez
-Daniel de Maria
-Marta Llabrés
+- Ivan Benitez
+- Daniel de Maria
+- Marta Llabrés
 
 # Objectiu del projecte 
 
