@@ -1,0 +1,40 @@
+.headerGeneral {
+    margin: 0;
+    background-color: var(--warm-sand-darker);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    outline: none;
+    border: none;
+}
+
+.logoNomWeb {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.nomWeb {
+    color: var(--brown-compass);
+    font-family: var(--font-principal);
+    font-size: var(--font-size-xxl);
+    font-weight: bold;
+}
+
+.navHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    a {
+        color: var(--brown-compass);
+        text-decoration: none;
+        font-size: var(--font-size-xl);
+        font-family: var(--font-principal);
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
