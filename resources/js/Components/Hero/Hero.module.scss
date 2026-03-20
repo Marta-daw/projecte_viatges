@@ -1,0 +1,43 @@
+.heroContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    grid-column: span 12;
+}
+
+.heroImg {
+    width: 1200px;
+    height: auto;
+    margin-top: 2px;
+
+    opacity: 0.9;
+    display: block;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+
+    &:hover {
+        transform: scale(1.02);
+        opacity: 0.7;
+    }
+}
+
+.heroTextContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -150%);
+    color: var(--ivory-beige);
+    text-align: center;
+    padding: var(--spacing-large);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    font-family: var(--font-principal);
+    font-size: var(--font-size-h1);
+    margin-bottom: var(--spacing-medium);
+}
+
+p {
+    font-family: var(--font-secundaria);
+    font-size: var(--font-size-xl);
+}
