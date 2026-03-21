@@ -22,9 +22,9 @@
 
 .heroTextContainer {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -150%);
+    top: calc(50% - 72px);
+    /*     left: 50%;
+    transform: translate(-50%, -150%); */
     color: var(--ivory-beige);
     text-align: center;
     padding: var(--spacing-large);

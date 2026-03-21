@@ -1,17 +1,16 @@
 import GuestLayout from '../Layouts/GuestLayout.jsx';
-import CardExperience from '@/Components/CardExperience/CardExperience.jsx';
+//import CardExperience from '@/Components/CardExperience/CardExperience.jsx';
+import ExperienceList from '@/Components/ExperienceList/ExperienceList.jsx';
 
-export default function HomeViatges() {
+export default function HomeViatges({ llista }) {
     return (
         <>
-            <h1 className="text-3xl font-bold text-center mt-8">
-                Benvingut a la pàgina de viatges!
-            </h1>
-            <p className="text-center mt-4">
-                Aquí trobaràs informació sobre els teus viatges i podràs gestionar-los.
-            </p>
+            <h1 className="homeViatgesH1">Experiències més recents</h1>
+            {/* {llista.map(item => (
+                <CardExperience key={item.id} experience={item} />
+            ))} */}
 
-            <CardExperience />
+            <ExperienceList experiences={llista} />
         </>
     );
 }
