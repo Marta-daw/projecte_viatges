@@ -15,13 +15,15 @@ export default function Hero() {
                     400px
                 " src="https://res.cloudinary.com/dadhzxpnj/image/upload/v1774030117/heroPhoto_skug90.jpg"
                     alt="Imatge de viatge" width="1200" height="600" className={styles.heroImg} />
+
+                <div className={styles.heroTextContainer}>
+                    <h1 >Benvingut a Destino Incierto</h1>
+                    <p>
+                        Descobreix experiències úniques i viatges inoblidables.
+                    </p>
+                </div>
             </div>
-            <div className={styles.heroTextContainer}>
-                <h1 >Benvingut a Destino Incierto</h1>
-                <p>
-                    Descobreix experiències úniques i viatges inoblidables.
-                </p>
-            </div>
+
 
         </>
 
