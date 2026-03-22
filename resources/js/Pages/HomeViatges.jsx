@@ -11,6 +11,8 @@ export default function HomeViatges({ llista }) {
             ))} */}
 
             <ExperienceList experiences={llista} />
+
+            <h1 className="homeViatgesH1"> Inici de sessió i registre</h1>
         </>
     );
 }

@@ -1,7 +1,11 @@
 .headerGeneral {
+    /*     position: sticky;
+    top: 0;
+    z-index: 1000; */
+
     margin: 0;
-    background-color: var(--warm-sand-darker);
-    padding: 10px 24px;
+    // background-color: var(--warm-sand-darker);
+    padding: 6px 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -16,10 +20,11 @@
 }
 
 .nomWeb {
-    color: var(--brown-compass);
+    /* color: var(--brown-compass);
     font-family: var(--font-principal);
-    font-size: var(--font-size-xxl);
+    font-size: var(--font-size-xxl); */
     font-weight: bold;
+    margin: 0 auto;
 }
 
 .navHeader {
@@ -30,8 +35,8 @@
     a {
         color: var(--brown-compass);
         text-decoration: none;
-        font-size: var(--font-size-xl);
-        font-family: var(--font-principal);
+        font-size: var(--font-size-medium);
+        /* font-family: var(--font-principal); */
 
         &:hover {
             opacity: 0.8;
