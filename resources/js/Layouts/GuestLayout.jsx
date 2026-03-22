@@ -10,7 +10,7 @@ export default function GuestLayout({ children }) {
             <Hero />
 
             <main>
-                <div className="container">
+                <div >
                     {children}
                 </div>
             </main>
