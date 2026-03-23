@@ -81,4 +81,14 @@ class ExperienceController extends Controller
             'experience' => $experience
         ]);
     }
+
+    public function create()
+    {
+        $categories = Categoria::all();
+
+        // Le enviamos los datos al componente de React llamado 'Home'
+        return Inertia::render('CreateExperience', [
+            'categories' => $categories
+        ]);
+    }
 }
