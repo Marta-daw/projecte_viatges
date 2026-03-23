@@ -1,8 +1,22 @@
 .grid {
+    /* display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; */
+
     display: flex;
     gap: 1rem;
     justify-content: center;
-    grid-column: 1 / -1; // ocupa todas las columnas del grid padre
+
+    /*  grid-column: 1 / -1; // ocupa todas las columnas del grid padre */
+
+    @media (max-width: 900px) {
+        /* grid-template-columns: repeat(2, 1fr); */
+        flex-wrap: wrap;
+    }
+
+    @media (max-width: 600px) {
+        /* grid-template-columns: 1fr; */
+    }
 }
 
 .centered {

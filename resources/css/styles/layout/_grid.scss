@@ -1,5 +1,18 @@
 .container {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+
+    @media (max-width: 900px) {
+        gap: 15px;
+    }
+
+    @media (max-width: 600px) {
+        gap: 10px;
+    }
+
+    /*     display: grid;
     //grid-template-columns: repeat(12, 1fr);
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
@@ -10,5 +23,5 @@
 
     @media (max-width: 600px) {
         grid-template-columns: 1fr;
-    }
+    } */
 }
