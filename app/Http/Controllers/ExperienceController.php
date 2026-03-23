@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Experiencia; // Asegúrate de importar tu modelo
 use Inertia\Inertia; // Importamos Inertia
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Models\Categoria;
 
 class ExperienceController extends Controller
 {
@@ -31,5 +32,15 @@ class ExperienceController extends Controller
         );
 
         $experiencia = Experiencia::create($data);
+    }
+
+    public function create()
+    {
+        $categories = Categoria::all();
+
+        // Le enviamos los datos al componente de React llamado 'Home'
+        return Inertia::render('CreateExperience', [
+            'categories' => $categories
+        ]);
     }
 }
