@@ -72,8 +72,13 @@ class ExperienceController extends Controller
         ]);
     }
 
-    public function show()
+    public function show($id)
     {
-        $experiencia = Experiencia::where();
+        // Busquem l'experiència o llançem un error 404 si no existeix
+        $experience = Experiencia::with('user', 'categories')->findOrFail($id);
+
+        return Inertia::render('DetailedCardExperience', [
+            'experience' => $experience
+        ]);
     }
 }

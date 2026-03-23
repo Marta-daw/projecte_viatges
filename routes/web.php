@@ -23,7 +23,7 @@ Route::get('/experiencies', [ExperienceController::class, 'index'])->name('exper
 Route::get('/experiencies/create', [ExperienceController::class, 'create'])->name('experiences.create');
 Route::post('/experiencies', [ExperienceController::class, 'store'])->name('experiencies.store');
 Route::get('/profile/experiencies', [ExperienceController::class, 'myExperiences'])->name('experiences.myExperiencies');
-Route::get('/experiencie/{id}', [ExperienceController::class, 'show']);
+Route::get('/experiencia/{id}', [ExperienceController::class, 'show'])->name('experiencia.show');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
