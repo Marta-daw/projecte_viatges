@@ -154,6 +154,7 @@ export default function ExperienceForm() {
                         ))}
                     </SelectInput>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <InputError message={errors.category_id} className={styles.errorMsg} />
                 </div >
 
@@ -185,14 +186,21 @@ export default function ExperienceForm() {
                     </PrimaryButton>
                 </div >
 =======
-                    <InputError message={errors.categoria_id} className={styles.errorMsg} />
-                </div>
+=======
+>>>>>>> af49bb6 (feat: Implement category management, revamp the experience creation form with new UI components and styling, and remove the Experience model.)
+    <InputError message={errors.categoria_id} className={styles.errorMsg} />
+                </div >
 
-                <PrimaryButton className={styles.submitBtn} disabled={processing}>
-                    {processing ? 'Guardant...' : 'Crear Experiència'}
-                </PrimaryButton>
+    <PrimaryButton className={styles.submitBtn} disabled={processing}>
+        {processing ? 'Guardant...' : 'Crear Experiència'}
+    </PrimaryButton>
+<<<<<<< HEAD
 >>>>>>> 14a5118 (feat: Implement category management, revamp the experience creation form with new UI components and styling, and remove the Experience model.)
             </form >
         </div >
+=======
+            </form>
+        </div>
+>>>>>>> af49bb6 (feat: Implement category management, revamp the experience creation form with new UI components and styling, and remove the Experience model.)
     );
 }
