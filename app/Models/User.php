@@ -46,4 +46,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Un usuari pot crear moltes experiències
+    public function experiences()
+    {
+        return $this->hasMany(Experience::class);
+    }
 }
