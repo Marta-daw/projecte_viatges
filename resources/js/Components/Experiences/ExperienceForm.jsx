@@ -13,7 +13,7 @@ import styles from './ExperienceForm.module.scss';
 export default function ExperienceForm() {
     const fileInputRef = useRef(null);
     const [fileName, setFileName] = useState('Cap arxiu seleccionat');
-    
+
     // Obtenim categories de les props injectades per Inertia
     const { categories = [] } = usePage().props;
 
