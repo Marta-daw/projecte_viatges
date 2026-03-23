@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Experiencia; // Asegúrate de importar tu modelo
-use Inertia\Inertia; // Importamos Inertia
+use App\Models\Experiencia;
+use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Models\Categoria;
+use Illuminate\Support\Facades\Auth;
 
 class ExperienceController extends Controller
 {
@@ -23,15 +24,21 @@ class ExperienceController extends Controller
         ]);
     }
 
-    public function store(Request $request): JsonResponse
+    public function store(Request $request)
     {
-        $data = $request->validate(
-            [
-                'title' => ['require', 'string',]
-            ]
-        );
+        $data = $request->validate([
+            'title' => ['required'],
+            'body' => ['required'],
+            'latitude' => ['nullable'],
+            'longitude' => ['nullable'],
+            'image' => ['nullable', 'image']
+        ]);
 
-        $experiencia = Experiencia::create($data);
+        $data['user_id'] = Auth::id(); // assignem id d'usuari
+
+        Experiencia::create($data);
+
+        return redirect()->route('experiences.index');
     }
 
     public function create()
