@@ -44,10 +44,10 @@ export default function MapInput({ onChange, defaultPosition = null }) {
 
     return (
         <div style={{
-            width: '100%', 
-            height: '320px', 
-            borderRadius: '8px', 
-            overflow: 'hidden', 
+            width: '100%',
+            height: '320px',
+            borderRadius: '8px',
+            overflow: 'hidden',
             border: '1.5px solid var(--warm-sand-darker)',
             position: 'relative',
             zIndex: 0
