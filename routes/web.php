@@ -17,7 +17,10 @@ use Inertia\Inertia;
 }); */
 
 Route::get('/', [HomeController::class, 'index'])->name('HomeViatges');
-Route::get('/experiencia', [ExperienceController::class, 'index']);
+
+// Experiencies
+Route::get('/experiencies/create', [ExperienceController::class, 'create'])
+    ->name('experiences.create');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

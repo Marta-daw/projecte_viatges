@@ -43,8 +43,15 @@ export default function MapInput({ onChange, defaultPosition = null }) {
     };
 
     return (
-        // El contenedor DEBE tener una altura definida o no se verá
-        <div className="w-full h-80 rounded-md overflow-hidden border border-gray-300 z-0 relative">
+        <div style={{
+            width: '100%', 
+            height: '320px', 
+            borderRadius: '8px', 
+            overflow: 'hidden', 
+            border: '1.5px solid var(--warm-sand-darker)',
+            position: 'relative',
+            zIndex: 0
+        }}>
             <MapContainer
                 center={center}
                 zoom={5}
