@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExperienceController;
 use Inertia\Inertia;
 
 /* Route::get('/', function () {
@@ -16,6 +17,7 @@ use Inertia\Inertia;
 }); */
 
 Route::get('/', [HomeController::class, 'index'])->name('HomeViatges');
+Route::get('/experiencia', [ExperienceController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -27,4 +29,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
