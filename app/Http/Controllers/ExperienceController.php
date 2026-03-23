@@ -26,17 +26,39 @@ class ExperienceController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'title' => ['required'],
-            'body' => ['required'],
-            'latitude' => ['nullable'],
-            'longitude' => ['nullable'],
-            'image' => ['nullable', 'image']
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'body' => ['required', 'string'],
+            'latitude' => ['nullable', 'numeric'],
+            'longitude' => ['nullable', 'numeric'],
+            'image' => ['nullable', 'file', 'image', 'max:5120'], // Max 5MB
+            'status' => ['required', 'in:publicada,esborrany'],
+            'category_id' => ['nullable', 'exists:categories,id']
         ]);
 
-        $data['user_id'] = Auth::id(); // assignem id d'usuari
+        $status = $validated['status'];
 
-        Experiencia::create($data);
+        $data = [
+            'user_id' => Auth::id(),
+            'title' => $validated['title'],
+            'body' => $validated['body'],
+            'latitude' => $validated['latitude'],
+            'longitude' => $validated['longitude'],
+            'status' => $status,
+            'published_at' => $status === 'publicada' ? now() : null,
+        ];
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('experiences', 'public');
+            $data['image_url'] = '/storage/' . $path;
+        }
+
+        $experiencia = Experiencia::create($data);
+
+        if (!empty($validated['category_id'])) {
+            // Relacionem la categoria escollida des del select
+            $experiencia->categories()->attach($validated['category_id']);
+        }
 
         return redirect()->route('experiences.index');
     }

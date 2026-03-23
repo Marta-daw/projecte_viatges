@@ -6,6 +6,7 @@ import TextInput from '../TextInput';
 import SelectInput from '../SelectInput';
 import InputError from '../InputError';
 import PrimaryButton from '../PrimaryButton';
+import SecondaryButton from '../SecondaryButton';
 import ImageInput from '../ImageInput';
 import SelectOption from '../SelectOption';
 import styles from './ExperienceForm.module.scss';
@@ -13,17 +14,22 @@ import styles from './ExperienceForm.module.scss';
 export default function ExperienceForm() {
     const fileInputRef = useRef(null);
     const [fileName, setFileName] = useState('Cap arxiu seleccionat');
-
+    
     // Obtenim categories de les props injectades per Inertia
     const { categories = [] } = usePage().props;
 
-    const { data, setData, post, processing, errors, reset } = useForm({
+    // Utilitzem els mateixos noms o definim el mapeig abans d'enviar per garantir
+    // compatibilitat amb el backend. Es guarda un estat per separat de mapa.
+    const { data, setData, post, processing, errors, reset, transform } = useForm({
         titol: '',
         descripcio: '',
         imatge: null,
-        localitzacio: '',
+        latitude: null,
+        longitude: null,
         categoria_id: '',
     });
+
+    const formAction = useRef('publicada');
 
     function handleFileChange(e) {
         const file = e.target.files[0];
@@ -38,9 +44,29 @@ export default function ExperienceForm() {
 
     function handleSubmit(e) {
         e.preventDefault();
+
+        // Abans d'enviar, transformem els noms de les propietats 
+        // per complir el model del servidor (titol -> title, descripcio -> body)
+        transform((actualData) => ({
+            title: actualData.titol,
+            body: actualData.descripcio,
+            image: actualData.imatge,
+            latitude: actualData.latitude,
+            longitude: actualData.longitude,
+            category_id: actualData.categoria_id,
+            status: formAction.current
+        }));
+
         post(route('experiencies.store'), {
             forceFormData: true,
-            onSuccess: () => reset(),
+            // Neteja l'estat local sols si es publica / desa correctament
+            onSuccess: () => {
+                reset();
+                setFileName('Cap arxiu seleccionat');
+                if (fileInputRef.current) {
+                    fileInputRef.current.value = null; // Reiniciar l'input de fitxers natiu
+                }
+            },
         });
     }
 
@@ -62,7 +88,8 @@ export default function ExperienceForm() {
                         onChange={e => setData('titol', e.target.value)}
                         placeholder="Escriu el títol de l'experiència..."
                     />
-                    <InputError message={errors.titol} className={styles.errorMsg} />
+                    {/* Utilitzar nom de base per errors genèrics retornats (title en lloc de titol) */}
+                    <InputError message={errors.title || errors.titol} className={styles.errorMsg} />
                 </div>
 
                 {/* Descripció */}
@@ -76,7 +103,7 @@ export default function ExperienceForm() {
                         onChange={e => setData('descripcio', e.target.value)}
                         placeholder="Descriu l'experiència..."
                     />
-                    <InputError message={errors.descripcio} className={styles.errorMsg} />
+                    <InputError message={errors.body || errors.descripcio} className={styles.errorMsg} />
                 </div>
 
                 {/* Imatge */}
@@ -93,17 +120,22 @@ export default function ExperienceForm() {
                         />
                         <span className={styles.fileName}>{fileName}</span>
                     </div>
-                    <InputError message={errors.imatge} className={styles.errorMsg} />
+                    <InputError message={errors.image || errors.imatge} className={styles.errorMsg} />
                 </div>
 
                 {/* Localització (MapInput) */}
                 <div className={styles.fieldGroup}>
                     <InputLabel value="Localització" className={styles.label} />
+                    {/* Guardar coordenades individualment */}
                     <MapInput
-                        value={data.localitzacio}
-                        onChange={val => setData('localitzacio', val)}
+                        onChange={val => {
+                            if (val) {
+                                setData(data => ({ ...data, latitude: val.lat, longitude: val.lng }));
+                            }
+                        }}
                     />
-                    <InputError message={errors.localitzacio} className={styles.errorMsg} />
+                    <InputError message={errors.latitude} className={styles.errorMsg} />
+                    <InputError message={errors.longitude} className={styles.errorMsg} />
                 </div>
 
                 {/* Categoria */}
@@ -121,12 +153,30 @@ export default function ExperienceForm() {
                             <SelectOption key={cat.id} value={cat.id}>{cat.name}</SelectOption>
                         ))}
                     </SelectInput>
-                    <InputError message={errors.categoria_id} className={styles.errorMsg} />
+                    <InputError message={errors.category_id} className={styles.errorMsg} />
                 </div>
 
-                <PrimaryButton className={styles.submitBtn} disabled={processing}>
-                    {processing ? 'Guardant...' : 'Crear Experiència'}
-                </PrimaryButton>
+                {/* Buttons wrapper inline direct */}
+                <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', justifyContent: 'flex-end' }}>
+                    <SecondaryButton 
+                        type="submit" 
+                        disabled={processing}
+                        onClick={() => formAction.current = 'esborrany'}
+                        style={{ padding: '0.75rem 1.5rem', fontFamily: 'var(--font-principal)' }}
+                    >
+                        Guardar Com a Esborrany
+                    </SecondaryButton>
+                    
+                    <PrimaryButton 
+                        type="submit" 
+                        className={styles.submitBtn} 
+                        disabled={processing}
+                        onClick={() => formAction.current = 'publicada'}
+                        style={{ margin: 0, width: 'auto' }}
+                    >
+                        {processing ? 'Desant...' : 'Publicar Experiència'}
+                    </PrimaryButton>
+                </div>
             </form>
         </div>
     );
