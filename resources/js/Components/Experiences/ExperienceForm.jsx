@@ -157,8 +157,11 @@ export default function ExperienceForm() {
                     <InputError message={errors.longitude} className={styles.errorMsg} />
 =======
                     <MapInput
-                        value={data.localitzacio}
-                        onChange={val => setData('localitzacio', val)}
+                        onChange={val => {
+                            if (val) {
+                                setData(data => ({ ...data, latitude: val.lat, longitude: val.lng }));
+                            }
+                        }}
                     />
                     <InputError message={errors.localitzacio} className={styles.errorMsg} />
 >>>>>>> 14a5118 (feat: Implement category management, revamp the experience creation form with new UI components and styling, and remove the Experience model.)
