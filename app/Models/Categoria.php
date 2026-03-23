@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Categoria extends Model
 {
     use HasFactory;
+    protected $table = 'categories';
 
     // L'únic camp que permetem omplir massivament és el nom
     protected $fillable = ['name'];
