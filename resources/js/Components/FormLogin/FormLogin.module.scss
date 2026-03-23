@@ -1,0 +1,29 @@
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 380px;
+    border: 2px solid var(--medium-bronze);
+    background-color: var(--warm-sand);
+    border-radius: 12px;
+}
+
+.buttonLogin {
+    background-color: var(--red-needle);
+    color: var(--ivory-beige);
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: var(--font-size-medium);
+
+    &:hover {
+        background-color: var(--red-needle);
+        opacity: 0.8;
+    }
+}
+
+.inputLogin {
+    width: 70%;
+}
