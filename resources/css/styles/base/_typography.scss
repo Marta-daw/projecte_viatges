@@ -1,0 +1,36 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-principal);
+    //color: var(--blue-needle);
+    color: var(--brown-compass);
+    font-weight: bold;
+}
+
+header,
+footer {
+    background-color: var(--warm-sand-darker);
+    color: var(--brown-compass);
+    font-family: var(--font-principal);
+    //font-size: var(--font-size-xxl);
+}
+
+body {
+    background-color: var(--ivory-beige);
+}
+
+p {
+    font-family: var(--font-secundaria);
+    color: var(--blackt-text);
+    font-size: var(--font-size-medium);
+}
+
+.homeViatgesH1 {
+    text-align: center;
+    margin: 24px auto 12px auto;
+    width: 800px;
+    border: 1px solid var(--medium-bronze);
+}
