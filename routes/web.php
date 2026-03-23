@@ -17,7 +17,6 @@ use Inertia\Inertia;
 }); */
 
 Route::get('/', [HomeController::class, 'index'])->name('HomeViatges');
-});
 Route::get('/experiencia', [ExperienceController::class, 'index']);
 
 Route::get('/dashboard', function () {
