@@ -7,7 +7,10 @@ use App\Models\Experiencia;
 use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Models\Categoria;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Auth;
+=======
+>>>>>>> af49bb6 (feat: Implement category management, revamp the experience creation form with new UI components and styling, and remove the Experience model.)
 
 class ExperienceController extends Controller
 {
@@ -60,6 +63,16 @@ class ExperienceController extends Controller
         }
 
         return redirect()->route('experiences.index');
+    }
+
+    public function create()
+    {
+        $categories = Categoria::all();
+
+        // Le enviamos los datos al componente de React llamado 'Home'
+        return Inertia::render('CreateExperience', [
+            'categories' => $categories
+        ]);
     }
 
     public function create()
