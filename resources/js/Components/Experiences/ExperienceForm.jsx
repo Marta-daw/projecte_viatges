@@ -14,7 +14,7 @@ import styles from './ExperienceForm.module.scss';
 export default function ExperienceForm() {
     const fileInputRef = useRef(null);
     const [fileName, setFileName] = useState('Cap arxiu seleccionat');
-    
+
     // Obtenim categories de les props injectades per Inertia
     const { categories = [] } = usePage().props;
 
@@ -158,18 +158,18 @@ export default function ExperienceForm() {
 
                 {/* Buttons wrapper inline direct */}
                 <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', justifyContent: 'flex-end' }}>
-                    <SecondaryButton 
-                        type="submit" 
+                    <SecondaryButton
+                        type="submit"
                         disabled={processing}
                         onClick={() => formAction.current = 'esborrany'}
                         style={{ padding: '0.75rem 1.5rem', fontFamily: 'var(--font-principal)' }}
                     >
                         Guardar Com a Esborrany
                     </SecondaryButton>
-                    
-                    <PrimaryButton 
-                        type="submit" 
-                        className={styles.submitBtn} 
+
+                    <PrimaryButton
+                        type="submit"
+                        className={styles.submitBtn}
                         disabled={processing}
                         onClick={() => formAction.current = 'publicada'}
                         style={{ margin: 0, width: 'auto' }}
