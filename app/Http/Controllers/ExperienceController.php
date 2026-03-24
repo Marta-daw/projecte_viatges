@@ -11,15 +11,14 @@ use Illuminate\Support\Facades\Auth;
 
 class ExperienceController extends Controller
 {
-    public function index()
-    {
-        // Cogemos las últimas experiencias publicadas
-        $experiencies = Experiencia::where('status', 'publicada')
-            ->orderBy('published_at', 'desc')
-            ->get();
+    public function index() {}
 
-        // Le enviamos los datos al componente de React llamado 'Home'
-        return Inertia::render('CreateExperience', [
+    public function myExperiences()
+    {
+        $experiencies = Experiencia::where('user_id', auth()->id())
+            ->latest()
+            ->get();
+        return Inertia::render('perfil/experiencies', [
             'experiencies' => $experiencies
         ]);
     }
@@ -30,7 +29,7 @@ class ExperienceController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'body' => ['required', 'string'],
             'latitude' => ['nullable', 'numeric'],
-            'longitude' => ['nullable', 'numeric'],
+            'longitude' => ['nullable', 'numericl'],
             'image' => ['nullable', 'file', 'image', 'max:5120'], // Max 5MB
             'status' => ['required', 'in:publicada,esborrany'],
             'category_id' => ['nullable', 'exists:categories,id']
