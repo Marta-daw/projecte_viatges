@@ -44,7 +44,6 @@ export default function ExperienceForm() {
 
     function handleSubmit(e) {
         e.preventDefault();
-<<<<<<< HEAD
 
         // Abans d'enviar, transformem els noms de les propietats 
         // per complir el model del servidor (titol -> title, descripcio -> body)
@@ -68,11 +67,6 @@ export default function ExperienceForm() {
                     fileInputRef.current.value = null; // Reiniciar l'input de fitxers natiu
                 }
             },
-=======
-        post(route('experiencies.store'), {
-            forceFormData: true,
-            onSuccess: () => reset(),
->>>>>>> 14a5118 (feat: Implement category management, revamp the experience creation form with new UI components and styling, and remove the Experience model.)
         });
     }
 
@@ -94,16 +88,12 @@ export default function ExperienceForm() {
                         onChange={e => setData('titol', e.target.value)}
                         placeholder="Escriu el títol de l'experiència..."
                     />
-<<<<<<< HEAD
-    {/* Utilitzar nom de base per errors genèrics retornats (title en lloc de titol) */ }
-    <InputError message={errors.title || errors.titol} className={styles.errorMsg} />
-=======
-                    <InputError message={errors.titol} className={styles.errorMsg} />
->>>>>>> 14a5118 (feat: Implement category management, revamp the experience creation form with new UI components and styling, and remove the Experience model.)
+                    {/* Utilitzar nom de base per errors genèrics retornats (title en lloc de titol) */}
+                    <InputError message={errors.title || errors.titol} className={styles.errorMsg} />
                 </div >
 
-        {/* Descripció */ }
-        < div className = { styles.fieldGroup } >
+                {/* Descripció */}
+                < div className={styles.fieldGroup} >
                     <InputLabel htmlFor="descripcio" value="Descripció" className={styles.label} />
                     <textarea
                         id="descripcio"
@@ -113,15 +103,11 @@ export default function ExperienceForm() {
                         onChange={e => setData('descripcio', e.target.value)}
                         placeholder="Descriu l'experiència..."
                     />
-<<<<<<< HEAD
                     <InputError message={errors.body || errors.descripcio} className={styles.errorMsg} />
-=======
-                    <InputError message={errors.descripcio} className={styles.errorMsg} />
->>>>>>> 14a5118 (feat: Implement category management, revamp the experience creation form with new UI components and styling, and remove the Experience model.)
                 </div >
 
-        {/* Imatge */ }
-        < div className = { styles.fieldGroup } >
+                {/* Imatge */}
+                < div className={styles.fieldGroup} >
                     <InputLabel value="Imatge" className={styles.label} />
                     <div className={styles.fileInputWrapper}>
                         <InputLabel htmlFor="imatge" value="Triar arxiu" className={styles.fileInputLabel} />
@@ -134,18 +120,13 @@ export default function ExperienceForm() {
                         />
                         <span className={styles.fileName}>{fileName}</span>
                     </div>
-<<<<<<< HEAD
                     <InputError message={errors.image || errors.imatge} className={styles.errorMsg} />
-=======
-                    <InputError message={errors.imatge} className={styles.errorMsg} />
->>>>>>> 14a5118 (feat: Implement category management, revamp the experience creation form with new UI components and styling, and remove the Experience model.)
                 </div >
 
-        {/* Localització (MapInput) */ }
-        < div className = { styles.fieldGroup } >
-            <InputLabel value="Localització" className={styles.label} />
-<<<<<<< HEAD
-    {/* Guardar coordenades individualment */ }
+                {/* Localització (MapInput) */}
+                < div className={styles.fieldGroup} >
+                    <InputLabel value="Localització" className={styles.label} />
+                    {/* Guardar coordenades individualment */}
                     <MapInput
                         onChange={val => {
                             if (val) {
@@ -155,20 +136,10 @@ export default function ExperienceForm() {
                     />
                     <InputError message={errors.latitude} className={styles.errorMsg} />
                     <InputError message={errors.longitude} className={styles.errorMsg} />
-=======
-                    <MapInput
-                        onChange={val => {
-                            if (val) {
-                                setData(data => ({ ...data, latitude: val.lat, longitude: val.lng }));
-                            }
-                        }}
-                    />
-                    <InputError message={errors.localitzacio} className={styles.errorMsg} />
->>>>>>> 14a5118 (feat: Implement category management, revamp the experience creation form with new UI components and styling, and remove the Experience model.)
                 </div >
 
-        {/* Categoria */ }
-        < div className = { styles.fieldGroup } >
+                {/* Categoria */}
+                < div className={styles.fieldGroup} >
                     <InputLabel htmlFor="categoria" value="Categoria" className={styles.label} />
                     <SelectInput
                         id="categoria"
@@ -183,12 +154,17 @@ export default function ExperienceForm() {
                         ))}
                     </SelectInput>
 <<<<<<< HEAD
-                    <InputError message={errors.category_id} className={styles.errorMsg} />
+    <InputError message={errors.category_id} className={styles.errorMsg} />
                 </div >
 
+<<<<<<< HEAD
         {/* Buttons wrapper inline direct */ }
         < div style = {{ display: 'flex', gap: '1rem', marginTop: '1.5rem', justifyContent: 'flex-end' }
 }>
+=======
+                {/* Buttons wrapper inline direct */}
+                <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', justifyContent: 'flex-end' }}>
+>>>>>>> 794f459 (fix: arregla bug de home i afegeix apartat per experiències pròpies)
                     <SecondaryButton
                         type="submit"
                         disabled={processing}
