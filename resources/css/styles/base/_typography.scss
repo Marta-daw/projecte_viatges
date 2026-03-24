@@ -34,3 +34,12 @@ p {
     width: 800px;
     border: 1px solid var(--medium-bronze);
 }
+
+.containerLoginRegister {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 85%;
+    margin: 0 auto 12px auto;
+    gap: 2rem;
+}

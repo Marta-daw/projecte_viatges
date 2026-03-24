@@ -10,6 +10,11 @@ class ExperienceSeeder extends Seeder
 {
     public function run(): void
     {
+        // Limpiamos y reseteamos el auto-increment para evitar conflictos
+        DB::table('category_experience')->delete();
+        DB::table('experiences')->delete();
+        DB::statement('ALTER TABLE experiences AUTO_INCREMENT = 1');
+        
         $experiences = [
             [
                 'user_id' => 2,
