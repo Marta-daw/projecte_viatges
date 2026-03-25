@@ -25,7 +25,7 @@ class ExperienceController extends Controller
         $experiencies = Experiencia::where('user_id', auth()->id())
             ->latest()
             ->get();
-        return Inertia::render('perfil/experiencies', [
+        return Inertia::render('ManageExperience', [
             'experiencies' => $experiencies
         ]);
     }
