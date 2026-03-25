@@ -153,54 +153,31 @@ export default function ExperienceForm() {
                             <SelectOption key={cat.id} value={cat.id}>{cat.name}</SelectOption>
                         ))}
                     </SelectInput>
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <InputError message={errors.category_id} className={styles.errorMsg} />
+                    <InputError message={errors.category_id} className={styles.errorMsg} />
                 </div >
 
-<<<<<<< HEAD
-        {/* Buttons wrapper inline direct */ }
-        < div style = {{ display: 'flex', gap: '1rem', marginTop: '1.5rem', justifyContent: 'flex-end' }
-}>
-=======
-                {/* Buttons wrapper inline direct */}
-                <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', justifyContent: 'flex-end' }}>
->>>>>>> 794f459 (fix: arregla bug de home i afegeix apartat per experiències pròpies)
-                    <SecondaryButton
-                        type="submit"
-                        disabled={processing}
-                        onClick={() => formAction.current = 'esborrany'}
-                        style={{ padding: '0.75rem 1.5rem', fontFamily: 'var(--font-principal)' }}
-                    >
-                        Guardar Com a Esborrany
-                    </SecondaryButton>
+        {/* Buttons wrapper inline direct */}
+        <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', justifyContent: 'flex-end' }}>
+            <SecondaryButton
+                type="submit"
+                disabled={processing}
+                onClick={() => formAction.current = 'esborrany'}
+                style={{ padding: '0.75rem 1.5rem', fontFamily: 'var(--font-principal)' }}
+            >
+                Guardar Com a Esborrany
+            </SecondaryButton>
 
-                    <PrimaryButton
-                        type="submit"
-                        className={styles.submitBtn}
-                        disabled={processing}
-                        onClick={() => formAction.current = 'publicada'}
-                        style={{ margin: 0, width: 'auto' }}
-                    >
-                        {processing ? 'Desant...' : 'Publicar Experiència'}
-                    </PrimaryButton>
-                </div >
-=======
-=======
->>>>>>> af49bb6 (feat: Implement category management, revamp the experience creation form with new UI components and styling, and remove the Experience model.)
-    <InputError message={errors.categoria_id} className={styles.errorMsg} />
-                </div >
-
-    <PrimaryButton className={styles.submitBtn} disabled={processing}>
-        {processing ? 'Guardant...' : 'Crear Experiència'}
-    </PrimaryButton>
-<<<<<<< HEAD
->>>>>>> 14a5118 (feat: Implement category management, revamp the experience creation form with new UI components and styling, and remove the Experience model.)
+            <PrimaryButton
+                type="submit"
+                className={styles.submitBtn}
+                disabled={processing}
+                onClick={() => formAction.current = 'publicada'}
+                style={{ margin: 0, width: 'auto' }}
+            >
+                {processing ? 'Desant...' : 'Publicar Experiència'}
+            </PrimaryButton>
+        </div>
             </form >
         </div >
-=======
-            </form>
-        </div>
->>>>>>> af49bb6 (feat: Implement category management, revamp the experience creation form with new UI components and styling, and remove the Experience model.)
     );
 }

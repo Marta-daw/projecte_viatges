@@ -25,7 +25,6 @@ class ExperienceController extends Controller
 
     public function store(Request $request)
     {
-<<<<<<< HEAD
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'body' => ['required', 'string'],
@@ -63,16 +62,6 @@ class ExperienceController extends Controller
         return redirect()->route('experiences.index');
     }
 
-    public function create()
-    {
-        $categories = Categoria::all();
-
-        // Le enviamos los datos al componente de React llamado 'Home'
-        return Inertia::render('CreateExperience', [
-            'categories' => $categories
-        ]);
-    }
-
     public function show($id)
     {
         // Busquem l'experiència o llançem un error 404 si no existeix
@@ -91,7 +80,6 @@ class ExperienceController extends Controller
         return Inertia::render('CreateExperience', [
             'categories' => $categories
         ]);
-=======
         $data = $request->validate([
             'title' => ['required'],
             'body' => ['required'],
@@ -105,16 +93,5 @@ class ExperienceController extends Controller
         Experiencia::create($data);
 
         return redirect()->route('experiences.index');
->>>>>>> eb2895f (feat: creació d'experiències completa)
-    }
-
-    public function create()
-    {
-        $categories = Categoria::all();
-
-        // Le enviamos los datos al componente de React llamado 'Home'
-        return Inertia::render('CreateExperience', [
-            'categories' => $categories
-        ]);
     }
 }
