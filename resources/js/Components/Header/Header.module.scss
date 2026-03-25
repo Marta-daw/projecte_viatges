@@ -43,3 +43,17 @@
         }
     }
 }
+
+.buttonNav {
+    background: transparent;
+    border: 1px solid var(--brown-compass, #6b4f3b);
+    color: var(--brown-compass, #6b4f3b);
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: var(--font-size-medium, 14px);
+
+    &:hover {
+        opacity: 0.85;
+    }
+}
