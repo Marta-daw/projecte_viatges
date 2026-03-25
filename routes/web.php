@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExperienceController;
 use Inertia\Inertia;
 
 /* Route::get('/', function () {
@@ -17,6 +18,13 @@ use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('HomeViatges');
 
+// Experiencies
+Route::get('/experiencies', [ExperienceController::class, 'index'])->name('experiences.index');
+Route::get('/experiencies/create', [ExperienceController::class, 'create'])->name('experiences.create');
+Route::post('/experiencies', [ExperienceController::class, 'store'])->name('experiencies.store');
+Route::get('/profile/experiencies', [ExperienceController::class, 'myExperiences'])->name('experiences.myExperiencies');
+Route::get('/experiencie/{id}', [ExperienceController::class, 'show']);
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -27,4 +35,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
