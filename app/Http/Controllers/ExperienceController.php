@@ -7,14 +7,7 @@ use App\Models\Experiencia;
 use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Models\Categoria;
-<<<<<<< HEAD
-<<<<<<< HEAD
 use Illuminate\Support\Facades\Auth;
-=======
->>>>>>> af49bb6 (feat: Implement category management, revamp the experience creation form with new UI components and styling, and remove the Experience model.)
-=======
-use Illuminate\Support\Facades\Auth;
->>>>>>> eb2895f (feat: creació d'experiències completa)
 
 class ExperienceController extends Controller
 {
@@ -32,7 +25,6 @@ class ExperienceController extends Controller
 
     public function store(Request $request)
     {
-<<<<<<< HEAD
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'body' => ['required', 'string'],
@@ -78,30 +70,9 @@ class ExperienceController extends Controller
         return Inertia::render('CreateExperience', [
             'categories' => $categories
         ]);
-=======
-        $data = $request->validate([
-            'title' => ['required'],
-            'body' => ['required'],
-            'latitude' => ['nullable'],
-            'longitude' => ['nullable'],
-            'image' => ['nullable', 'image']
-        ]);
-
-        $data['user_id'] = Auth::id(); // assignem id d'usuari
-
-        Experiencia::create($data);
-
-        return redirect()->route('experiences.index');
->>>>>>> eb2895f (feat: creació d'experiències completa)
     }
 
-    public function create()
-    {
-        $categories = Categoria::all();
-
-        // Le enviamos los datos al componente de React llamado 'Home'
-        return Inertia::render('CreateExperience', [
-            'categories' => $categories
-        ]);
+    public function show() {
+        $experiencia = Experiencia::where
     }
 }
