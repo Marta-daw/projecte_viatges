@@ -72,7 +72,8 @@ class ExperienceController extends Controller
         ]);
     }
 
-    public function show() {
-        $experiencia = Experiencia::where
+    public function show()
+    {
+        $experiencia = Experiencia::where();
     }
 }
