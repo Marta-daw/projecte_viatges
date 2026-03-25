@@ -2,7 +2,7 @@ import TextInput from '../TextInput';
 import styles from './FormRegister.module.scss'
 import PrimaryButton from '../PrimaryButton';
 
-export default function FormLogin() {
+export default function FormRegister() {
     return (
 
         <div className={styles.registerContainer}>

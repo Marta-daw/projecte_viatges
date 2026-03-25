@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import ApplicationLogo from '../AppLogo/AppLogo';
+import AuthDropdown from '../AuthDropdown/AuthDropdown';
 import styles from './Header.module.scss';
 
 function Header() {
@@ -10,24 +10,7 @@ function Header() {
                 <h1 className={styles.nomWeb}>Destino Incierto</h1>
             </div>
             <nav className={styles.navHeader}>
-
-                    <a href="#"> Iniciar Sessió </a>
-                    <a href="#"> Registrar-se </a>
-
-                {/* {auth?.user ? (
-                    <>
-                        <a href="#"> Inici </a>
-                        <a href="#"> Experiencies </a>
-                        <a href="#"> Viatges </a>
-                        <a href="#"> Perfil </a>
-                    </>
-
-                ) : (
-                    <>
-                        <a href="#"> Iniciar Sessió </a>
-                        <a href="#"> Registrar-se </a>
-                    </>
-                )} */}
+                <AuthDropdown />
             </nav>
         </header>
     );
