@@ -2,7 +2,7 @@ import styles from './CardExperience.module.scss';
 import { Card } from "flowbite-react";
 import { Link } from '@inertiajs/react';
 
-function CardExperience({ experience }) {
+function CardExperience({ experience, isAutenticated }) {
     return (
         <Link
             href={`/experiencia/${experience.id}`}
@@ -17,6 +17,15 @@ function CardExperience({ experience }) {
                             {experience.body}
                         </p>
                     </div>
+
+                    {/*Solo visible con session iniciada*/}
+                    {isAutenticated && (
+                        <div className={styles.cardActions}>
+                            <button onClick={() => console.log('editar')}>✏️ Editar</button>
+                            <button onClick={() => console.log('eliminar')}>🗑️ Eliminar</button>
+                            <button onClick={() => console.log('favorito')}>❤️ Favorito</button>
+                        </div>
+                    )}
 
                 </Card>
             </div>

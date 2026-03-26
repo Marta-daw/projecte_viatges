@@ -16,6 +16,7 @@ use Inertia\Inertia;
     ]);
 }); */
 
+// Rutas públicas
 Route::get('/', [HomeController::class, 'index'])->name('HomeViatges');
 
 // Experiencies
@@ -25,10 +26,12 @@ Route::post('/experiencies', [ExperienceController::class, 'store'])->name('expe
 Route::get('/profile/experiencies', [ExperienceController::class, 'myExperiences'])->name('experiences.myExperiencies');
 Route::get('/experiencia/{id}', [ExperienceController::class, 'show'])->name('experiencia.show');
 
+// Dashboard
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Rutas privadas (requieren auth)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
