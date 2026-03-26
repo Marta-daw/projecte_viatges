@@ -23,6 +23,8 @@ Route::get('/', [HomeController::class, 'index'])->name('HomeViatges');
 Route::get('/experiencies', [ExperienceController::class, 'index'])->name('experiences.index');
 Route::get('/experiencies/create', [ExperienceController::class, 'create'])->name('experiences.create');
 Route::post('/experiencies', [ExperienceController::class, 'store'])->name('experiencies.store');
+Route::get('/profile/experiencies', [ExperienceController::class, 'myExperiences'])->name('experiences.myExperiencies');
+Route::get('/experiencia/{id}', [ExperienceController::class, 'show'])->name('experiencia.show');
 
 // Dashboard
 Route::get('/dashboard', function () {
@@ -34,6 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/profile/experiencies', [ExperienceController::class, 'myExperiences'])
+        ->name('experiences.myExperiencies');
+
+    Route::get('/experiencia/{id}', [ExperienceController::class, 'show'])
+        ->name('experiencia.show');
 });
 
 require __DIR__ . '/auth.php';

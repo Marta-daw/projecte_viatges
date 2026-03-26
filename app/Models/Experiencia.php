@@ -39,6 +39,6 @@ class Experiencia extends Model
     // Una experiència pot tenir moltes categories (i viceversa)
     public function categories()
     {
-        return $this->belongsToMany(Categoria::class);
+        return $this->belongsToMany(Categoria::class, 'category_experience', 'experience_id', 'category_id');
     }
 }

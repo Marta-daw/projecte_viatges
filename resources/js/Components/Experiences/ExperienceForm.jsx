@@ -90,10 +90,10 @@ export default function ExperienceForm() {
                     />
                     {/* Utilitzar nom de base per errors genèrics retornats (title en lloc de titol) */}
                     <InputError message={errors.title || errors.titol} className={styles.errorMsg} />
-                </div>
+                </div >
 
                 {/* Descripció */}
-                <div className={styles.fieldGroup}>
+                < div className={styles.fieldGroup} >
                     <InputLabel htmlFor="descripcio" value="Descripció" className={styles.label} />
                     <textarea
                         id="descripcio"
@@ -104,10 +104,10 @@ export default function ExperienceForm() {
                         placeholder="Descriu l'experiència..."
                     />
                     <InputError message={errors.body || errors.descripcio} className={styles.errorMsg} />
-                </div>
+                </div >
 
                 {/* Imatge */}
-                <div className={styles.fieldGroup}>
+                < div className={styles.fieldGroup} >
                     <InputLabel value="Imatge" className={styles.label} />
                     <div className={styles.fileInputWrapper}>
                         <InputLabel htmlFor="imatge" value="Triar arxiu" className={styles.fileInputLabel} />
@@ -121,10 +121,10 @@ export default function ExperienceForm() {
                         <span className={styles.fileName}>{fileName}</span>
                     </div>
                     <InputError message={errors.image || errors.imatge} className={styles.errorMsg} />
-                </div>
+                </div >
 
                 {/* Localització (MapInput) */}
-                <div className={styles.fieldGroup}>
+                < div className={styles.fieldGroup} >
                     <InputLabel value="Localització" className={styles.label} />
                     {/* Guardar coordenades individualment */}
                     <MapInput
@@ -136,10 +136,10 @@ export default function ExperienceForm() {
                     />
                     <InputError message={errors.latitude} className={styles.errorMsg} />
                     <InputError message={errors.longitude} className={styles.errorMsg} />
-                </div>
+                </div >
 
                 {/* Categoria */}
-                <div className={styles.fieldGroup}>
+                < div className={styles.fieldGroup} >
                     <InputLabel htmlFor="categoria" value="Categoria" className={styles.label} />
                     <SelectInput
                         id="categoria"
@@ -154,7 +154,7 @@ export default function ExperienceForm() {
                         ))}
                     </SelectInput>
                     <InputError message={errors.category_id} className={styles.errorMsg} />
-                </div>
+                </div >
 
                 {/* Buttons wrapper inline direct */}
                 <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', justifyContent: 'flex-end' }}>
@@ -177,7 +177,7 @@ export default function ExperienceForm() {
                         {processing ? 'Desant...' : 'Publicar Experiència'}
                     </PrimaryButton>
                 </div>
-            </form>
-        </div>
+            </form >
+        </div >
     );
 }

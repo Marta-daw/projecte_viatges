@@ -18,7 +18,7 @@ class ExperienceController extends Controller
         $experiencies = Experiencia::where('user_id', auth()->id())
             ->latest()
             ->get();
-        return Inertia::render('perfil/experiencies', [
+        return Inertia::render('ManageExperience', [
             'experiencies' => $experiencies
         ]);
     }
@@ -29,7 +29,7 @@ class ExperienceController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'body' => ['required', 'string'],
             'latitude' => ['nullable', 'numeric'],
-            'longitude' => ['nullable', 'numericl'],
+            'longitude' => ['nullable', 'numeric'],
             'image' => ['nullable', 'file', 'image', 'max:5120'], // Max 5MB
             'status' => ['required', 'in:publicada,esborrany'],
             'category_id' => ['nullable', 'exists:categories,id']
@@ -59,7 +59,17 @@ class ExperienceController extends Controller
             $experiencia->categories()->attach($validated['category_id']);
         }
 
-        return redirect()->route('experiences.index');
+        return redirect()->route('experiences.myExperiencies');
+    }
+
+    public function show($id)
+    {
+        // Busquem l'experiència o llançem un error 404 si no existeix
+        $experience = Experiencia::with('user', 'categories')->findOrFail($id);
+
+        return Inertia::render('DetailedCardExperience', [
+            'experience' => $experience
+        ]);
     }
 
     public function create()
@@ -70,5 +80,18 @@ class ExperienceController extends Controller
         return Inertia::render('CreateExperience', [
             'categories' => $categories
         ]);
+        $data = $request->validate([
+            'title' => ['required'],
+            'body' => ['required'],
+            'latitude' => ['nullable'],
+            'longitude' => ['nullable'],
+            'image' => ['nullable', 'image']
+        ]);
+
+        $data['user_id'] = Auth::id(); // assignem id d'usuari
+
+        Experiencia::create($data);
+
+        return redirect()->route('experiences.index');
     }
 }
