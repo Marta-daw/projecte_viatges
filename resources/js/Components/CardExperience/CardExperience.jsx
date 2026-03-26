@@ -10,7 +10,7 @@ function CardExperience({ experience }) {
         >
             <div className={styles.cardBody}>
                 <Card className={styles.card}>
-                    <img src={experience.image_url} alt="experienceIMG" className={styles.cardImage} />
+                    <img src={experience.image_url || '/images/placeholder.png'} alt="experienceIMG" className={styles.cardImage} />
                     <div className={styles.textCard}>
                         <h5 className={styles.cardTitle}> {experience.title} </h5>
                         <p className={styles.cardDescription}>

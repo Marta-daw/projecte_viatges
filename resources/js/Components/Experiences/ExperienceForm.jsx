@@ -156,27 +156,27 @@ export default function ExperienceForm() {
                     <InputError message={errors.category_id} className={styles.errorMsg} />
                 </div >
 
-        {/* Buttons wrapper inline direct */}
-        <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', justifyContent: 'flex-end' }}>
-            <SecondaryButton
-                type="submit"
-                disabled={processing}
-                onClick={() => formAction.current = 'esborrany'}
-                style={{ padding: '0.75rem 1.5rem', fontFamily: 'var(--font-principal)' }}
-            >
-                Guardar Com a Esborrany
-            </SecondaryButton>
+                {/* Buttons wrapper inline direct */}
+                <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', justifyContent: 'flex-end' }}>
+                    <SecondaryButton
+                        type="submit"
+                        disabled={processing}
+                        onClick={() => formAction.current = 'esborrany'}
+                        style={{ padding: '0.75rem 1.5rem', fontFamily: 'var(--font-principal)' }}
+                    >
+                        Guardar Com a Esborrany
+                    </SecondaryButton>
 
-            <PrimaryButton
-                type="submit"
-                className={styles.submitBtn}
-                disabled={processing}
-                onClick={() => formAction.current = 'publicada'}
-                style={{ margin: 0, width: 'auto' }}
-            >
-                {processing ? 'Desant...' : 'Publicar Experiència'}
-            </PrimaryButton>
-        </div>
+                    <PrimaryButton
+                        type="submit"
+                        className={styles.submitBtn}
+                        disabled={processing}
+                        onClick={() => formAction.current = 'publicada'}
+                        style={{ margin: 0, width: 'auto' }}
+                    >
+                        {processing ? 'Desant...' : 'Publicar Experiència'}
+                    </PrimaryButton>
+                </div>
             </form >
         </div >
     );

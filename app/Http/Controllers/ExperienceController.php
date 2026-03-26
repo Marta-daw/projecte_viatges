@@ -29,7 +29,7 @@ class ExperienceController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'body' => ['required', 'string'],
             'latitude' => ['nullable', 'numeric'],
-            'longitude' => ['nullable', 'numericl'],
+            'longitude' => ['nullable', 'numeric'],
             'image' => ['nullable', 'file', 'image', 'max:5120'], // Max 5MB
             'status' => ['required', 'in:publicada,esborrany'],
             'category_id' => ['nullable', 'exists:categories,id']
@@ -59,7 +59,7 @@ class ExperienceController extends Controller
             $experiencia->categories()->attach($validated['category_id']);
         }
 
-        return redirect()->route('experiences.index');
+        return redirect()->route('experiences.myExperiencies');
     }
 
     public function show($id)
