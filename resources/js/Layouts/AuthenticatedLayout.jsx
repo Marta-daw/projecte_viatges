@@ -66,6 +66,13 @@ export default function AuthenticatedLayout({ header, children }) {
                                         >
                                             Profile
                                         </Dropdown.Link>
+                                        {user.role == "admin" &&
+                                            <Dropdown.Link
+                                                href={route('admin.dashboard')}
+                                            >
+                                                Admin Dashboard
+                                            </Dropdown.Link>
+                                        }
                                         <Dropdown.Link
                                             href={route('logout')}
                                             method="post"
