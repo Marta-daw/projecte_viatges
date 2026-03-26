@@ -7,8 +7,6 @@
     gap: 1rem;
     justify-content: center;
 
-    /*  grid-column: 1 / -1; // ocupa todas las columnas del grid padre */
-
     @media (max-width: 900px) {
         /* grid-template-columns: repeat(2, 1fr); */
         flex-wrap: wrap;
@@ -21,4 +19,13 @@
 
 .centered {
     justify-content: center;
+}
+
+.homeViatgesH1 {
+    font-size: var(--font-size-h1);
+    color: var(--brown-compass);
+    text-align: center;
+    margin: 24px auto 12px auto;
+    width: 800px;
+    border: 1px solid var(--medium-bronze);
 }

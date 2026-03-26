@@ -6,11 +6,14 @@ function ExperienceList({ experiences }) {
     const isCentered = published.length < 3;
 
     return (
-        <div className={`${styles.grid} ${isCentered ? styles.centered : ''}`}>
-            {published.map(exp => (
-                <CardExperience key={exp.id} experience={exp} />
-            ))}
-        </div>
+        <>
+            <h1 className={styles.homeViatgesH1}>Experiències més recents</h1>
+            <div className={`${styles.grid} ${isCentered ? styles.centered : ''}`}>
+                {published.map(exp => (
+                    <CardExperience key={exp.id} experience={exp} />
+                ))}
+            </div>
+        </>
     );
 }
 
