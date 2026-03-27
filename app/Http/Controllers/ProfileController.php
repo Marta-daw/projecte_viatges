@@ -29,7 +29,24 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+
+            $user -> fill([
+                'name'       => $request->name,
+                'email'      => $request->email,
+                'bio'        => $request->bio,
+                'avatar_url' => $request->avatar_url,
+            ]);
+
+            if ($user->isDirty('email')) {
+                $user->email_verified_at = null;
+            }
+            
+            $user->save();
+
+            return back()->with('success', 'Profile updated successfully!');
+       
+        /* $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
@@ -37,7 +54,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit');
+        return Redirect::route('profile.edit'); */
     }
 
     /**

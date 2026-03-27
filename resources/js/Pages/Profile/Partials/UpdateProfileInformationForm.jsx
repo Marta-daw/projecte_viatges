@@ -16,6 +16,8 @@ export default function UpdateProfileInformation({
         useForm({
             name: user.name,
             email: user.email,
+            bio: user.bio || "",
+            avatar_url: user.avatar_url || "",
         });
 
     const submit = (e) => {
@@ -67,6 +69,39 @@ export default function UpdateProfileInformation({
                     />
 
                     <InputError className="mt-2" message={errors.email} />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="bio" value="Bio" />
+
+                    <textarea
+                        id="bio"
+                        type="text"
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        value={data.bio}
+                        onChange={(e) => setData('bio', e.target.value)}
+                        autoComplete="bio"
+                    />
+
+                    <InputError className="mt-2" message={errors.bio} />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="avatar_url" value="Avatar URL" />
+
+                    <TextInput
+                        id="avatar_url"
+                        type="url"
+                        className="mt-1 block w-full"
+                        value={data.avatar_url}
+                        onChange={(e) => setData('avatar_url', e.target.value)}
+                        autoComplete="avatar_url"
+                    />
+
+                    <InputError
+                        className="mt-2"
+                        message={errors.avatar_url}
+                    />
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (
