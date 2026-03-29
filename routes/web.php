@@ -6,6 +6,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExperienceController;
 use Inertia\Inertia;
+use App\Http\Controllers\VoteController;
+use App\Http\Controllers\ReportController;
 
 /* Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -48,6 +50,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('experiencia.update');
     Route::delete('/experiencia/{id}', [ExperienceController::class, 'destroy'])
         ->name('experiencia.destroy');
+
+    /* Route::post('/experiencia/vote/{id}', [VoteController::class, 'vote'])
+        ->name('experiencia.vote'); */
+    Route::post('/experiencia/vote/toggle/{id}', [VoteController::class, 'toggleVote'])
+        ->name('experiencia.toggleVote');
+    Route::post('/experiencia/report/{id}', [ReportController::class, 'report'])
+        ->name('experiencia.report');
 });
 
 require __DIR__ . '/auth.php';

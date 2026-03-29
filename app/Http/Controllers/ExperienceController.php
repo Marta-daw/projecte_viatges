@@ -82,7 +82,17 @@ class ExperienceController extends Controller
         $experience = Experiencia::with('user', 'categories')->findOrFail($id);
 
         return Inertia::render('DetailedCardExperience', [
-            'experience' => $experience
+            'experience' => $experience,
+            'Auth' => [
+                'user' => Auth::user(),
+            ],
+            'categories' => $experience->categories,
+            'votesCount' => $experience->votes()->sum('value'),
+            'positiveVotes' => $experience->votes()->where('value', 1)->count(),
+            'negativeVotes' => $experience->votes()->where('value', -1)->count(),
+            'votedByUser' => Auth::check() ? $experience->votes()->where('user_id', Auth::id())->value('value') : null,
+            'reported' => Auth::check() ? $experience->reports()->where('user_id', Auth::id())->exists() : false,
+            'isAutenticated' => Auth::check(),
         ]);
     }
 
