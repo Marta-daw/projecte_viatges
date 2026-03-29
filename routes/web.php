@@ -42,6 +42,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/experiencia/{id}', [ExperienceController::class, 'show'])
         ->name('experiencia.show');
+    Route::get('/experiencia/edit/{id}', [ExperienceController::class, 'edit'])
+        ->name('experiencia.edit');
+    Route::put('/experiencia/{id}', [ExperienceController::class, 'update'])
+        ->name('experiencia.update');
+    Route::delete('/experiencia/{id}', [ExperienceController::class, 'destroy'])
+        ->name('experiencia.destroy');
 });
 
 require __DIR__ . '/auth.php';
