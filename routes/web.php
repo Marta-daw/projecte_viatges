@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\DashboardController;
 use Inertia\Inertia;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\ReportController;
@@ -29,9 +30,7 @@ Route::get('/profile/experiencies', [ExperienceController::class, 'myExperiences
 Route::get('/experiencia/{id}', [ExperienceController::class, 'show'])->name('experiencia.show');
 
 // Dashboard
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 // Rutas privadas (requieren auth)
 Route::middleware(['auth', 'verified'])->group(function () {
