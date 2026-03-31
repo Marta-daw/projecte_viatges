@@ -2,7 +2,7 @@ import styles from './CardExperience.module.scss';
 import { Card } from "flowbite-react";
 import { Link, router } from '@inertiajs/react';
 
-function CardExperience({ experience, isAutenticated }) {
+function CardExperience({ experience, isAuthenticated }) {
     return (
         <Card className={styles.card}>
             <Link
@@ -21,7 +21,7 @@ function CardExperience({ experience, isAutenticated }) {
             </Link >
 
             {/*Solo visible con session iniciada*/}
-            {isAutenticated && (
+            {isAuthenticated && (
                 <div className={styles.cardActions}>
                     {experience?.can?.update && (
                         <Link className={styles.editDeletebtnCard} href={route('experiencia.edit', experience.id)}>Editar</Link>

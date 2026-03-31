@@ -17,23 +17,26 @@ class ExperienceController extends Controller
 
     public function myExperiences()
     {
-        $experiencies = Experiencia::where('user_id', auth()->id())
+        $user = Auth::user();
+        $experiencies = Experiencia::where('user_id', $user->id)
             ->latest()
             ->get();
         return Inertia::render('ManageExperience', [
-            'experiencies' => $experiencies->map(function ($experience) {
+            'experiencies' => $experiencies->map(function ($experience) use
+            ($user){
                 return [
                     'id' => $experience->id,
                     'title' => $experience->title,
                     'body' => $experience->body,
                     'image_url' => $experience->image_url,
+                    'status' => $experience->status,
                     'can' => [
                         'update' => Auth::user()->can('update', $experience),
                         'delete' => Auth::user()->can('delete', $experience),
                     ]
                 ];
             }),
-            'isAutenticated' => Auth::check(),
+            'isAuthenticated' => Auth::check(),
         ]);
     }
 
@@ -144,12 +147,12 @@ class ExperienceController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Experiencia $experience)
     {
         // Busquem l'experiència o llançem un error 404 si no existeix
-        $experience = Experiencia::findOrFail($id);
+        //$experience = Experiencia::findOrFail($id);
         
-        $this -> authorize('update', $id);
+        $this -> authorize('update', $experience);
 
         // Validem les dades del formulari d'edició
         $data = $request->validate([

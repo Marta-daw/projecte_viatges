@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Models\Experiencia;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+//use Illuminate\Auth\Access\Response;
 
 class ExperiencePolicy
 {
@@ -37,8 +37,8 @@ class ExperiencePolicy
      */
     public function update(User $user, Experiencia $experiencia): bool
     {
-        $this -> authorize('update', $experiencia);
-        return $user->id === $experiencia->user_id;
+        //$this -> authorize('update', $experiencia);
+        return (int) $user->id === (int) $experiencia->user_id;
     }
 
     /**
@@ -46,8 +46,8 @@ class ExperiencePolicy
      */
     public function delete(User $user, Experiencia $experiencia): bool
     {
-        $this -> authorize('delete', $experiencia);
-        return $user->id === $experiencia->user_id;
+        //$this -> authorize('delete', $experiencia);
+        return (int) $user->id === (int) $experiencia->user_id;
     }
 
     /**
