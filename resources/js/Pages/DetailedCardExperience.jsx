@@ -25,8 +25,26 @@ export default function DetailedCardExperience({ experience, categories, votesCo
         setVotesLoading(true);
         setError(null);
 
+        const isSameVote = userVote === value;
+
+        if (isSameVote) {
+            router.delete(`/experiencia/vote/${experience.id}`, {
+                preserveScroll: true,
+                onSuccess: (response) => {
+                    setPositiveVotes(response.props.positiveVotes);
+                    setNegativeVotes(response.props.negativeVotes);
+                    setUserVote(response.props.votedByUser);
+                },
+                onError: () => {
+                    setError('Error al retirar el vot. Torna-ho a intentar.');
+                },
+                onFinish: () => setVotesLoading(false),
+            });
+            return;
+        }
+
         // Determinar el valor del vot: si l'usuari ja ha votat, el toggle eliminarà el vot, sinó, el toggle registrarà un vot positiu
-        router.post(`/experiencia/vote/toggle/${experience.id}`, { value }, {
+        router.post(`/experiencia/vote/${experience.id}`, { value }, {
             preserveScroll: true,
             onSuccess: (response) => {
                 setPositiveVotes(response.props.positiveVotes);

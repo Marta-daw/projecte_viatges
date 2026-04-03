@@ -147,12 +147,12 @@ class ExperienceController extends Controller
         ]);
     }
 
-    public function update(Request $request, Experiencia $experience)
+    public function update(Request $request, Experiencia $experiencia)
     {
         // Busquem l'experiència o llançem un error 404 si no existeix
         //$experience = Experiencia::findOrFail($id);
         
-        $this -> authorize('update', $experience);
+        $this -> authorize('update', $experiencia);
 
         // Validem les dades del formulari d'edició
         $data = $request->validate([
@@ -164,9 +164,10 @@ class ExperienceController extends Controller
             'category_id' => ['nullable', 'exists:categories,id']
         ]);
         // Actualitzem les dades de l'experiència
-        $experience->update($data);
+        $experiencia->update($data);
 
-        return redirect()->route('experiences.myExperiencies');
+        return redirect()->route('experiences.myExperiencies')
+            ->with('success', 'Experiencia actualizada correctamente!');
     }
 
     public function destroy($id)

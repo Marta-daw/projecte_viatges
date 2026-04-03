@@ -24,14 +24,14 @@ function CardExperience({ experience, isAuthenticated }) {
             {isAuthenticated && (
                 <div className={styles.cardActions}>
                     {experience?.can?.update && (
-                        <Link className={styles.editDeletebtnCard} href={route('experiencia.edit', experience.id)}>Editar</Link>
+                        <Link className={styles.editDeletebtnCard} href={route('experiences.edit', experience.id)}>Editar</Link>
                     )}
 
                     {experience?.can?.delete && (
                         <button
                             onClick={() => {
                                 if (confirm('¿Estás seguro de que deseas eliminar esta experiencia?')) {
-                                    router.delete(route('experiencia.destroy', experience.id));
+                                    router.delete(route('experiences.destroy', experience.id));
                                 }
                             }} className={styles.editDeletebtnCard}>
                             Eliminar

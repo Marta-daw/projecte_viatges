@@ -58,7 +58,7 @@ export default function ExperienceForm() {
         }));
 
         if (!isEdit) {
-            post(route('experiencies.store'), {
+            post(route('experiences.store'), {
                 forceFormData: true,
                 // Neteja l'estat local sols si es publica / desa correctament
                 onSuccess: () => {
@@ -70,7 +70,7 @@ export default function ExperienceForm() {
                 },
             });
         } else {
-            put(route('experiencia.update', experience.id), {
+            put(route('experiences.update', experience.id), {
                 forceFormData: true,
                 onSuccess: () => {
                     // No resetejem l'estat en edició, ja que volem mantenir les dades visibles

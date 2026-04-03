@@ -9,59 +9,32 @@ class VoteController extends Controller
 {
     //
 
-    public function vote (Request $request, $id)
+    public function store (Request $request, int $id)
     {
 
         $request->validate([
-            'value' => ['required', 'integer', 'in:1,-1'], // Si queremos permitir votos positivos y negativos
+            'value' => ['required', 'in:1,-1'] // Si queremos permitir votos positivos y negativos
         ]);
 
         // Lógica para votar una experiencia
-        $experience = Experiencia::findOrFail($id);
         $userId = auth()->id();
 
-        $experience->votes()->updateOrCreate(
-            ['user_id' => $userId],
-            ['value' => $request->value] // Per defecte, el valor del vot és +1
+        Vote::updateOrCreate(
+            ['user_id' => $userId, 'experience_id' => $id],
+            ['value' => (int) $request->value]
         );
 
-        return response()->json([
-            'message' => 'Vot registrat',
-            'voted' => true,
-            'votesCount' => $experience -> votes() -> cout(),
-        ], 200);
+        return back()->with('success', 'Voto registrado correctamente.');
     }
 
     //toggle per votar o eliminar el vot
-    public function toggleVote (Request $request, $id)
+    public function destroy (int $id)
     {
-        $experience = Experiencia::findOrFail($id);
-        $userId = auth()->id();
-        $value = $request->value; // Per defecte, el valor del vot és +1
+        Vote::where('user_id', auth()->id())
+            ->where('experience_id', $id)
+            ->delete();
 
-        $isVoted = $experience->votes()->where('user_id', $userId)->first();
-
-        if ($isVoted) {
-            if ($isVoted->value == $value) {
-                // Si el usuario ya ha votado lo mismo, eliminamos el voto
-                $isVoted->votes()->detach($userId);
-                $votedByUser = null;
-            } else {
-                // Botón contrario — cambiar voto
-                $experience->votes()->updateExistingPivot($userId, ['value' => $value]);
-                $votedByUser = $value;
-            }
-        } else {
-            // Sin voto previo — crear
-            $experience->votes()->attach($userId, ['value' => $value]);
-            $votedByUser = $value;
-        }
-        return redirect()->back()->with([
-            'votesCount'  => $experience->votes()->sum('value'),
-            'positiveVotes' => $experience->votes()->where('value', 1)->count(),
-            'negativeVotes' => $experience->votes()->where('value', -1)->count(),
-            'votedByUser' => $votedByUser,
-        ]);
+        return back()->with('success', 'Voto eliminado correctamente.');
     }
 }
 

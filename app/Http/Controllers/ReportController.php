@@ -10,31 +10,27 @@ class ReportController extends Controller
     // Lógica para reportar una experiencia
     public function report (Request $request, $id)
     {
-        $experience = Experiencia::findOrFail($id);
+        // $experience = Experiencia::findOrFail($id);
         $userId = auth()->id();
         
-        $isReport = Report::where('user_id', $userId)->where('experience_id', $id)->exists();
-        //Comprovar si l'usuari ja ha reportat l'experiència
-        if ($isReport) {
-            return response()->json([
-                'message' => 'Ja has reportat aquesta experiència',
-                'reported' => true,
-            ], 400);
-        }
+        // $isReport = Report::where('user_id', $userId)->where('experience_id', $id)->exists();
+        // //Comprovar si l'usuari ja ha reportat l'experiència
+        // if ($isReport) {
+        //     return response()->json([
+        //         'message' => 'Ja has reportat aquesta experiència',
+        //         'reported' => true,
+        //     ], 400);
+        // }
         
-        $request->validate([
-            'reason' => ['nullable', 'string', 'max:255'],
+        $data = $request->validate([
+            'reason' => ['required', 'string', 'min:10', 'max:255'],
         ]);
 
-        Report::create([
-            'user_id' => $userId,
-            'experience_id' => $experience->id,
-            'reason' => $request->reason,
-            'status' => 'pendent', // O 'revisat' segons la lògica que vulguem implementar
+        Report::firstOrCreate([
+            ['user_id' => $userId, 'experience_id' => $id],
+            ['reason' => $data[reason], 'status' => 'pending']
         ]);
 
-        return response()->json([
-            'message' => 'Experiencia reportada correctament',
-        ], 200);
+        return back()->with('success', 'Experiencia reportada correctamente.');
     }
 }
