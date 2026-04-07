@@ -20,6 +20,7 @@ class Experiencia extends Model
         'latitude',
         'longitude',
         'status',
+        'is_reported',
         'published_at',
     ];
 
