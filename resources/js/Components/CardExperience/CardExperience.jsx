@@ -1,35 +1,45 @@
 import styles from './CardExperience.module.scss';
 import { Card } from "flowbite-react";
-import { Link } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 
-function CardExperience({ experience, isAutenticated }) {
+function CardExperience({ experience, isAuthenticated }) {
     return (
-        <Link
-            href={`/experiencia/${experience.id}`}
-            className={styles.cardContainer}
-        >
-            <div className={styles.cardBody}>
-                <Card className={styles.card}>
-                    <img src={experience.image_url || '/images/placeholder.png'} alt="experienceIMG" className={styles.cardImage} />
-                    <div className={styles.textCard}>
-                        <h5 className={styles.cardTitle}> {experience.title} </h5>
-                        <p className={styles.cardDescription}>
-                            {experience.body}
-                        </p>
-                    </div>
+        <Card className={styles.card}>
+            <Link
+                href={`/experiencia/${experience.id}`}
+                className={styles.cardContainer}
+            >
 
-                    {/*Solo visible con session iniciada*/}
-                    {isAutenticated && (
-                        <div className={styles.cardActions}>
-                            <button onClick={() => console.log('editar')}>✏️ Editar</button>
-                            <button onClick={() => console.log('eliminar')}>🗑️ Eliminar</button>
-                            <button onClick={() => console.log('favorito')}>❤️ Favorito</button>
-                        </div>
+                <img src={experience.image_url || '/images/placeholder.png'} alt="experienceIMG" className={styles.cardImage} />
+                <div className={styles.textCard}>
+                    <h5 className={styles.cardTitle}> {experience.title} </h5>
+                    <p className={styles.cardDescription}>
+                        {experience.body}
+                    </p>
+                </div>
+
+            </Link >
+
+            {/*Solo visible con session iniciada*/}
+            {isAuthenticated && (
+                <div className={styles.cardActions}>
+                    {experience?.can?.update && (
+                        <Link className={styles.editDeletebtnCard} href={route('experiences.edit', experience.id)}>Editar</Link>
                     )}
 
-                </Card>
-            </div>
-        </Link>
+                    {experience?.can?.delete && (
+                        <button
+                            onClick={() => {
+                                if (confirm('¿Estás seguro de que deseas eliminar esta experiencia?')) {
+                                    router.delete(route('experiences.destroy', experience.id));
+                                }
+                            }} className={styles.editDeletebtnCard}>
+                            Eliminar
+                        </button>
+                    )}
+                </div>
+            )}
+        </Card>
     );
 }
 

@@ -1,6 +1,6 @@
 import styles from './Hero.module.scss';
 
-export default function Hero() {
+export default function Hero({ variant = 'guest', user = null, createExperienceUrl = '#' }) {
     return (
         <div className={styles.heroContainer}>
             <img srcSet="
@@ -15,9 +15,20 @@ export default function Hero() {
             " src="https://res.cloudinary.com/dadhzxpnj/image/upload/v1774030117/heroPhoto_skug90.jpg"
                 alt="Imatge de viatge" width="1200" height="600" className={styles.heroImg} />
 
+
             <div className={styles.heroTextContainer}>
-                <h1 className={styles.benvingutH1} >Benvingut a Destino Incierto</h1>
-                <p className={styles.heroParagraf}>Descobreix experiències úniques i viatges inoblidables.</p>
+                {variant == 'auth' ? (
+                    <>
+                        <h1 className={styles.benvingutH1} >Benvingut, {user?.name || 'viatger/a'}!</h1>
+                        <p className={styles.pgfUserLog}>Comparteix la teva propera aventura amb la comunitat.</p>
+                        <a href={createExperienceUrl} className={styles.ctaButton}> Crear experiencia</a>
+                    </>
+                ) : (
+                    <>
+                        <h1 className={styles.benvingutH1} >Benvingut a Destino Incierto</h1>
+                        <p className={styles.heroParagraf}>Descobreix experiències úniques i viatges inoblidables.</p>
+                    </>
+                )}
             </div>
         </div>
 

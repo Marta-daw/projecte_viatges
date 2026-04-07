@@ -16,17 +16,17 @@ export default function ExperienceForm() {
     const [fileName, setFileName] = useState('Cap arxiu seleccionat');
 
     // Obtenim categories de les props injectades per Inertia
-    const { categories = [] } = usePage().props;
+    const { categories = [], experience = [], isEdit } = usePage().props;
 
     // Utilitzem els mateixos noms o definim el mapeig abans d'enviar per garantir
     // compatibilitat amb el backend. Es guarda un estat per separat de mapa.
-    const { data, setData, post, processing, errors, reset, transform } = useForm({
-        titol: '',
-        descripcio: '',
+    const { data, setData, put, post, processing, errors, reset, transform } = useForm({
+        titol: experience?.title || '',
+        descripcio: experience?.body || '',
         imatge: null,
-        latitude: null,
-        longitude: null,
-        categoria_id: '',
+        latitude: experience?.latitude || null,
+        longitude: experience?.longitude || null,
+        categoria_id: experience?.categoria_id || '',
     });
 
     const formAction = useRef('publicada');
@@ -57,22 +57,33 @@ export default function ExperienceForm() {
             status: formAction.current
         }));
 
-        post(route('experiencies.store'), {
-            forceFormData: true,
-            // Neteja l'estat local sols si es publica / desa correctament
-            onSuccess: () => {
-                reset();
-                setFileName('Cap arxiu seleccionat');
-                if (fileInputRef.current) {
-                    fileInputRef.current.value = null; // Reiniciar l'input de fitxers natiu
-                }
-            },
-        });
+        if (!isEdit) {
+            post(route('experiences.store'), {
+                forceFormData: true,
+                // Neteja l'estat local sols si es publica / desa correctament
+                onSuccess: () => {
+                    reset();
+                    setFileName('Cap arxiu seleccionat');
+                    if (fileInputRef.current) {
+                        fileInputRef.current.value = null; // Reiniciar l'input de fitxers natiu
+                    }
+                },
+            });
+        } else {
+            put(route('experiences.update', experience.id), {
+                forceFormData: true,
+                onSuccess: () => {
+                    // No resetejem l'estat en edició, ja que volem mantenir les dades visibles
+                    // i permetre múltiples actualitzacions sense perdre la informació carregada.
+                },
+            });
+        }
+
     }
 
     return (
         <div className={styles.formWrapper}>
-            <h2>Nova Experiència</h2>
+            <h2>{isEdit ? "Editar Experiència" : "Nova Experiència"}</h2>
 
             <form onSubmit={handleSubmit} encType="multipart/form-data">
 

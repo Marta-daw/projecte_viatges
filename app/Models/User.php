@@ -22,6 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'bio',
+        'avatar_url',
     ];
 
     /**
@@ -51,5 +53,17 @@ class User extends Authenticatable
     public function experiences()
     {
         return $this->hasMany(Experience::class);
+    }
+
+    // Un usuari pot votar moltes experiències (i viceversa)
+    public function votes()
+    {
+        return $this->belongsToMany(Experience::class, 'votes', 'user_id', 'experience_id')->withTimestamps();
+    }
+
+    // Un usuari pot reportar moltes experiències
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'user_id');
     }
 }
