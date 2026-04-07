@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { Head, useForm, Link } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
 
 export default function UsersIndex({ auth, users = [] }) {
     const [confirmDelete, setConfirmDelete] = useState(null);
@@ -127,13 +127,6 @@ export default function UsersIndex({ auth, users = [] }) {
                                                         {new Date(user.created_at).toLocaleDateString('ca-ES')}
                                                     </td>
                                                     <td className="px-6 py-4 text-sm space-x-2 flex">
-                                                        <Link
-                                                            href={route('profile.show', { user: user.id })}
-                                                            className="px-3 py-2 bg-admin-accent hover:bg-admin-accent/80 text-white rounded-md transition duration-200 font-medium text-xs whitespace-nowrap"
-                                                            title="Ver perfil"
-                                                        >
-                                                            👤 Perfil
-                                                        </Link>
                                                         {!isBanned ? (
                                                             <button
                                                                 onClick={() => handleBanUser(user.id)}
