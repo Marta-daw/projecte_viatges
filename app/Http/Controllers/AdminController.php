@@ -45,6 +45,72 @@ class AdminController extends Controller
     }
 
     /**
+     * Gestionar experiencias
+     */
+    public function gestionarExperiences()
+    {
+        $experiences = Experiencia::with(['user', 'categories'])->get();
+
+        return Inertia::render('Admin/Experiences/Index', [
+            'experiences' => $experiences,
+        ]);
+    }
+
+    /**
+     * Gestionar usuarios
+     */
+    public function gestionarUsers()
+    {
+        $users = User::withCount('experiences')->get();
+
+        return Inertia::render('Admin/Users/Index', [
+            'users' => $users,
+        ]);
+    }
+
+    /**
+     * Eliminar experiencia
+     */
+    public function deleteExperience(Experiencia $experiencia)
+    {
+        $experiencia->delete();
+
+        return back()->with('success', 'Experiencia eliminada correctamente');
+    }
+
+    /**
+     * Eliminar usuario
+     */
+    public function deleteUser(User $user)
+    {
+        // Opcionalmente, elimina las experiencias del usuario también
+        $user->experiences()->delete();
+        $user->delete();
+
+        return back()->with('success', 'Usuario eliminado correctamente');
+    }
+
+    /**
+     * Banear usuario
+     */
+    public function banUser(User $user)
+    {
+        $user->update(['is_banned' => true]);
+
+        return back()->with('success', 'Usuario baneado correctamente');
+    }
+
+    /**
+     * Desbanear usuario
+     */
+    public function unbanUser(User $user)
+    {
+        $user->update(['is_banned' => false]);
+
+        return back()->with('success', 'Usuario desbaneado correctamente');
+    }
+
+    /**
      * Marcar un reporte como revisado
      */
     public function resolveReport(Experiencia $experiencia)

@@ -45,6 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('admin/categories', [AdminController::class, 'gestionarCategories'])->name('admin.categories');
     Route::get('admin/reports', [AdminController::class, 'gestionarReports'])->name('admin.reports');
+    Route::get('admin/experiences', [AdminController::class, 'gestionarExperiences'])->name('admin.experiences');
+    Route::get('admin/users', [AdminController::class, 'gestionarUsers'])->name('admin.users');
 
     // CRUD Categorías
     Route::post('admin/categories', [CategoryController::class, 'store'])->name('admin.categories.store');
@@ -55,6 +57,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('admin/reports/{experiencia}/delete', [AdminController::class, 'deleteReport'])->name('admin.reports.delete');
     Route::delete('admin/reports/{experiencia}/resolve', [AdminController::class, 'resolveReport'])->name('admin.reports.resolve');
     Route::put('admin/reports/{experiencia}/reject', [AdminController::class, 'rejectReport'])->name('admin.reports.reject');
+
+    // Admin Experiences Management
+    Route::delete('admin/experiences/{experiencia}', [AdminController::class, 'deleteExperience'])->name('admin.experiences.delete');
+
+    // Admin Users Management
+    Route::delete('admin/users/{user}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
+    Route::post('admin/users/{user}/ban', [AdminController::class, 'banUser'])->name('admin.users.ban');
+    Route::post('admin/users/{user}/unban', [AdminController::class, 'unbanUser'])->name('admin.users.unban');
 });
 
 require __DIR__.'/auth.php';

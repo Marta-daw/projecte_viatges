@@ -9,8 +9,8 @@ export default function AdminSidebar({ auth }) {
     const menuItems = [
         { label: 'Dashboard', href: route('admin.dashboard'), icon: '📊' },
         { label: 'Categoríes', href: route('admin.categories'), icon: '📂' },
-        { label: 'Experiències', href: '#', icon: '✈️' },
-        { label: 'Usuaris', href: '#', icon: '👥' },
+        { label: 'Experiències', href: route('admin.experiences'), icon: '✈️' },
+        { label: 'Usuaris', href: route('admin.users'), icon: '👥' },
         { label: 'Reportes', href: route('admin.reports'), icon: '⚠️' },
     ];
 
