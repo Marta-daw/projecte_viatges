@@ -11,18 +11,18 @@ export default function AdminHeader({ user }) {
 
     return (
         <header className={styles.adminHeader}>
-            <div className="flex justify-between items-center h-full px-8">
+            <div className="flex justify-between items-center h-full px-8 bg-admin-surface border-b border-admin-border">
                 {/* Logo/Título */}
                 <div className={styles.headerTitle}>
-                    <h1 className="text-2xl font-bold">Panel d'Administració</h1>
+                    <h1 className="text-2xl font-bold text-admin-text">Panel d'Administració</h1>
                 </div>
 
                 {/* Información del usuario y logout */}
                 <div className={styles.headerUser}>
-                    <span className="text-sm text-gray-400">Benvingut, <strong>{user?.name || 'Admin'}</strong></span>
+                    <span className="text-sm text-admin-text-muted">Benvingut, <strong className="text-admin-text">{user?.name || 'Admin'}</strong></span>
                     <button
                         onClick={handleLogout}
-                        className="ml-4 px-4 py-2 bg-red-600 hover:bg-red-700 rounded text-white text-sm transition"
+                        className="ml-4 px-4 py-2 bg-admin-danger hover:bg-admin-danger/80 rounded text-white text-sm transition font-medium"
                     >
                         Tancar sessió
                     </button>

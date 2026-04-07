@@ -11,7 +11,7 @@ export default function AdminSidebar({ auth }) {
         { label: 'Categoríes', href: route('admin.categories'), icon: '📂' },
         { label: 'Experiències', href: '#', icon: '✈️' },
         { label: 'Usuaris', href: '#', icon: '👥' },
-        { label: 'Reportes', href: '#', icon: '⚠️' },
+        { label: 'Reportes', href: route('admin.reports'), icon: '⚠️' },
     ];
 
     return (
