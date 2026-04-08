@@ -20,12 +20,15 @@
 }
 
 .benvingutH1 {
+    font-size: var(--font-size-h1);
     margin-bottom: var(--spacing-medium);
     color: var(--ivory-beige);
 }
 
-.heroParagraf {
+.heroParagraf,
+.pgfUserLog {
     color: var(--ivory-beige);
+    font-size: var(--font-size-large);
 }
 
 .heroTextContainer {
@@ -34,4 +37,20 @@
     text-align: center;
     padding: var(--spacing-large);
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ctaButton {
+    display: inline-block;
+    margin-top: var(--spacing-medium);
+    padding: var(--spacing-small) var(--spacing-large);
+    background-color: var(--ivory-beige);
+
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: var(--red-needle);
+        color: var(--ivory-beige);
+    }
 }

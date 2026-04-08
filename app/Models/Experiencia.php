@@ -22,6 +22,7 @@ class Experiencia extends Model
         'status',
         'is_reported',
         'published_at',
+        'votes_count', // Camp virtual per comptar vots (és un camp caché, no es guarda a la BD)
     ];
 
     // 2. Convertim automàticament els camps de data i coordenades
@@ -41,5 +42,17 @@ class Experiencia extends Model
     public function categories()
     {
         return $this->belongsToMany(Categoria::class, 'category_experience', 'experience_id', 'category_id');
+    }
+
+    // Una experiència pot tenir molts vots (i viceversa)
+    public function votes()
+    {
+        return $this->belongsToMany(User::class, 'votes', 'experience_id', 'user_id')->withTimestamps();
+    }
+
+    // Una experiència pot tenir molts reports
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'experience_id');
     }
 }

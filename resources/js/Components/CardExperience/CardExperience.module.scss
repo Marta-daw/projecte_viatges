@@ -25,6 +25,7 @@
     overflow: hidden;
     background-color: var(--bg-color-white);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    margin: 20px;
 }
 
 .cardImage {
@@ -50,4 +51,21 @@
     font-size: 0.875rem;
     line-height: 1.6;
     margin: 0;
+}
+
+.cardActions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+}
+
+.editDeletebtnCard {
+    padding: 8px 16px;
+    border: 1px solid #a14545;
+    border-radius: 4px;
+    color: #a14545;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: background-color 0.3s ease;
 }
