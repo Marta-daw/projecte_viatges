@@ -14,31 +14,47 @@ export default function AdminSidebar({ auth }) {
         { label: 'Reportes', href: route('admin.reports'), icon: '⚠️' },
     ];
 
+    const isActive = (href) => url === href || url.startsWith(href + '/');
+
     return (
         <aside className={`${styles.adminSidebar} ${isOpen ? '' : styles.collapsed}`}>
-            {/* Botó para colapsar */}
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className={styles.toggleBtn}
-                title="Ocultar/Mostrar menú"
-            >
-                {isOpen ? '◀' : '▶'}
-            </button>
+            {/* Top section: logo + toggle */}
+            <div className={styles.sidebarTop}>
+                {isOpen && (
+                    <div className={styles.sidebarLogo}>
+                        <span className={styles.logoIcon}>🧭</span>
+                        <span className={styles.logoText}>Admin</span>
+                    </div>
+                )}
+                <button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className={styles.toggleBtn}
+                    title={isOpen ? 'Reduir menú' : 'Expandir menú'}
+                >
+                    {isOpen ? '◀' : '▶'}
+                </button>
+            </div>
 
-            {/* Menú de navegación */}
+            {/* Navigation menu */}
             <nav className={styles.sidebarNav}>
                 {menuItems.map((item, index) => (
                     <Link
                         key={`menu-${index}`}
                         href={item.href}
-                        className={`${styles.navItem} ${url === item.href ? 'active' : ''}`}
-                        title={item.label}
+                        className={`${styles.navItem} ${isActive(item.href) ? styles.active : ''}`}
+                        title={!isOpen ? item.label : undefined}
                     >
                         <span className={styles.icon}>{item.icon}</span>
                         {isOpen && <span className={styles.label}>{item.label}</span>}
                     </Link>
                 ))}
             </nav>
+
+            {/* Footer: system status */}
+            <div className={styles.sidebarFooter}>
+                <div className={styles.footerDot} title="Sistema actiu"></div>
+                {isOpen && <span className={styles.footerText}>Sistema actiu</span>}
+            </div>
         </aside>
     );
 }

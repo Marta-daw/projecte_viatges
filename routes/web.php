@@ -60,6 +60,8 @@ Route::middleware('auth')->group(function () {
 
     // Admin Experiences Management
     Route::delete('admin/experiences/{experiencia}', [AdminController::class, 'deleteExperience'])->name('admin.experiences.delete');
+    Route::get('admin/experiences/{experiencia}/edit', [AdminController::class, 'editExperience'])->name('admin.experiences.edit');
+    Route::put('admin/experiences/{experiencia}', [AdminController::class, 'updateExperience'])->name('admin.experiences.update');
 
     // Admin Users Management
     Route::delete('admin/users/{user}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');

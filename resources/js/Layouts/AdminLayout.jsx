@@ -4,23 +4,26 @@ import AdminSidebar from '@/Components/Admin/AdminSidebar/AdminSidebar';
 
 export default function AdminLayout({ user, children }) {
     return (
-        // Contenedor principal: Ocupa toda la pantalla y pone los elementos en columna (Arriba/Abajo)
-        <div className="flex flex-col h-screen bg-admin-bg text-admin-text">
+        // Contenedor principal
+        <div className="flex flex-col h-screen" style={{ backgroundColor: '#EDE0CC' }}>
 
-            {/* 1. CAJA SUPERIOR: Cabecera (Ancho completo) */}
-            <header className="h-16 flex-shrink-0 border-b border-admin-border z-10">
+            {/* 1. Header superior (ancho completo) */}
+            <div className="flex-shrink-0 z-20">
                 <AdminHeader user={user} />
-            </header>
+            </div>
 
-            {/* Contenedor inferior: Divide el espacio restante en Izquierda/Derecha */}
+            {/* 2. Contenedor inferior: sidebar + main */}
             <div className="flex flex-1 overflow-hidden">
 
+                {/* Sidebar izquierdo */}
                 <AdminSidebar auth={{ user }} />
 
+                {/* Área de contenido principal */}
+                <main
+                    className="flex-1 overflow-y-auto p-8"
+                    style={{ backgroundColor: '#EDE0CC' }}
+                >
 
-                {/* DERECHA: El contenido principal dinámico */}
-                <main className="flex-1 overflow-y-auto bg-admin-bg p-8">
-                    {/* Aquí Inertia inyectará la página que toque (Categorías, Usuarios, etc.) */}
                     {children}
                 </main>
 

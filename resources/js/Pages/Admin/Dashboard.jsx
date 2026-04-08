@@ -15,151 +15,217 @@ export default function Dashboard({ auth, stats = {} }) {
             <Head title="Panel d'Administració" />
             <AdminLayout user={auth.user}>
                 <div className="space-y-8">
-                    {/* Header */}
-                    <div className="border-b border-admin-border pb-6">
-                        <h2 className="text-4xl font-bold text-admin-text mb-2">
-                            Benvingut al Dashboard
-                        </h2>
-                        <p className="text-admin-text-muted text-lg">
+
+                    {/* Page header */}
+                    <div className="pb-6" style={{ borderBottom: '2px solid #cfbfa4' }}>
+                        <div className="flex items-center gap-3 mb-1">
+                            <span className="text-3xl">📊</span>
+                            <h2 className="text-admin-text" style={{ fontSize: '1.9rem', fontWeight: 800, fontFamily: 'Montserrat, sans-serif' }}>
+                                Benvingut al Dashboard
+                            </h2>
+                        </div>
+                        <p className="text-admin-text-muted text-base mt-1 ml-12">
                             Gestiona tots els aspectes de la plataforma de viatges
                         </p>
                     </div>
 
-                    {/* Grid de estadísticas */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {/* Stats grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                         <StatCard
                             title="Experiències"
                             value={experiencesCount}
                             icon="✈️"
-                            color="bg-admin-accent"
-                            trend="+12% este mes"
+                            accent="#C0634A"
+                            trend="+12% aquest mes"
+                            href={route('admin.experiences')}
                         />
                         <StatCard
                             title="Usuaris"
                             value={usersCount}
                             icon="👥"
-                            color="bg-admin-success"
-                            trend="+8% este mes"
+                            accent="#4A7C6F"
+                            trend="+8% aquest mes"
+                            href={route('admin.users')}
                         />
                         <StatCard
                             title="Categoríes"
                             value={categoriesCount}
                             icon="📂"
-                            color="bg-purple-500"
-                            trend="Completes"
+                            accent="#8B7335"
+                            trend="Configurades"
+                            href={route('admin.categories')}
                         />
                         <StatCard
                             title="Reportes Pendents"
                             value={reportsCount}
                             icon="⚠️"
-                            color={reportsCount > 0 ? "bg-admin-danger" : "bg-admin-text-muted"}
-                            trend={reportsCount > 0 ? "Revisió necessària" : "Cap reportes"}
+                            accent={reportsCount > 0 ? '#C0634A' : '#7A6050'}
+                            trend={reportsCount > 0 ? 'Revisió necessària' : 'Cap reportes'}
+                            href={route('admin.reports')}
                         />
                     </div>
 
-                    {/* Secciones principales */}
+                    {/* Main content grid */}
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        {/* Accions ràpides */}
+
+                        {/* Quick actions */}
                         <div className="lg:col-span-2">
-                            <div className="bg-admin-surface rounded-lg p-6 border border-admin-border">
-                                <h3 className="text-xl font-semibold text-admin-text mb-4 flex items-center gap-2">
-                                    <span>🔧</span>
-                                    <span>Accions ràpides</span>
+                            <div className="bg-admin-surface rounded-xl p-6 border border-admin-border shadow-sm">
+                                <h3 className="text-lg font-bold text-admin-text mb-5 flex items-center gap-2"
+                                    style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                                    <span>⚡</span> Accions ràpides
                                 </h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                    <Link
+                                    <QuickAction
                                         href={route('admin.categories')}
-                                        className="block p-4 bg-admin-bg hover:bg-admin-border rounded-lg transition duration-200 text-admin-text hover:text-admin-accent font-medium border border-transparent hover:border-admin-border"
-                                    >
-                                        📂 Gestionar Categoríes
-                                    </Link>
-                                    <Link
+                                        icon="📂"
+                                        label="Gestionar Categoríes"
+                                        description="Crear, editar i eliminar categories"
+                                        color="#8B7335"
+                                    />
+                                    <QuickAction
+                                        href={route('admin.experiences')}
+                                        icon="✈️"
+                                        label="Gestionar Experiències"
+                                        description="Moderar i editar experiències"
+                                        color="#C0634A"
+                                    />
+                                    <QuickAction
                                         href={route('admin.reports')}
-                                        className="block p-4 bg-admin-bg hover:bg-admin-border rounded-lg transition duration-200 text-admin-text hover:text-admin-danger font-medium border border-transparent hover:border-admin-border"
-                                    >
-                                        ⚠️ Revisar Reportes
-                                    </Link>
-                                    <a
-                                        href="#"
-                                        className="block p-4 bg-admin-bg hover:bg-admin-border rounded-lg transition duration-200 text-admin-text-muted hover:text-admin-text font-medium border border-transparent hover:border-admin-border opacity-50 cursor-not-allowed"
-                                        title="Pròximamente"
-                                    >
-                                        ✈️ Revisar Experiències
-                                    </a>
-                                    <a
-                                        href="#"
-                                        className="block p-4 bg-admin-bg hover:bg-admin-border rounded-lg transition duration-200 text-admin-text-muted hover:text-admin-text font-medium border border-transparent hover:border-admin-border opacity-50 cursor-not-allowed"
-                                        title="Pròximamente"
-                                    >
-                                        👥 Gestionar Usuaris
-                                    </a>
+                                        icon="⚠️"
+                                        label="Revisar Reportes"
+                                        description={reportsCount > 0 ? `${reportsCount} reportes pendents` : 'Cap reportes pendents'}
+                                        color={reportsCount > 0 ? '#C0634A' : '#7A6050'}
+                                    />
+                                    <QuickAction
+                                        href={route('admin.users')}
+                                        icon="👥"
+                                        label="Gestionar Usuaris"
+                                        description="Banear, eliminar usuaris"
+                                        color="#4A7C6F"
+                                    />
                                 </div>
                             </div>
                         </div>
 
-                        {/* Estado del sistema */}
-                        <div className="bg-admin-surface rounded-lg p-6 border border-admin-border">
-                            <h3 className="text-xl font-semibold text-admin-text mb-4 flex items-center gap-2">
-                                <span>📊</span>
-                                <span>Estado</span>
+                        {/* System status */}
+                        <div className="bg-admin-surface rounded-xl p-6 border border-admin-border shadow-sm">
+                            <h3 className="text-lg font-bold text-admin-text mb-5 flex items-center gap-2"
+                                style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                                <span>🟢</span> Estat del sistema
                             </h3>
-                            <div className="space-y-3">
-                                <div className="flex items-center gap-2">
-                                    <span className="text-admin-success text-lg">●</span>
-                                    <span className="text-admin-text text-sm">Plataforma activa</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <span className="text-admin-success text-lg">●</span>
-                                    <span className="text-admin-text text-sm">Sistema de moderació actiu</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <span className={reportsCount > 0 ? "text-admin-danger text-lg" : "text-admin-success text-lg"}>●</span>
-                                    <span className="text-admin-text text-sm">
-                                        {reportsCount > 0 ? `${reportsCount} reportes pendents` : "Cap reportes pendents"}
-                                    </span>
-                                </div>
+                            <div className="space-y-4">
+                                <StatusRow icon="🟢" label="Plataforma activa" ok />
+                                <StatusRow icon="🟢" label="Moderació activa" ok />
+                                <StatusRow
+                                    icon={reportsCount > 0 ? '🔴' : '🟢'}
+                                    label={reportsCount > 0 ? `${reportsCount} reportes pendents` : 'Cap reportes pendents'}
+                                    ok={reportsCount === 0}
+                                />
                             </div>
                         </div>
                     </div>
 
-                    {/* Últimas actividades */}
-                    <div className="bg-admin-surface rounded-lg p-6 border border-admin-border">
-                        <h3 className="text-xl font-semibold text-admin-text mb-4 flex items-center gap-2">
-                            <span>📝</span>
-                            <span>Informació del sistema</span>
+                    {/* Info footer */}
+                    <div className="bg-admin-surface rounded-xl p-6 border border-admin-border shadow-sm">
+                        <h3 className="text-lg font-bold text-admin-text mb-5 flex items-center gap-2"
+                            style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                            <span>📈</span> Resum de la plataforma
                         </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                            <div className="border-l-4 border-admin-accent pl-4">
-                                <p className="text-admin-text-muted mb-1">Categoríes disponibles</p>
-                                <p className="text-2xl font-bold text-admin-accent">{categoriesCount}</p>
-                            </div>
-                            <div className="border-l-4 border-admin-success pl-4">
-                                <p className="text-admin-text-muted mb-1">Usuaris registrats</p>
-                                <p className="text-2xl font-bold text-admin-success">{usersCount}</p>
-                            </div>
-                            <div className="border-l-4 border-purple-500 pl-4">
-                                <p className="text-admin-text-muted mb-1">Experiències actives</p>
-                                <p className="text-2xl font-bold text-purple-400">{experiencesCount}</p>
-                            </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <InfoStat
+                                label="Categoríes disponibles"
+                                value={categoriesCount}
+                                color="#8B7335"
+                            />
+                            <InfoStat
+                                label="Usuaris registrats"
+                                value={usersCount}
+                                color="#4A7C6F"
+                            />
+                            <InfoStat
+                                label="Experiències actives"
+                                value={experiencesCount}
+                                color="#C0634A"
+                            />
                         </div>
                     </div>
+
                 </div>
             </AdminLayout>
         </>
     );
 }
 
-function StatCard({ title, value, icon, color, trend }) {
+function StatCard({ title, value, icon, accent, trend, href }) {
     return (
-        <div className={`${color} rounded-lg p-6 text-white shadow-lg transform hover:scale-105 transition duration-200`}>
+        <Link
+            href={href}
+            className="block rounded-xl p-6 text-white shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
+            style={{ background: `linear-gradient(135deg, ${accent} 0%, ${accent}cc 100%)` }}
+        >
             <div className="flex justify-between items-start mb-4">
                 <div>
-                    <p className="text-white/80 text-sm font-medium">{title}</p>
-                    <p className="text-4xl font-bold mt-3">{value}</p>
+                    <p className="text-white/80 text-sm font-semibold mb-2">{title}</p>
+                    <p className="text-4xl font-bold">{value}</p>
                 </div>
-                <span className="text-4xl opacity-80">{icon}</span>
+                <span className="text-4xl opacity-85">{icon}</span>
             </div>
-            <p className="text-white/70 text-xs font-semibold">{trend}</p>
+            <p className="text-white/70 text-xs font-medium">{trend} →</p>
+        </Link>
+    );
+}
+
+function QuickAction({ href, icon, label, description, color }) {
+    return (
+        <Link
+            href={href}
+            className="flex items-start gap-3 p-4 rounded-lg transition-all duration-200 hover:-translate-y-0.5"
+            style={{
+                background: `rgba(${hexToRgb(color)}, 0.06)`,
+                border: `1px solid rgba(${hexToRgb(color)}, 0.18)`,
+            }}
+            onMouseEnter={e => {
+                e.currentTarget.style.background = `rgba(${hexToRgb(color)}, 0.12)`;
+            }}
+            onMouseLeave={e => {
+                e.currentTarget.style.background = `rgba(${hexToRgb(color)}, 0.06)`;
+            }}
+        >
+            <span className="text-2xl flex-shrink-0 mt-0.5">{icon}</span>
+            <div>
+                <p className="font-semibold text-sm text-admin-text">{label}</p>
+                <p className="text-xs text-admin-text-muted mt-0.5">{description}</p>
+            </div>
+        </Link>
+    );
+}
+
+function StatusRow({ icon, label }) {
+    return (
+        <div className="flex items-center gap-3 p-3 rounded-lg" style={{ background: '#EDE0CC' }}>
+            <span className="text-sm">{icon}</span>
+            <span className="text-sm font-medium text-admin-text">{label}</span>
         </div>
     );
+}
+
+function InfoStat({ label, value, color }) {
+    return (
+        <div
+            className="pl-4 py-2"
+            style={{ borderLeft: `4px solid ${color}` }}
+        >
+            <p className="text-admin-text-muted text-sm mb-1">{label}</p>
+            <p className="text-3xl font-bold" style={{ color }}>{value}</p>
+        </div>
+    );
+}
+
+// Helper to convert hex to rgb for rgba()
+function hexToRgb(hex) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `${r}, ${g}, ${b}`;
 }
