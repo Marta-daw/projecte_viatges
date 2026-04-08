@@ -7,7 +7,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\DashboardController;
 use Inertia\Inertia;
 use App\Http\Controllers\VoteController;
