@@ -46,7 +46,8 @@ export default function UpdatePasswordForm({ className = '' }) {
     };
 
     return (
-        <section className={className}>
+        // <section className={className}>
+        <section className={styles.updateProfile}>
             <header className={styles.headerSection}>
                 <h2 className={`text-lg font-medium text-gray-900 ${styles.titleSection}`}>
                     Actualitza la contrasenya
@@ -57,7 +58,9 @@ export default function UpdatePasswordForm({ className = '' }) {
                 </p>
             </header>
 
-            <form onSubmit={updatePassword} className="mt-6 mx-6 space-y-6">
+            {/* <form onSubmit={updatePassword} className="mt-6 mx-6 space-y-6"> */}
+            <form onSubmit={updatePassword} className={`pt-6 px-6 space-y-6 ${styles.formSection}`}>
+
                 <div>
                     <InputLabel
                         htmlFor="current_password"
@@ -136,7 +139,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                         </p>
                     </Transition>
                 </div>
-            </form>
-        </section>
+            </form >
+        </section >
     );
 }

@@ -6,6 +6,7 @@ import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import styles from './Partials.module.scss';
 
+
 export default function UpdateProfileInformation({
     mustVerifyEmail,
     status,
@@ -28,7 +29,7 @@ export default function UpdateProfileInformation({
     };
 
     return (
-        <section className={className}>
+        <section className={styles.updateProfile}>
             <header className={styles.headerSection}>
                 <h2 className={`text-lg font-medium text-gray-900 ${styles.titleSection}`}>
                     Informació del perfil

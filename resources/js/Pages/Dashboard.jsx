@@ -4,7 +4,7 @@ import styles from './Dashboard.module.scss';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, usePage } from '@inertiajs/react';
 
-export default function Dashboard({ llista }) {
+export default function Dashboard({ llista = [] }) {
     const { auth } = usePage().props;
     const authUser = auth?.user;
 
