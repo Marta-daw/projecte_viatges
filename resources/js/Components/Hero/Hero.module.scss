@@ -6,7 +6,8 @@
 }
 
 .heroImg {
-    width: 1200px;
+    //width: 1200px;
+    width: 100%;
     height: auto;
     margin-top: 2px;
     opacity: 0.9;
@@ -15,6 +16,7 @@
 
     &:hover {
         transform: scale(1.02);
+        //transform: scale(1.08);
         opacity: 0.7;
     }
 }

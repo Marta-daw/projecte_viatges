@@ -7,7 +7,7 @@ import { Head, usePage } from '@inertiajs/react';
 import FiltreDropdown from '@/Components/Filtres/FiltreDropdown';
 import FiltreBuscar from '@/Components/Filtres/FiltreBuscar';
 
-export default function Dashboard({ llista, categories }) {
+export default function Dashboard({ llista = [], categories }) {
     const { auth } = usePage().props;
     const authUser = auth?.user;
 

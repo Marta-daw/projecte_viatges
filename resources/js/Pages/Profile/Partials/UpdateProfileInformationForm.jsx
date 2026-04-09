@@ -20,12 +20,16 @@ export default function UpdateProfileInformation({
             email: user.email,
             bio: user.bio || "",
             avatar_url: user.avatar_url || "",
+            avatar: null,
         });
 
     const submit = (e) => {
         e.preventDefault();
 
-        patch(route('profile.update'));
+        patch(route('profile.update'), {
+            forceFromData: true,
+            _method: 'patch',
+        });
     };
 
     return (
@@ -103,6 +107,17 @@ export default function UpdateProfileInformation({
                         className="mt-2"
                         message={errors.avatar_url}
                     />
+                </div>
+                <div>
+                    <InputLabel htmlFor="avatar" value="Avatar (fitxer)" />
+                    <input
+                        id="avatar"
+                        type="file"
+                        accept="image/*"
+                        className="mt-1 block w-full"
+                        onChange={(e) => setData('avatar', e.target.files?.[0] ?? null)}
+                    />
+                    <InputError className="mt-2" message={errors.avatar} />
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (
