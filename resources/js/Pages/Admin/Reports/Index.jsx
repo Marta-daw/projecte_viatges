@@ -113,7 +113,7 @@ export default function ReportsIndex({ auth, reports = [] }) {
                                                         🗑️ Eliminar
                                                     </button>
                                                     <a
-                                                        href={route('experiencia.show', report.id)}
+                                                        href={route('experiences.show', report.id)}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
                                                         className="px-3 py-2 bg-admin-accent hover:bg-admin-accent/80 text-white rounded-md transition duration-200 font-medium text-xs whitespace-nowrap"

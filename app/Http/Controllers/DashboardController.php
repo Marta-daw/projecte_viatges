@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Experiencia;
+use App\Models\Categoria;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -17,8 +18,8 @@ class DashboardController extends Controller
         $experiencies = Experiencia::query()
             ->with(['user:id,name'])
             ->withCount([
-                'votes as positive_votes_count' => fn ($q) => $q->where('value', 1),
-                'votes as negative_votes_count' => fn ($q) => $q->where('value', -1),
+                'votes as positive_votes_count' => fn($q) => $q->where('value', 1),
+                'votes as negative_votes_count' => fn($q) => $q->where('value', -1),
             ])
             ->latest()
             ->get()
@@ -30,10 +31,13 @@ class DashboardController extends Controller
                 return $exp;
             });
 
+        $categories = Categoria::all();
+
 
         //Renderitzem la pàgina de React i li passem les dades com a array
         return Inertia::render('Dashboard', [
             'llista' => $experiencies,
+            'categories' => $categories,
         ]);
     }
 }
