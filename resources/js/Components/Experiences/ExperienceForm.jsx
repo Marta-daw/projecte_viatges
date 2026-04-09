@@ -20,7 +20,7 @@ export default function ExperienceForm() {
 
     // Utilitzem els mateixos noms o definim el mapeig abans d'enviar per garantir
     // compatibilitat amb el backend. Es guarda un estat per separat de mapa.
-    const { data, setData, put, post, processing, errors, reset, transform } = useForm({
+    const { data, setData, put, post, processing, errors, setError, clearErrors, reset, transform } = useForm({
         titol: experience?.title || '',
         descripcio: experience?.body || '',
         imatge: null,
@@ -34,11 +34,25 @@ export default function ExperienceForm() {
     function handleFileChange(e) {
         const file = e.target.files[0];
         if (file) {
+            // Validar que l'arxiu no superi els 5MB (5 * 1024 * 1024 bytes)
+            if (file.size > 5 * 1024 * 1024) {
+                setError('imatge', 'L\'arxiu és massa gran. El tamany màxim permès és de 5MB.');
+                setData('imatge', null);
+                setFileName('Cap arxiu seleccionat');
+                if (fileInputRef.current) {
+                    fileInputRef.current.value = null;
+                }
+                return;
+            } else {
+                clearErrors('imatge');
+            }
+
             setData('imatge', file);
             setFileName(file.name);
         } else {
             setData('imatge', null);
             setFileName('Cap arxiu seleccionat');
+            clearErrors('imatge');
         }
     }
 
