@@ -2,13 +2,15 @@ import React, { useState } from 'react'
 import { router } from '@inertiajs/react';
 import styles from './DetailedCardExperience.module.scss';
 
-export default function DetailedCardExperience({ experience, categories, votesCount, votedByUser, reported, isAutenticated }) {
+export default function DetailedCardExperience({ experience, categories, votesCount, votedByUser, reported, isAutenticated, positiveVotes: positiveVotesProp,
+    negativeVotes: negativeVotesProp, }) {
+
     const [votes, setVotes] = useState(votesCount);
     const [userVote, setUserVote] = useState(votedByUser);
     const [votesLoading, setVotesLoading] = useState(false);
 
-    const [positiveVotes, setPositiveVotes] = useState(experience.positiveVotes);
-    const [negativeVotes, setNegativeVotes] = useState(experience.negativeVotes);
+    const [positiveVotes, setPositiveVotes] = useState(positiveVotesProp ?? 0);
+    const [negativeVotes, setNegativeVotes] = useState(negativeVotesProp ?? 0);
 
     const [reportOpen, setReportOpen] = useState(false);
     const [reportReason, setReportReason] = useState('');
@@ -126,16 +128,18 @@ export default function DetailedCardExperience({ experience, categories, votesCo
                     <button className={`${styles.voteButton} ${userVote === 1 ? styles.active : ''}`}
                         onClick={() => handleVote(1)}
                         disabled={votesLoading}>
-                        {userVote ? 'Has votat positiu' : 'Votar positiu'}
+                        {userVote == 1 ? 'Treure vot positiu' : 'Vot positiu'}
                     </button>
+
                     <span className={styles.voteCount}>{positiveVotes} {positiveVotes === 1 ? 'vot positiu' : 'vots positius'}</span>
                 </div>
+
                 <div className={styles.negativeVote}>
                     <span className={styles.voteCount}>{negativeVotes} {negativeVotes === 1 ? 'vot negatiu' : 'vots negatius'}</span>
                     <button className={`${styles.voteButtonNegative} ${userVote === -1 ? styles.active : ''}`}
                         onClick={() => handleVote(-1)}
                         disabled={votesLoading}>
-                        {userVote ? 'Has votat negatiu' : 'Votar Negatiu'}
+                        {userVote == -1 ? 'Treure vot negatiu' : 'Vot Negatiu'}
                     </button>
 
                 </div>

@@ -13,19 +13,21 @@ function CardExperience({ experience, isAuthenticated }) {
             >
 
                 <img src={experience.image_url || '/images/placeholder.png'} alt="experienceIMG" className={styles.cardImage} />
-                <div className={styles.textCard}>
-                    <p className="text-sm text-gray-600">
+                {isAuthenticated && (
+                    <p className="text-sm mt-3 mb-0 text-gray-600">
                         Autor: {experience.user?.name ?? 'Desconocido'}
                     </p>
+                )}
 
+                <div className={styles.textCard}>
                     <h5 className={styles.cardTitle}> {experience.title} </h5>
                     <p className={styles.cardDescription}>
                         {experience.body}
                     </p>
 
                     <div className="mt-2 flex flex-row items-center gap-4 text-md">
-                        <span className="inline-fkex items-center gap-1 text-green-800"><FaRegThumbsUp /> {experience.positive_votes_count ?? 0}</span>
-                        <span className="inline-fkex items-center gap-1 text-red-600"><FaRegThumbsDown />{experience.negative_votes_count ?? 0}</span>
+                        <span className="inline-flex items-center gap-1 text-green-800"><FaRegThumbsUp /> {experience.positive_votes_count ?? 0}</span>
+                        <span className="inline-flex items-center gap-1 text-red-600"><FaRegThumbsDown />{experience.negative_votes_count ?? 0}</span>
                     </div>
                 </div>
 
@@ -37,7 +39,6 @@ function CardExperience({ experience, isAuthenticated }) {
                     {experience?.can?.update && (
                         <Link className={styles.editDeletebtnCard} href={route('experiences.edit', experience.id)}>Editar</Link>
                     )}
-
                     {experience?.can?.delete && (
                         <button
                             onClick={() => {

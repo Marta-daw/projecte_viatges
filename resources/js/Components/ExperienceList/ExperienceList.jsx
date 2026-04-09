@@ -7,7 +7,7 @@ function ExperienceList({ experiences }) {
     const isCentered = published.length < 3;
 
     const { auth } = usePage().props;
-    const isAuthenticated = !!auth;
+    const isAuthenticated = !!auth?.user;
 
     return (
         <>
