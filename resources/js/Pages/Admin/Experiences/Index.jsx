@@ -20,11 +20,11 @@ export default function ExperiencesIndex({ auth, experiences = [] }) {
 
     const getStatusBadge = (status) => {
         const statusMap = {
-            'publicada':  { bg: '#4A7C6F', text: '✅ Publicada' },
-            'published':  { bg: '#4A7C6F', text: '✅ Publicada' },
-            'esborrany':  { bg: '#8B7335', text: '📋 Esborrany' },
-            'draft':      { bg: '#8B7335', text: '📋 Esborrany' },
-            'archived':   { bg: '#7A6050', text: '📁 Arxivada' },
+            'publicada': { bg: '#4A7C6F', text: '✅ Publicada' },
+            'published': { bg: '#4A7C6F', text: '✅ Publicada' },
+            'esborrany': { bg: '#8B7335', text: '📋 Esborrany' },
+            'draft': { bg: '#8B7335', text: '📋 Esborrany' },
+            'archived': { bg: '#7A6050', text: '📁 Arxivada' },
         };
         return statusMap[status] || statusMap['esborrany'];
     };
@@ -157,7 +157,7 @@ export default function ExperiencesIndex({ auth, experiences = [] }) {
                                                         <div className="flex items-center gap-2">
                                                             {/* View */}
                                                             <a
-                                                                href={route('experiencia.show', experience.id)}
+                                                                href={route('experiences.show', experience.id)}
                                                                 target="_blank"
                                                                 rel="noopener noreferrer"
                                                                 className="px-3 py-1.5 text-white rounded-lg font-semibold text-xs transition-all hover:-translate-y-0.5"
