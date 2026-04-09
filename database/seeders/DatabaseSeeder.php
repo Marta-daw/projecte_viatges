@@ -12,6 +12,9 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             UserSeeder::class,
             ExperienceSeeder::class,
+            TestReportedExperienceSeeder::class,
+            VoteSeeder::class,
+            ReportSeeder::class,
         ]);
     }
 }
