@@ -89,10 +89,8 @@ export default function DetailedCardExperience({ experience, categories, votesCo
 
     return (
         <div className={styles.cardExperience}>
-            <div className={styles.cardExperience}>
-                <div className={styles.imageContainer}>
-                    <img src={experience.image_url} alt="Experience Image" className={styles.image} />
-                </div>
+            <div className={styles.imageContainer}>
+                <img src={experience.image_url} alt="Experience Image" className={styles.image} />
             </div>
 
             {/* Metadatos */}

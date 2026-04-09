@@ -6,7 +6,8 @@
 }
 
 .heroImg {
-    width: 1200px;
+    width: 100%;
+    max-width: 1200px;
     height: auto;
     margin-top: 2px;
     opacity: 0.9;
@@ -23,20 +24,35 @@
     font-size: var(--font-size-h1);
     margin-bottom: var(--spacing-medium);
     color: var(--ivory-beige);
+
+    @media (max-width: 768px) {
+        font-size: var(--font-size-xxl);
+    }
 }
 
 .heroParagraf,
 .pgfUserLog {
     color: var(--ivory-beige);
     font-size: var(--font-size-large);
+
+    @media (max-width: 768px) {
+        font-size: var(--font-size-medium);
+    }
 }
 
 .heroTextContainer {
     position: absolute;
-    top: calc(50% - 72px);
+    top: 50%;
+    transform: translateY(-50%);
     text-align: center;
     padding: var(--spacing-large);
     background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 90%;
+
+    @media (max-width: 768px) {
+        padding: var(--spacing-medium);
+    }
 }
 
 .ctaButton {

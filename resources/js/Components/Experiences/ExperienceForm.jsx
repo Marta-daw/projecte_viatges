@@ -181,8 +181,8 @@ export default function ExperienceForm() {
                     <InputError message={errors.category_id} className={styles.errorMsg} />
                 </div >
 
-                {/* Buttons wrapper inline direct */}
-                <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', justifyContent: 'flex-end' }}>
+                {/* Buttons wrapper */}
+                <div className={styles.buttonsContainer}>
                     <SecondaryButton
                         type="submit"
                         disabled={processing}
