@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { router } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import styles from './DetailedCardExperience.module.scss';
 
 export default function DetailedCardExperience({ experience, categories, votesCount, votedByUser, reported, isAutenticated, positiveVotes: positiveVotesProp,
@@ -18,6 +18,12 @@ export default function DetailedCardExperience({ experience, categories, votesCo
     const [reportSent, setReportSent] = useState(false);
 
     const [error, setError] = useState(null);
+
+    // Crear string amb el nom de les categories separades per comes
+    const categoriesText = (categories ?? [])
+        .map((cat) => cat?.name)
+        .filter(Boolean)
+        .join(', ');
 
     // Funció per gestionar el vot
     const handleVote = (value) => {
@@ -91,7 +97,13 @@ export default function DetailedCardExperience({ experience, categories, votesCo
 
     return (
         <div className={styles.cardExperience}>
+            <div className="flex justify-end w-full">
+                <Link href={route('dashboard')} className={`px-4 py-2 rounded ${styles.saveButton}`}>
+                    Guardar i sortir
+                </Link>
+            </div>
             <div className={styles.cardExperience}>
+
                 <div className={styles.imageContainer}>
                     <img src={experience.image_url} alt="Experience Image" className={styles.image} />
                 </div>
@@ -105,14 +117,10 @@ export default function DetailedCardExperience({ experience, categories, votesCo
                     month: 'long',
                     year: 'numeric'
                 })}</p>
-                {experience.categories?.length > 0 && (
-                    <div className={styles.categories}>
-                        {experience.categories.map(cat => (
-                            <span key={cat.id} className={styles.category}>
-                                Categoria: {cat.name}
-                            </span>
-                        ))}
-                    </div>
+                {categoriesText && (
+                    <p className={`${styles.categories} `}>
+                        Categories: {categoriesText}
+                    </p>
                 )}
             </div>
 

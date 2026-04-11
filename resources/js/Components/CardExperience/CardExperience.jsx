@@ -1,8 +1,8 @@
 import styles from './CardExperience.module.scss';
 import { Card } from "flowbite-react";
 import { Link, router } from '@inertiajs/react';
-import { FaRegThumbsUp } from 'react-icons/fa'; // versió outline/light
-import { FaRegThumbsDown } from 'react-icons/fa';
+import { FaRegThumbsUp, FaRegThumbsDown } from 'react-icons/fa'; // versió outline/light
+import PropTypes from 'prop-types';
 
 function CardExperience({ experience, isAuthenticated }) {
     return (
@@ -54,5 +54,25 @@ function CardExperience({ experience, isAuthenticated }) {
         </Card>
     );
 }
+
+// Validació de PropTypes per assegurar que es reben els props correctes
+CardExperience.propTypes = {
+    experience: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        body: PropTypes.string.isRequired,
+        image_url: PropTypes.string,
+        user: PropTypes.shape({
+            name: PropTypes.string,
+        }),
+        positive_votes_count: PropTypes.number,
+        negative_votes_count: PropTypes.number,
+        can: PropTypes.shape({
+            update: PropTypes.bool,
+            delete: PropTypes.bool,
+        }),
+    }).isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
+};
 
 export default CardExperience;

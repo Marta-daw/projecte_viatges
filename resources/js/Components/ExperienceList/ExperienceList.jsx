@@ -11,7 +11,9 @@ function ExperienceList({ experiences }) {
 
     return (
         <>
-            <h1 className={styles.homeViatgesH1}>Experiències més recents</h1>
+            <h1 className={styles.homeViatgesH1}>
+                {isAuthenticated ? 'Descobreix les experiències de la comunitat' : 'Experiències més recents'}
+            </h1>
             <div className={`${styles.grid} ${isCentered ? styles.centered : ''}`}>
                 {published.map(exp => (
                     <CardExperience key={exp.id} experience={exp} isAuthenticated={isAuthenticated} />
