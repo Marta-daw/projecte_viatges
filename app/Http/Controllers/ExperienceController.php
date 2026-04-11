@@ -76,7 +76,8 @@ class ExperienceController extends Controller
             $experiencia->categories()->attach($validated['category_id']);
         }
 
-        return redirect()->route('experiences.myExperiencies');
+        return redirect()->route('experiences.myExperiencies')
+            ->with('success', 'Experiència creada correctament! 🎉');
     }
 
     public function show($id)

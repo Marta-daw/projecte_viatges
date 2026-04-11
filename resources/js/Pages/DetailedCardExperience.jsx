@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { router } from '@inertiajs/react';
 import styles from './DetailedCardExperience.module.scss';
+import { toast } from 'sonner';
 
 export default function DetailedCardExperience({ experience, categories, votesCount, votedByUser, reported, isAutenticated }) {
     const [votes, setVotes] = useState(votesCount);
@@ -51,7 +52,8 @@ export default function DetailedCardExperience({ experience, categories, votesCo
                 setNegativeVotes(response.props.negativeVotes);
                 setUserVote(response.props.votedByUser);
             },
-            onError: (error) => {
+            onError: () => {
+                toast.error('Error al registrar el vot. Torna-ho a intentar.');
                 setError('Error al registrar el vot. Torna-ho a intentar.');
             },
             onFinish: () => setVotesLoading(false),
@@ -70,17 +72,16 @@ export default function DetailedCardExperience({ experience, categories, votesCo
             { reason: reportReason },
             {
                 preserveScroll: true,
-                onSuccess: (response) => {
+                onSuccess: () => {
                     setReportSent(true);
                     setReportOpen(false);
                     setReportReason('');
+                    toast.success('Experiència reportada correctament. Gràcies per ajudar a mantenir la comunitat! 🙏');
                 },
                 onError: (error) => {
-                    if (error.report) {
-                        setError(error.report);
-                    } else {
-                        setError('Error al enviar el report. Torna-ho a intentar.');
-                    }
+                    const msg = error?.report || 'Error al enviar el report. Torna-ho a intentar.';
+                    setError(msg);
+                    toast.error(msg);
                 },
                 onFinish: () => setReportLoading(false),
             }

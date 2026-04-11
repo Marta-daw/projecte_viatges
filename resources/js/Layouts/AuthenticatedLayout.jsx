@@ -5,9 +5,11 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import Header from '@/Components/Header/Header.jsx';
+import { useFlashToast } from '@/hooks/useFlashToast';
 
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth?.user;
+    useFlashToast();
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
