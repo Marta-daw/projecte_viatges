@@ -14,7 +14,7 @@ function CardExperience({ experience, isAuthenticated }) {
 
                 <img src={experience.image_url || '/images/placeholder.png'} alt="experienceIMG" className={styles.cardImage} />
                 {isAuthenticated && (
-                    <p className="text-sm mt-3 mb-0 text-gray-600">
+                    <p className="text-sm mt-5 mb-0 ml-5 text-gray-600">
                         Autor: {experience.user?.name ?? 'Desconocido'}
                     </p>
                 )}

@@ -79,7 +79,6 @@ class ExperienceController extends Controller
             // Relacionem la categoria escollida des del select
             $experiencia->categories()->attach($validated['category_id']);
         }
-
         return redirect()->route('experiences.myExperiencies');
     }
 
@@ -167,6 +166,14 @@ class ExperienceController extends Controller
             'image' => ['nullable', 'image'],
             'category_id' => ['nullable', 'exists:categories,id']
         ]);
+
+        //Afegim la gestió de la imatge
+        if ($request->hasFile('image')) {
+            $data['image_url'] = '/storage/' . $request->file('image')->store('experiences', 'public');
+        }
+
+        unset($data['image']); // Treiem el camp 'image' ja que el camp del model és 'image_url'
+        
         // Actualitzem les dades de l'experiència
         $experiencia->update($data);
 
