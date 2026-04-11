@@ -12,6 +12,16 @@ export default function AuthenticatedLayout({ header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
+
+    const getInitials = (name) => {
+        return name
+            .split(' ')
+            .map(n => n[0])
+            .join('')
+            .toUpperCase()
+            .slice(0, 2);
+    };
+
     return (
         <div className="min-h-screen bg-gray-100">
             <nav className="border-b border-gray-100 bg-white">
@@ -36,6 +46,7 @@ export default function AuthenticatedLayout({ header, children }) {
 
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
                             <div className="relative ms-3">
+
                                 <Dropdown>
                                     <Dropdown.Trigger>
                                         <span className="inline-flex rounded-md">
@@ -43,8 +54,28 @@ export default function AuthenticatedLayout({ header, children }) {
                                                 type="button"
                                                 className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
                                             >
-                                                {user?.name}
+                                                {user?.avatar_url ? (
+                                                    <img
+                                                        src={user.avatar_url}
+                                                        alt="Avatar"
+                                                        className="h-12 w-12 mr-5 rounded-full object-cover"
+                                                    />
+                                                ) : (
+                                                    <div className="h-12 w-12 rounded-full me-2 flex items-center justify-center text-white text-sm font-bold"
+                                                        style={{ backgroundColor: 'var(--blue-needle)' }}
+                                                    >
+                                                        {getInitials(user?.name || 'A')}
+                                                    </div>
+                                                )}
 
+                                                <div className="flex flex-col leading-tight">
+                                                    <span>{user?.name}</span>
+                                                    {user?.role && (
+                                                        <span className="text-xs uppercase" style={{ color: 'var(--gold)' }}>
+                                                            {user.role}
+                                                        </span>
+                                                    )}
+                                                </div>
                                                 <svg
                                                     className="-me-0.5 ms-2 h-4 w-4"
                                                     xmlns="http://www.w3.org/2000/svg"
