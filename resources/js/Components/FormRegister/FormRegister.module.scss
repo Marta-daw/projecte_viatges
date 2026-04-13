@@ -1,29 +1,67 @@
 .registerContainer {
+    width: 100%;
+    max-width: 450px;
+    margin: 3rem auto;
+    padding: 2.5rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-width: 380px;
-    border: 2px solid var(--medium-bronze);
-    background-color: var(--warm-sand);
-    border-radius: 12px;
 }
 
-.buttonRegister {
-    background-color: var(--red-needle);
-    color: var(--ivory-beige);
-    margin: 10px 0;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: var(--font-size-medium);
+.registerTitle {
+    text-align: center;
+    font-size: 1.75rem;
+    color: #222;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
 
-    &:hover {
-        background-color: var(--red-needle);
-        opacity: 0.8;
+.registerContainer p {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.3rem;
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+.inputRegister {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #f9fafb;
+    transition: all 0.3s ease;
+
+    &:focus {
+        border-color: #000;
+        background-color: #fff;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
     }
 }
 
-.inputLogin {
-    width: 70%;
+.buttonRegister {
+    width: 100%;
+    margin-top: 2rem;
+    padding: 0.85rem;
+    background-color: #111;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: #333;
+    }
+
+    &:disabled {
+        background-color: #999;
+        cursor: not-allowed;
+    }
 }

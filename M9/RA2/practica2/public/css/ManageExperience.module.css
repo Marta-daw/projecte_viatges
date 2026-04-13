@@ -1,0 +1,12 @@
+.manageBody {
+  background-color: var(--ivory-beige);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.myExpTitle {
+  color: var(--brown-compass);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}/*# sourceMappingURL=ManageExperience.module.css.map */

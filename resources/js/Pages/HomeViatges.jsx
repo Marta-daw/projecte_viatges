@@ -1,7 +1,7 @@
 import GuestLayout from '../Layouts/GuestLayout.jsx';
+import AuthenticatedLayout from '../Layouts/AuthenticatedLayout.jsx';
 import ExperienceList from '@/Components/ExperienceList/ExperienceList.jsx';
 import Hero from '@/Components/Hero/Hero.jsx';
-//import AuthenticatedLayout from '../Layouts/AuthenticatedLayout.jsx';
 
 export default function HomeViatges({ llista }) {
     return (
@@ -12,6 +12,16 @@ export default function HomeViatges({ llista }) {
     );
 }
 
-HomeViatges.layout = page => <GuestLayout children={page} />;
+HomeViatges.layout = page => {
+    const { auth } = page.props;
 
-//HomeViatges.layout = page => <AuthenticatedLayout children={page} />;
+    return auth.user ? (
+        <AuthenticatedLayout user={auth.user}>
+            {page}
+        </AuthenticatedLayout>
+    ) : (
+        <GuestLayout>
+            {page}
+        </GuestLayout>
+    );
+};

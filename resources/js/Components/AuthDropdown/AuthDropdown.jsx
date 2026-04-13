@@ -1,63 +1,38 @@
-import { useEffect, useRef, useState } from 'react';
-import FormLogin from '@/Components/FormLogin/FormLogin';
-import FormRegister from '@/Components/FormRegister/FormRegister';
-import headerStyles from '../Header/Header.module.scss';
+import { useState } from 'react';
+import { Link } from '@inertiajs/react';
 import styles from './AuthDropdown.module.scss';
 
-export default function AuthDropdown() {
-
+export default function AuthDropdown({ user }) {
     const [isOpen, setIsOpen] = useState(false);
-    const [activeView, setActiveView] = useState('login');
-
-    const toggle = (view) => {
-        if (!isOpen) {
-            setActiveView(view);
-            setIsOpen(true);
-            return;
-        }
-
-        if (activeView === view) {
-            setIsOpen(false);
-            return;
-        }
-
-        setActiveView(view);
-    };
-
-    const close = () => setIsOpen(false);
 
     return (
-        <>
-            <div className={styles.authDropdown}>
-                <button type="button" className={headerStyles.buttonNav} onClick={() => toggle('login')}>
-                    Inici sessió
-                </button>
-                <button type="button" className={headerStyles.buttonNav} onClick={() => toggle('register')}>
-                    Registrar-se
-                </button>
-            </div>
+        <div className={styles.dropdownContainer}>
+            <button
+                onClick={() => setIsOpen(!isOpen)}
+                className={styles.dropdownButton}
+            >
+                {user.name}
+                <svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+            </button>
 
             {isOpen && (
-                <>
-                    {/* Backdrop */}
-                    <div className={styles.backdrop} onClick={close} aria-hidden="true" />
+                <div className={styles.dropdownMenu}>
+                    <Link href={route('profile.edit')} className={styles.dropdownItem}>
+                        Perfil
+                    </Link>
 
-                    {/* Modal */}
-                    <div role="dialog" aria-modal="true" aria-labelledby="auth-modal-title" className={styles.modal}>
-                        <div className={styles.modalHeader}>
-                            <h3 id="auth-modal-title">
-                                {activeView === 'login' ? 'Inici de sessió' : 'Registrar-se'}
-                            </h3>
-                            <button type="button" onClick={close} className={styles.closeButton}>
-                                ✕
-                            </button>
-                        </div>
-                        <div className={styles.modalContent}>
-                            {activeView === 'login' ? <FormLogin /> : <FormRegister />}
-                        </div>
-                    </div>
-                </>
+                    <Link
+                        href={route('logout')}
+                        method="post"
+                        as="button"
+                        className={styles.dropdownItem}
+                    >
+                        Tancar sessió
+                    </Link>
+                </div>
             )}
-        </>
+        </div>
     );
 }

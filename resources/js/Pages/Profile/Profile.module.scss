@@ -1,0 +1,99 @@
+.profileContainer {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.titleSection {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--brown-compass);
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--medium-bronze);
+    padding-bottom: 0.5rem;
+}
+
+.headerSection {
+    padding: 20px 20px 0 20px;
+    margin-bottom: 1.5rem;
+
+    h2 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: var(--brown-compass);
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+        color: var(--earth-grey);
+        line-height: 1.4;
+    }
+}
+
+.formSection {
+    background-color: var(--warm-sand);
+    border: 1px solid var(--medium-bronze);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+
+    form {
+        padding: 0 20px 20px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    form>div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+    label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--brown-compass);
+    }
+
+    input,
+    textarea {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--medium-bronze);
+        border-radius: 8px;
+        font-size: 1rem;
+        background-color: var(--ivory-beige);
+        color: var(--blackt-text);
+        transition: all 0.3s ease;
+        font-family: inherit;
+
+        &:focus {
+            border-color: var(--red-needle);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(192, 99, 74, 0.2);
+        }
+    }
+
+    button {
+        padding: 0.75rem 1.5rem;
+        background-color: var(--blue-needle);
+        color: var(--bg-color-white);
+        border: none;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity 0.2s;
+        width: max-content;
+        margin-top: 0.5rem;
+
+        &:hover {
+            opacity: 0.85;
+        }
+    }
+}

@@ -1,0 +1,53 @@
+.heroContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  grid-column: span 12;
+}
+
+.heroImg {
+  width: 1200px;
+  height: auto;
+  margin-top: 2px;
+  opacity: 0.9;
+  display: block;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.heroImg:hover {
+  transform: scale(1.02);
+  opacity: 0.7;
+}
+
+.benvingutH1 {
+  font-size: var(--font-size-h1);
+  margin-bottom: var(--spacing-medium);
+  color: var(--ivory-beige);
+}
+
+.heroParagraf,
+.pgfUserLog {
+  color: var(--ivory-beige);
+  font-size: var(--font-size-large);
+}
+
+.heroTextContainer {
+  position: absolute;
+  top: calc(50% - 72px);
+  text-align: center;
+  padding: var(--spacing-large);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ctaButton {
+  display: inline-block;
+  margin-top: var(--spacing-medium);
+  padding: var(--spacing-small) var(--spacing-large);
+  background-color: var(--ivory-beige);
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.ctaButton:hover {
+  background-color: var(--red-needle);
+  color: var(--ivory-beige);
+}/*# sourceMappingURL=Hero.module.css.map */

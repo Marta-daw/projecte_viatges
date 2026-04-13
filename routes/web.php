@@ -10,34 +10,13 @@ use Inertia\Inertia;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\ReportController;
 
-/* Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-}); */
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Rutas públicas
-Route::get('/', [HomeController::class, 'index'])->name('HomeViatges');
-
-// Experiencies
-// Route::get('/experiencies', [ExperienceController::class, 'index'])->name('experiences.index');
-// Route::get('/experiencies/create', [ExperienceController::class, 'create'])->name('experiences.create');
-// Route::post('/experiencies', [ExperienceController::class, 'store'])->name('experiencies.store');
-// Route::get('/profile/experiencies', [ExperienceController::class, 'myExperiences'])->name('experiences.myExperiencies');
-// Route::get('/experiencia/{id}', [ExperienceController::class, 'show'])->name('experiencia.show');
-
-// Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-//Rutas que solo se necesitan autenticación
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile/experiencies', [ExperienceController::class, 'myExperiences'])
         ->name('experiences.myExperiencies');
-    // A la linia 125 del ExperienceController.php es redirigeix a aquesta ruta, però al posar-la al
-    //navegador no funciona, mirar a veure com es pot solucionar
     Route::get('/experiencies', [ExperienceController::class, 'index'])->name('experiences.index');
     Route::get('/experiencies/create', [ExperienceController::class, 'create'])->name('experiences.create');
     Route::post('/experiencia', [ExperienceController::class, 'store'])
@@ -52,7 +31,6 @@ Route::middleware(['auth'])->group(function () {
         ->name('experiences.destroy');
 });
 
-// Rutas privadas (requieren autht y verificación de email)
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

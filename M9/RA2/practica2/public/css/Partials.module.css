@@ -1,0 +1,13 @@
+.titleSection {
+  color: var(--brown-compass);
+  font-weight: bold;
+}
+
+.headerSection {
+  padding: 20px;
+}
+
+.formSection {
+  background-color: var(--warm-sand);
+  border: 1px solid var(--medium-bronze);
+}/*# sourceMappingURL=Partials.module.css.map */

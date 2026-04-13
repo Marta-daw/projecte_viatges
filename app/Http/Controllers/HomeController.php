@@ -8,21 +8,11 @@ use Inertia\Inertia;
 
 class HomeController extends Controller
 {
-    //
-
     public function index()
     {
-        //Obtenim dades de la BBDD
         $experiencies = Experiencia::latest()->take(3)->get();
-
-        //Renderitzem la pàgina de React i li passem les dades com a array
         return Inertia::render('HomeViatges', [
             'llista' => $experiencies,
-            'auth' => auth() -> user(), //null si no hay session
-            // 'canLogin' => Route::has('login'),
-            // 'canRegister' => Route::has('register'),
-            // 'laravelVersion' => Application::VERSION,
-            // 'phpVersion' => PHP_VERSION,
         ]);
     }
 }

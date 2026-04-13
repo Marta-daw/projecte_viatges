@@ -1,0 +1,32 @@
+.grid {
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px; */
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+@media (max-width: 900px) {
+  .grid {
+    /* grid-template-columns: repeat(2, 1fr); */
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 600px) {
+  .grid {
+    /* grid-template-columns: 1fr; */
+  }
+}
+
+.centered {
+  justify-content: center;
+}
+
+.homeViatgesH1 {
+  font-size: var(--font-size-h1);
+  color: var(--brown-compass);
+  text-align: center;
+  margin: 24px auto 12px auto;
+  width: 800px;
+  border: 1px solid var(--medium-bronze);
+}/*# sourceMappingURL=ExperienceList.module.css.map */

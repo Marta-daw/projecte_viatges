@@ -1,0 +1,69 @@
+@charset "UTF-8";
+.headerGeneral {
+  margin: 0;
+  padding: 6px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  outline: none;
+  border: none;
+}
+
+.logoNomWeb {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nomWeb {
+  font-weight: bold;
+  margin: 0 auto;
+}
+
+.navHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.navHeader a {
+  color: var(--brown-compass);
+  text-decoration: none;
+  font-size: var(--font-size-medium);
+}
+.navHeader a:hover {
+  opacity: 0.8;
+}
+
+.buttonNav {
+  background: transparent;
+  border: 1px solid var(--brown-compass, #6b4f3b);
+  color: var(--brown-compass, #6b4f3b);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: var(--font-size-medium, 14px);
+}
+.buttonNav:hover {
+  opacity: 0.85;
+}
+
+.authLinks {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.authLink {
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  /* Hereda el color negro/oscuro que ya tenías */
+  cursor: pointer;
+}/*# sourceMappingURL=Header.module.css.map */

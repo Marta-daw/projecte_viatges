@@ -3,37 +3,41 @@ import { Head } from '@inertiajs/react';
 import DeleteUserForm from './Partials/DeleteUserForm';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
+import styles from './Profile.module.scss';
 
-export default function Edit({ auth, mustVerifyEmail, status }) {
+export default function Edit({ mustVerifyEmail, status }) {
     return (
-        <AuthenticatedLayout
-            header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Profile
-                </h2>
-            }
-        >
-            <Head title="Profile" />
+        <AuthenticatedLayout>
+            <Head title="Perfil" />
 
-            <div className="py-12" style={{ backgroundColor: "var(--ivory-beige)" }}>
-                <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
-                    <div className="bg-white pt-0 px-0 shadow sm:rounded-lg sm:pt-0 sm:px-0">
-                        <UpdateProfileInformationForm
-                            mustVerifyEmail={mustVerifyEmail}
-                            status={status}
-                        // className="max-w-xl"
-                        />
-                    </div>
+            <div className={styles.profileContainer}>
+                <h2 className={styles.titleSection}>El meu Perfil</h2>
 
-                    <div className="bg-white pt-0 px-0 shadow sm:rounded-lg sm:pt-0 sm:px-0">
-                        <UpdatePasswordForm //className="max-w-xl" 
-                        />
+                <div className={styles.formSection}>
+                    <div className={styles.headerSection}>
+                        <h2>Informació del perfil</h2>
+                        <p>Actualitza la teva informació del perfil, la direcció de correu...</p>
                     </div>
+                    <UpdateProfileInformationForm
+                        mustVerifyEmail={mustVerifyEmail}
+                        status={status}
+                    />
+                </div>
 
-                    <div className="bg-white pt-0 px-0 shadow sm:rounded-lg sm:pt-0 sm:px-0">
-                        <DeleteUserForm //className="max-w-xl" 
-                        />
+                <div className={styles.formSection}>
+                    <div className={styles.headerSection}>
+                        <h2>Actualitza la contrasenya</h2>
+                        <p>Asseguris que el seu compte utilitza una contrasenya llarga i aleatòria...</p>
                     </div>
+                    <UpdatePasswordForm />
+                </div>
+
+                <div className={styles.formSection}>
+                    <div className={styles.headerSection}>
+                        <h2>Eliminar el compte</h2>
+                        <p>Un cop eliminada el teu compte, tots els recursos i dades s'eliminaran permanentment...</p>
+                    </div>
+                    <DeleteUserForm />
                 </div>
             </div>
         </AuthenticatedLayout>

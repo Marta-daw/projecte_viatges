@@ -34,7 +34,7 @@ export default function FormRegister() {
 
             <p>Nom</p>
             <TextInput
-                className={styles.inputLogin}
+                className={styles.inputRegister}
                 value={data.name}
                 onChange={(e) => setData('name', e.target.value)}
                 required
@@ -44,7 +44,7 @@ export default function FormRegister() {
 
             <p>Email</p>
             <TextInput
-                className={styles.inputLogin}
+                className={styles.inputRegister}
                 type="email"
                 value={data.email}
                 onChange={(e) => setData('email', e.target.value)}
@@ -54,7 +54,7 @@ export default function FormRegister() {
 
             <p>Contrasenya</p>
             <TextInput
-                className={styles.inputLogin}
+                className={styles.inputRegister}
                 type="password"
                 value={data.password}
                 onChange={(e) => setData('password', e.target.value)}
@@ -65,7 +65,7 @@ export default function FormRegister() {
 
             <p>Confirmar contrasenya</p>
             <TextInput
-                className={styles.inputLogin}
+                className={styles.inputRegister}
                 type="password"
                 value={data.password_confirmation}
                 onChange={(e) => setData('password_confirmation', e.target.value)}

@@ -1,51 +1,62 @@
-.authDropdown {
+.dropdownContainer {
     position: relative;
+    display: inline-block;
+}
+
+.dropdownButton {
     display: flex;
     align-items: center;
-    gap: 12px;
-}
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.2s;
 
-// Para el modal
-.backdrop {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 100;
-}
-
-.modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    width: 400px;
-    max-width: 90vw;
-    z-index: 101;
-    padding: 1.5rem;
-}
-
-.modalHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-
-    h3 {
-        margin: 0;
+    &:hover {
+        color: #000;
     }
 }
 
-.closeButton {
+.icon {
+    width: 20px;
+    height: 20px;
+}
+
+.dropdownMenu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 0.5rem;
+    background-color: white;
+    min-width: 150px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eaeaea;
+    overflow: hidden;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdownItem {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem 1rem;
     background: none;
     border: none;
-    font-size: 1.2rem;
+    font-size: 0.95rem;
+    color: #444;
+    text-decoration: none;
     cursor: pointer;
-    padding: 0.25rem 0.5rem;
+    transition: background-color 0.2s, color 0.2s;
 
     &:hover {
-        opacity: 0.6;
+        background-color: #f8f9fa;
+        color: #000;
     }
 }
