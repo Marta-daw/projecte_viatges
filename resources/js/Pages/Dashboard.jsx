@@ -7,17 +7,17 @@ import { Head, usePage } from '@inertiajs/react';
 import FiltreDropdown from '@/Components/Filtres/FiltreDropdown';
 import FiltreBuscar from '@/Components/Filtres/FiltreBuscar';
 
+const opcionsOrdenar = [
+    { id: 'mes_nou', name: 'Més nou' },
+    { id: 'mes_antic', name: 'Més antic' },
+    { id: 'millor_valoracio', name: 'Millor valoració' },
+    { id: 'a_z', name: 'A - Z ↓' },
+    { id: 'z_a', name: 'Z - A ↑' },
+];
+
 export default function Dashboard({ llista, categories }) {
     const { auth } = usePage().props;
     const authUser = auth?.user;
-
-    const opcionsOrdenar = [
-        'Més nou',
-        'Més antic',
-        'Millor valoració',
-        'A - Z ↓',
-        'Z - A ↑'
-    ]
 
     const [categoryId, setCategoryId] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
@@ -44,10 +44,20 @@ export default function Dashboard({ llista, categories }) {
         if (!sortOption) return 0;
 
         switch (sortOption) {
-            case 'Més nou':
-                return new Date(b.created_at) - new Date(a.created_at)
+            case 'mes_nou':
+                return new Date(b.created_at) - new Date(a.created_at);
+            case 'mes_antic':
+                return new Date(a.created_at) - new Date(b.created_at);
+            case 'millor_valoracio':
+                return (b.rating || 0) - (a.rating || 0);
+            case 'a_z':
+                return (a.title || '').localeCompare(b.title || '');
+            case 'z_a':
+                return (b.title || '').localeCompare(a.title || '');
+            default:
+                return 0;
         }
-    })
+    });
 
 
     return (
@@ -78,14 +88,14 @@ export default function Dashboard({ llista, categories }) {
                                 label="Categories"
                             />
                             <FiltreDropdown
-                                options={categories}
-                                value={categoryId}
-                                onChange={setCategoryId}
-                                onClear={() => setCategoryId('')}
-                                labe="Ordenar"
+                                options={opcionsOrdenar}
+                                value={sortOption}
+                                onChange={setSortOption}
+                                onClear={() => setSortOption('')}
+                                label="Ordenar per"
                             />
                         </div>
-                        <ExperienceList experiences={filteredExperiences} />
+                        <ExperienceList experiences={sortedExperiences} />
                         {/* <div className="p-6 text-gray-900">
                             You're logged in!
                         </div> */}

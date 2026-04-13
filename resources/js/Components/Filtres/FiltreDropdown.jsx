@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './FiltreDropdown.module.scss';
 
-export default function FiltreDropdown({ options, value, onChange, onClear, label }) {
+export default function FiltreDropdown({ options, value, onChange, onClear, label = 'Seleccionar' }) {
     const safeOptions = Array.isArray(options) ? options : [];
 
     return (
@@ -21,13 +21,18 @@ export default function FiltreDropdown({ options, value, onChange, onClear, labe
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
                 >
-                    <option value="">Seleccionar categoría</option>
+                    <option value="">Seleccionar {label.toLowerCase()}</option>
 
-                    {safeOptions.map((opt) => (
-                        <option key={opt.id} value={opt.id}>
-                            {opt.name}
-                        </option>
-                    ))}
+                    {safeOptions.map((opt) => {
+                        const optionValue = typeof opt === 'object' ? opt.id : opt;
+                        const optionLabel = typeof opt === 'object' ? opt.name : opt;
+
+                        return (
+                            <option key={optionValue} value={optionValue}>
+                                {optionLabel}
+                            </option>
+                        );
+                    })}
                 </select>
             </div>
 
