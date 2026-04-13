@@ -18,18 +18,22 @@ class ExperienceController extends Controller
     public function myExperiences()
     {
         $user = Auth::user();
-        $experiencies = Experiencia::where('user_id', $user->id)
+        $experiencies = Experiencia::with('user:id,name')
+            ->where('user_id', $user->id)
             ->latest()
             ->get();
+
         return Inertia::render('ManageExperience', [
-            'experiencies' => $experiencies->map(function ($experience) use
-            ($user){
+            'experiencies' => $experiencies->map(function ($experience) {
                 return [
                     'id' => $experience->id,
                     'title' => $experience->title,
                     'body' => $experience->body,
                     'image_url' => $experience->image_url,
                     'status' => $experience->status,
+                    'user' => [
+                        'name' => $experience->user?->name,
+                    ],
                     'can' => [
                         'update' => Auth::user()->can('update', $experience),
                         'delete' => Auth::user()->can('delete', $experience),
@@ -76,7 +80,8 @@ class ExperienceController extends Controller
             $experiencia->categories()->attach($validated['category_id']);
         }
 
-        return redirect()->route('experiences.myExperiencies');
+        return redirect()->route('experiences.myExperiencies')
+            ->with('success', 'Experiència creada correctament! 🎉');
     }
 
     public function show($id)
@@ -163,6 +168,14 @@ class ExperienceController extends Controller
             'image' => ['nullable', 'image'],
             'category_id' => ['nullable', 'exists:categories,id']
         ]);
+
+        //Afegim la gestió de la imatge
+        if ($request->hasFile('image')) {
+            $data['image_url'] = '/storage/' . $request->file('image')->store('experiences', 'public');
+        }
+
+        unset($data['image']); // Treiem el camp 'image' ja que el camp del model és 'image_url'
+        
         // Actualitzem les dades de l'experiència
         $experiencia->update($data);
 

@@ -20,6 +20,7 @@ class Experiencia extends Model
         'latitude',
         'longitude',
         'status',
+        'is_reported',
         'published_at',
         'votes_count', // Camp virtual per comptar vots (és un camp caché, no es guarda a la BD)
     ];

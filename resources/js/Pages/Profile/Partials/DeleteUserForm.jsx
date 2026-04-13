@@ -47,7 +47,7 @@ export default function DeleteUserForm({ className = '' }) {
     };
 
     return (
-        <section className={`space-y-6 ${className}`}>
+        <section className={` ${styles.updateProfile}`}>
             <header className={styles.headerSection}>
                 <h2 className={`text-lg font-medium text-gray-900 ${styles.titleSection}`}>
                     Eliminar el compte
@@ -60,7 +60,8 @@ export default function DeleteUserForm({ className = '' }) {
                 </p>
             </header>
 
-            <div className="ml-6 mb-6" style={{ marginBottom: '1.5rem' }}>
+            {/* <div className="ml-6 mb-6" style={{ marginBottom: '1rem' }}> */}
+            <div className={`pt-0 px-6 space-y-6 ${styles.deleteSection}`}>
                 <DangerButton onClick={confirmUserDeletion}>
                     Eliminar el compte
                 </DangerButton>

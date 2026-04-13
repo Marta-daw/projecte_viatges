@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_banned',
         'bio',
         'avatar_url',
     ];
@@ -52,13 +53,13 @@ class User extends Authenticatable
     // Un usuari pot crear moltes experiències
     public function experiences()
     {
-        return $this->hasMany(Experience::class);
+        return $this->hasMany(Experiencia::class);
     }
 
     // Un usuari pot votar moltes experiències (i viceversa)
     public function votes()
     {
-        return $this->belongsToMany(Experience::class, 'votes', 'user_id', 'experience_id')->withTimestamps();
+        return $this->belongsToMany(Experiencia::class, 'votes', 'user_id', 'experience_id')->withTimestamps();
     }
 
     // Un usuari pot reportar moltes experiències

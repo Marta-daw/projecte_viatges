@@ -3,8 +3,9 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
-import { Link, useForm, usePage } from '@inertiajs/react';
+import { Link, useForm, usePage, router } from '@inertiajs/react';
 import styles from './Partials.module.scss';
+
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -19,16 +20,20 @@ export default function UpdateProfileInformation({
             email: user.email,
             bio: user.bio || "",
             avatar_url: user.avatar_url || "",
+            avatar: null,
+            remove_avatar: false,
         });
 
     const submit = (e) => {
         e.preventDefault();
 
-        patch(route('profile.update'));
+        patch(route('profile.update'), {
+            forceFromData: true,
+        });
     };
 
     return (
-        <section className={className}>
+        <section className={styles.updateProfile}>
             <header className={styles.headerSection}>
                 <h2 className={`text-lg font-medium text-gray-900 ${styles.titleSection}`}>
                     Informació del perfil
@@ -91,17 +96,69 @@ export default function UpdateProfileInformation({
 
                     <TextInput
                         id="avatar_url"
-                        type="url"
+                        type="text"
                         className="mt-1 block w-full"
                         value={data.avatar_url}
                         onChange={(e) => setData('avatar_url', e.target.value)}
-                        autoComplete="avatar_url"
+                        readOnly={data.avatar !== null}
+                        Placeholder="Es generarà automàticament en pujar un fitxer"
                     />
 
                     <InputError
                         className="mt-2"
                         message={errors.avatar_url}
                     />
+                </div>
+                <div>
+                    <InputLabel htmlFor="avatar" value="Avatar (fitxer)" />
+                    <div className="flex flex-row items-center">
+                        <input
+                            id="avatar"
+                            type="file"
+                            accept="image/*"
+                            className="mt-1 block w-full"
+                            onChange={(e) => {
+                                const file = e.target.files?.[0] ?? null;
+                                setData('avatar', file);
+                                if (file) {
+                                    setData('avatar_url', URL.createObjectURL(file));
+                                } else {
+                                    setData('avatar_url', '');
+                                }
+                            }}
+                        />
+                        <InputError className="mt-2" message={errors.avatar} />
+
+                        <PrimaryButton
+                            className="mr-4"
+                            onClick={() => {
+                                setData('avatar', null);
+                                document.getElementById('avatar').value = '';
+                            }}
+                        >
+                            Eliminar fitxer
+                        </PrimaryButton>
+
+                        <PrimaryButton type="button" className={`text-lg text-red-600 ${styles.deleteAvatarBtn}`}
+                            onClick={() => {
+                                router.post(route('profile.update'), {
+                                    name: data.name,
+                                    email: data.email,
+                                    bio: data.bio,
+                                    remove_avatar: 1,
+                                    _method: 'PATCH',
+                                }, {
+                                    onSuccess: () => {
+                                        setData('avatar_url', '');
+                                        setData('avatar', null);
+                                        setData('remove_avatar', false);
+                                    }
+                                });
+                            }}
+                        >
+                            Eliminar foto
+                        </PrimaryButton>
+                    </div>
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -30,6 +29,9 @@ return new class extends Migration
 
             // Estat: esborrany, publicada o rebutjada 
             $table->enum('status', ['esborrany', 'publicada', 'rebutjada'])->default('esborrany');
+            
+            // Si la experiecia té reportes
+            $table->boolean('is_reported')->default(false);
 
             // Data de publicació real
             $table->timestamp('published_at')->nullable();

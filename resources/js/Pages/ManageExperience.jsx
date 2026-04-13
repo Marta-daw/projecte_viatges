@@ -9,13 +9,9 @@ export default function ManageExperience() {
 
     return (
         <div className={styles.manageBody}>
-            <div className='container mx-auto px-4 py-8 flex flex-col items-center'>
-                <div className="flex flex-col gap-6 mt-6">
-                    {experiencies && experiencies.map(exp => (
-                        <CardExperience key={exp.id} experience={exp} isAuthenticated={isAuthenticated} />
-                    ))}
-                </div>
-            </div>
+            {experiencies && experiencies.map(exp => (
+                <CardExperience key={exp.id} experience={exp} isAuthenticated={isAuthenticated} />
+            ))}
         </div>
     )
 }
