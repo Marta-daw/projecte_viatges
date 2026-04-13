@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 use Inertia\Inertia;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\PublicUserController;
 
 /* Route::get('/', function () {
  return Inertia::render('Welcome', [
@@ -23,6 +24,7 @@ use App\Http\Controllers\ReportController;
 
 // Rutas públicas
 Route::get('/', [HomeController::class, 'index'])->name('HomeViatges');
+Route::get('/usuari/{user}', [PublicUserController::class, 'show'])->name('users.public.show');
 
 // Experiencies
 // Route::get('/experiencies', [ExperienceController::class, 'index'])->name('experiences.index');

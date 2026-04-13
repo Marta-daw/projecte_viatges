@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link, router } from '@inertiajs/react';
 import styles from './DetailedCardExperience.module.scss';
+import { toast } from 'sonner';
+import { Link } from '@inertiajs/react';
 
 export default function DetailedCardExperience({ experience, categories, votesCount, votedByUser, reported, isAutenticated, positiveVotes: positiveVotesProp,
     negativeVotes: negativeVotesProp, }) {
@@ -59,7 +61,8 @@ export default function DetailedCardExperience({ experience, categories, votesCo
                 setNegativeVotes(response.props.negativeVotes);
                 setUserVote(response.props.votedByUser);
             },
-            onError: (error) => {
+            onError: () => {
+                toast.error('Error al registrar el vot. Torna-ho a intentar.');
                 setError('Error al registrar el vot. Torna-ho a intentar.');
             },
             onFinish: () => setVotesLoading(false),
@@ -78,17 +81,16 @@ export default function DetailedCardExperience({ experience, categories, votesCo
             { reason: reportReason },
             {
                 preserveScroll: true,
-                onSuccess: (response) => {
+                onSuccess: () => {
                     setReportSent(true);
                     setReportOpen(false);
                     setReportReason('');
+                    toast.success('Experiència reportada correctament. Gràcies per ajudar a mantenir la comunitat! 🙏');
                 },
                 onError: (error) => {
-                    if (error.report) {
-                        setError(error.report);
-                    } else {
-                        setError('Error al enviar el report. Torna-ho a intentar.');
-                    }
+                    const msg = error?.report || 'Error al enviar el report. Torna-ho a intentar.';
+                    setError(msg);
+                    toast.error(msg);
                 },
                 onFinish: () => setReportLoading(false),
             }
@@ -107,11 +109,22 @@ export default function DetailedCardExperience({ experience, categories, votesCo
                 <div className={styles.imageContainer}>
                     <img src={experience.image_url} alt="Experience Image" className={styles.image} />
                 </div>
+            <div className={styles.imageContainer}>
+                <img src={experience.image_url} alt="Experience Image" className={styles.image} />
             </div>
 
             {/* Metadatos */}
             <div className={styles.metadata}>
-                <p className={styles.author}>Autor: {experience.user?.name ?? 'Usuari Elimiant'}</p>
+                <p className={styles.author}>
+                    Autor:{' '}
+                    {experience.user?.id ? (
+                        <Link href={route('users.public.show', experience.user.id)} className={styles.authorLink}>
+                            {experience.user.name}
+                        </Link>
+                    ) : (
+                        'Usuari Elimiant'
+                    )}
+                </p>
                 <p className={styles.data}> {new Date(experience.created_at).toLocaleDateString('es-ES', {
                     day: 'numeric',
                     month: 'long',

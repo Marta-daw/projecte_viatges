@@ -16,12 +16,16 @@ export default function Dashboard({ llista = [], categories }) {
 
     const filteredExperiences = llista.filter(exp => {
         const matchesCategory = categoryId
-            ? (exp.categories?.some(c => c.id === parseInt(categoryId)) || exp.category_id === parseInt(categoryId))
+            ? (
+                // Comparem com a string per evitar mismatch de tipus
+                exp.categories?.some(c => String(c.id) === String(categoryId)) ||
+                String(exp.category_id) === String(categoryId)
+              )
             : true;
 
         const matchesSearch = searchTerm
             ? (exp.title && exp.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
-            (exp.body && exp.body.toLowerCase().includes(searchTerm.toLowerCase()))
+              (exp.body && exp.body.toLowerCase().includes(searchTerm.toLowerCase()))
             : true;
 
         return matchesCategory && matchesSearch;

@@ -33,6 +33,17 @@ function CardExperience({ experience, isAuthenticated }) {
 
             </Link >
 
+            <div className={styles.cardMeta}>
+                <span>Autor: </span>
+                {experience?.user?.id ? (
+                    <Link href={route('users.public.show', experience.user.id)} className={styles.authorLink}>
+                        {experience.user.name}
+                    </Link>
+                ) : (
+                    <span>Usuari eliminat</span>
+                )}
+            </div>
+
             {/*Solo visible con session iniciada*/}
             {isAuthenticated && (
                 <div className={styles.cardActions}>
