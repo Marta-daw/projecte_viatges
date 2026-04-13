@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './FiltreDropdown.module.scss';
 
-export default function FiltreDropdown({ options, value, onChange, onClear }) {
+export default function FiltreDropdown({ options, value, onChange, onClear, label }) {
     const safeOptions = Array.isArray(options) ? options : [];
 
     return (
@@ -12,7 +12,7 @@ export default function FiltreDropdown({ options, value, onChange, onClear }) {
                     <path d="M22 22L20 20" stroke="#171717" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
 
-                Categoría
+                {label}
             </label>
 
             <div className={styles.selectWrapper}>

@@ -11,8 +11,17 @@ export default function Dashboard({ llista, categories }) {
     const { auth } = usePage().props;
     const authUser = auth?.user;
 
+    const opcionsOrdenar = [
+        'Més nou',
+        'Més antic',
+        'Millor valoració',
+        'A - Z ↓',
+        'Z - A ↑'
+    ]
+
     const [categoryId, setCategoryId] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
+    const [sortOption, setSortOption] = useState('');
 
     const filteredExperiences = llista.filter(exp => {
         const matchesCategory = categoryId
@@ -20,16 +29,25 @@ export default function Dashboard({ llista, categories }) {
                 // Comparem com a string per evitar mismatch de tipus
                 exp.categories?.some(c => String(c.id) === String(categoryId)) ||
                 String(exp.category_id) === String(categoryId)
-              )
+            )
             : true;
 
         const matchesSearch = searchTerm
             ? (exp.title && exp.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
-              (exp.body && exp.body.toLowerCase().includes(searchTerm.toLowerCase()))
+            (exp.body && exp.body.toLowerCase().includes(searchTerm.toLowerCase()))
             : true;
 
         return matchesCategory && matchesSearch;
     });
+
+    const sortedExperiences = [...filteredExperiences].sort((a, b) => {
+        if (!sortOption) return 0;
+
+        switch (sortOption) {
+            case 'Més nou':
+                return new Date(b.created_at) - new Date(a.created_at)
+        }
+    })
 
 
     return (
@@ -57,6 +75,14 @@ export default function Dashboard({ llista, categories }) {
                                 value={categoryId}
                                 onChange={setCategoryId}
                                 onClear={() => setCategoryId('')}
+                                label="Categories"
+                            />
+                            <FiltreDropdown
+                                options={categories}
+                                value={categoryId}
+                                onChange={setCategoryId}
+                                onClear={() => setCategoryId('')}
+                                labe="Ordenar"
                             />
                         </div>
                         <ExperienceList experiences={filteredExperiences} />
