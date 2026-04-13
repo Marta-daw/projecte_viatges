@@ -13,11 +13,17 @@ function CardExperience({ experience, isAuthenticated }) {
             >
 
                 <img src={experience.image_url || '/images/placeholder.png'} alt="experienceIMG" className={styles.cardImage} />
-                {isAuthenticated && (
-                    <p className="text-sm mt-5 mb-0 ml-5 text-gray-600">
-                        Autor: {experience.user?.name ?? 'Desconocido'}
-                    </p>
-                )}
+
+                <div className={styles.cardMeta}>
+                    <span>Autor: </span>
+                    {experience?.user?.id ? (
+                        <Link href={route('users.public.show', experience.user.id)} className={styles.authorLink}>
+                            {experience.user.name}
+                        </Link>
+                    ) : (
+                        <span>Usuari eliminat</span>
+                    )}
+                </div>
 
                 <div className={styles.textCard}>
                     <h5 className={styles.cardTitle}> {experience.title} </h5>
@@ -32,17 +38,6 @@ function CardExperience({ experience, isAuthenticated }) {
                 </div>
 
             </Link >
-
-            <div className={styles.cardMeta}>
-                <span>Autor: </span>
-                {experience?.user?.id ? (
-                    <Link href={route('users.public.show', experience.user.id)} className={styles.authorLink}>
-                        {experience.user.name}
-                    </Link>
-                ) : (
-                    <span>Usuari eliminat</span>
-                )}
-            </div>
 
             {/*Solo visible con session iniciada*/}
             {isAuthenticated && (
