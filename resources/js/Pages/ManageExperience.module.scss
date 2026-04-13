@@ -1,8 +1,21 @@
 .manageBody {
-
     background-color: var(--ivory-beige);
-    min-height: 100vh;
-    padding: 20px;
+    padding: 0 150px;
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+    .manageBody {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1280px) {
+    .manageBody {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
 }
 
 

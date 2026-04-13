@@ -7,7 +7,7 @@ import { Head, usePage } from '@inertiajs/react';
 import FiltreDropdown from '@/Components/Filtres/FiltreDropdown';
 import FiltreBuscar from '@/Components/Filtres/FiltreBuscar';
 
-export default function Dashboard({ llista, categories }) {
+export default function Dashboard({ llista = [], categories }) {
     const { auth } = usePage().props;
     const authUser = auth?.user;
 
@@ -41,11 +41,11 @@ export default function Dashboard({ llista, categories }) {
             }
         >
             <Head title="Dashboard" />
-
+            <Hero variant="auth" user={authUser} createExperienceUrl={route('experiences.create')} />
             <div className={styles.dashboardContainer}>
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden shadow-sm sm:rounded-lg">
-                        <Hero variant="auth" user={authUser} createExperienceUrl={route('experiences.create')} />
+
                         <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-6">
                             <FiltreBuscar
                                 value={searchTerm}
@@ -60,9 +60,6 @@ export default function Dashboard({ llista, categories }) {
                             />
                         </div>
                         <ExperienceList experiences={filteredExperiences} />
-                        {/* <div className="p-6 text-gray-900">
-                            You're logged in!
-                        </div> */}
                     </div>
                 </div>
             </div>

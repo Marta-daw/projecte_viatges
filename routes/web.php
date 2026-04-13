@@ -56,7 +56,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('experiences.destroy');
 });
 
-// Rutas privadas (requieren autht y verificación de email)
+// Rutas privadas (requieren auth y verificación de email)
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -66,6 +66,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('experiencia.vote.store');
     Route::delete('/experiencia/vote/{id}', [VoteController::class, 'destroy'])
         ->name('experiencia.vote.destroy');
+    
     Route::post('/experiencia/report/{id}', [ReportController::class, 'report'])
         ->name('experiencia.report');
 
