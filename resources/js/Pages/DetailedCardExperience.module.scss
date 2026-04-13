@@ -56,6 +56,17 @@
     }
 }
 
+.authorLink {
+    color: var(--blue-needle);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.authorLink:hover {
+    color: var(--brown-compass);
+    text-decoration: underline;
+}
+
 .textContainer {
     max-width: 800px;
     text-align: center;
@@ -93,7 +104,7 @@
     border: 2px solid #ddd;
     padding: 15px 20px;
     border-radius: 8px;
-    
+
     @media (max-width: 768px) {
         flex-direction: column;
         padding: 15px;
@@ -109,8 +120,6 @@
     background-color: #007bff;
     color: #fff;
     transition: background-color 0.3s ease;
-
-
 }
 
 .voteButtonNegative {
@@ -189,8 +198,6 @@
         border-radius: 5px;
         margin-bottom: 20px;
     }
-
-
 }
 
 .reportButtons {

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { router } from '@inertiajs/react';
 import styles from './DetailedCardExperience.module.scss';
 import { toast } from 'sonner';
+import { Link } from '@inertiajs/react';
 
 export default function DetailedCardExperience({ experience, categories, votesCount, votedByUser, reported, isAutenticated }) {
     const [votes, setVotes] = useState(votesCount);
@@ -96,7 +97,16 @@ export default function DetailedCardExperience({ experience, categories, votesCo
 
             {/* Metadatos */}
             <div className={styles.metadata}>
-                <p className={styles.author}>Autor: {experience.user?.name ?? 'Usuari Elimiant'}</p>
+                <p className={styles.author}>
+                    Autor:{' '}
+                    {experience.user?.id ? (
+                        <Link href={route('users.public.show', experience.user.id)} className={styles.authorLink}>
+                            {experience.user.name}
+                        </Link>
+                    ) : (
+                        'Usuari Elimiant'
+                    )}
+                </p>
                 <p className={styles.data}> {new Date(experience.created_at).toLocaleDateString('es-ES', {
                     day: 'numeric',
                     month: 'long',
