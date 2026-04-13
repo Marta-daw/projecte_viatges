@@ -61,6 +61,23 @@
     flex-wrap: wrap;
 }
 
+.cardMeta {
+    margin: 0 20px 14px;
+    color: var(--earth-grey);
+    font-size: 0.9rem;
+}
+
+.authorLink {
+    color: var(--blue-needle);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.authorLink:hover {
+    color: var(--brown-compass);
+    text-decoration: underline;
+}
+
 .editDeletebtnCard {
     padding: 8px 16px;
     border: 1px solid #a14545;
