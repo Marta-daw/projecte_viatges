@@ -14,10 +14,12 @@ function ExperienceList({ experiences }) {
             <h1 className={styles.homeViatgesH1}>
                 {isAuthenticated ? 'Descobreix les experiències de la comunitat' : 'Experiències més recents'}
             </h1>
-            <div className={`${styles.grid} ${isCentered ? styles.centered : ''}`}>
-                {published.map(exp => (
-                    <CardExperience key={exp.id} experience={exp} isAuthenticated={isAuthenticated} />
-                ))}
+            <div className={styles.container}>
+                <div className={`${styles.grid} ${isCentered ? styles.centered : ''}`}>
+                    {published.map(exp => (
+                        <CardExperience key={exp.id} experience={exp} isAuthenticated={isAuthenticated} />
+                    ))}
+                </div>
             </div>
         </>
     );

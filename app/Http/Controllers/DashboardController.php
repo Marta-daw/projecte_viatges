@@ -33,11 +33,13 @@ class DashboardController extends Controller
 
         $categories = Categoria::all();
 
-
+        
         //Renderitzem la pàgina de React i li passem les dades com a array
         return Inertia::render('Dashboard', [
-            'llista' => $experiencies,
-            'categories' => $categories,
+            // 'llista' => $experiencies,
+            // 'categories' => $categories,
+            'llista' => Experiencia::with(['categories', 'user'])->where('status', 'publicada')->latest()->get(),
+            'categories' => Categoria::all(),
         ]);
     }
 }
