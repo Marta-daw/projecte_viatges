@@ -69,11 +69,11 @@ export default function Dashboard({ llista, categories }) {
             }
         >
             <Head title="Dashboard" />
-
+            <Hero variant="auth" user={authUser} createExperienceUrl={route('experiences.create')} />
             <div className={styles.dashboardContainer}>
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden shadow-sm sm:rounded-lg">
-                        <Hero variant="auth" user={authUser} createExperienceUrl={route('experiences.create')} />
+
                         <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-6">
                             <FiltreBuscar
                                 value={searchTerm}

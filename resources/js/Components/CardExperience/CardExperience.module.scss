@@ -1,25 +1,13 @@
-/* .cardExperience {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--bg-color-white);
-    //box-shadow: 0 4px 6px rgba(0, 0, 0);
-    border: 2px solid var(--medium-bronze);
-    border-radius: 8px;
-    padding: 16px;
-    width: 350px;
-    margin: 10px 0;
-} */
-
 .cardContainer {
     text-decoration: none;
 }
 
-.cardBody {
-    padding: 20px;
-}
-
 .card {
+    width: min(350px, 100%);
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+
     width: 100%;
     max-width: 350px;
     border-radius: 12px;
@@ -29,14 +17,23 @@
     margin: 20px auto;
 }
 
+.card>div {
+    padding: 0 0 1.5rem 0;
+}
+
 .cardImage {
-    width: 100%;
-    height: 180px;
+    width: calc(100% + 3rem);
+    height: 200px;
     object-fit: cover;
+    object-position: top;
+    margin-top: -2rem;
 }
 
 .textCard {
     margin: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .cardTitle {
@@ -45,6 +42,11 @@
     font-weight: 700;
     margin-bottom: 10px;
     line-height: 1.3;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .cardDescription {
@@ -52,6 +54,10 @@
     font-size: 0.875rem;
     line-height: 1.6;
     margin: 0;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .cardActions {

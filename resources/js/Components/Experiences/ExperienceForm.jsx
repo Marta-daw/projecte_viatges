@@ -92,7 +92,6 @@ export default function ExperienceForm() {
                 },
             });
         }
-
     }
 
     return (
@@ -199,7 +198,7 @@ export default function ExperienceForm() {
                         onClick={() => formAction.current = 'publicada'}
                         style={{ margin: 0, width: 'auto' }}
                     >
-                        {processing ? 'Desant...' : 'Publicar Experiència'}
+                        {processing ? 'Desant...' : (isEdit ? 'Guardar Canvis' : 'Publicar Experiència')}
                     </PrimaryButton>
                 </div>
             </form >

@@ -27,7 +27,6 @@ class VoteController extends Controller
         return back()->with('success', 'Voto registrado correctamente.');
     }
 
-    //toggle per votar o eliminar el vot
     public function destroy (int $id)
     {
         Vote::where('user_id', auth()->id())

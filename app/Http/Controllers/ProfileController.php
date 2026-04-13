@@ -8,6 +8,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+
+use Illuminate\Support\Facades\Storage;
+
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -30,21 +33,42 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $user = $request->user();
+        $data = $request->validated();
 
-            $user -> fill([
-                'name'       => $request->name,
-                'email'      => $request->email,
-                'bio'        => $request->bio,
-                'avatar_url' => $request->avatar_url,
-            ]);
-
-            if ($user->isDirty('email')) {
-                $user->email_verified_at = null;
+        // Eliminar avatar si es demana
+        if (!empty($data['remove_avatar'])) {
+            if ($user->avatar) {
+                Storage::disk('public')->delete($user->avatar);
             }
-            
-            $user->save();
+            $data['avatar'] = null;
+            $data['avatar_url'] = null;
+        }
 
-            return back()->with('success', 'Profile updated successfully!');
+        // Pujar nou avatar
+        if ($request->hasFile('avatar')) {
+            if ($user->avatar) {
+                Storage::disk('public')->delete($user->avatar); // elimina l'anterior
+            }
+            $path = $request->file('avatar')->store('avatars', 'public');
+            $data['avatar'] = $path;
+            $data['avatar_url'] = '/storage/' . $path;
+        }
+
+        $user->fill([
+            'name'       => $data['name'] ?? $user->name,
+            'email'      => $data['email'] ?? $user->email,
+            'bio'        => $data['bio'] ?? $user->bio,
+            'avatar_url' => array_key_exists('avatar_url', $data) ? $data['avatar_url'] : $user->avatar_url,
+            'avatar'     => array_key_exists('avatar', $data) ? $data['avatar'] : $user->avatar,
+        ]);
+
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
+        
+        $user->save();
+
+        return back()->with('success', 'Perfil actualitzat correctament.');
     }
 
     /**
