@@ -156,11 +156,11 @@ Un viatge 10/10.',
             [
                 'user_id' => 3,
                 'title' => 'Tres dies a Praga',
-                'body' => 'La Ciutat de les Cent Torres \n*
-            Praga és una de les ciutats més ben conservades d\'Europa. El barri jueu, el castell i el pont de Carles van ser els nostres favorits. \n*
-            * Millor evitar el centre en cap de setmana: és ple de turistes. \n*
-            * La cervesa txeca és la millor del món, i és baratíssima. \n*
-            * El mercat de Nadal a la plaça de la Ciutat Vella és màgic. \n*
+                'body' => 'La Ciutat de les Cent Torres
+            Praga és una de les ciutats més ben conservades d\'Europa. El barri jueu, el castell i el pont de Carles van ser els nostres favorits.
+            * Millor evitar el centre en cap de setmana: és ple de turistes.
+            * La cervesa txeca és la millor del món, i és baratíssima.
+            * El mercat de Nadal a la plaça de la Ciutat Vella és màgic.
             Un viatge molt recomanable i assequible.',
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093834/praga_bpodpn.avif',
                 'latitude' => 50.0755,
@@ -173,11 +173,11 @@ Un viatge 10/10.',
             [
                 'user_id' => 2,
                 'title' => 'Aventura al Parc Nacional de Doñana',
-                'body' => 'Natura salvatge al sud d\'Espanya \n*
+                'body' => 'Natura salvatge al sud d\'Espanya
             Doñana és un dels espais naturals més importants d\'Europa i és a tocar de casa. Vam fer una excursió guiada en tot terreny per veure linx ibèric i àguila imperial. \n*
-            * És imprescindible reservar l\'excursió amb antelació. \n*
-            * L\'alba al parc, amb la boira sobre les marismes, és inoblidable. \n*
-            "La naturalesa no necessita nosaltres, nosaltres la necessitem a ella." \n*
+            * És imprescindible reservar l\'excursió amb antelació.
+            * L\'alba al parc, amb la boira sobre les marismes, és inoblidable.
+            "La naturalesa no necessita nosaltres, nosaltres la necessitem a ella."
             Perfecte per a amants de la fauna i el birdwatching.',
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093834/donana_ui2uvj.avif',
                 'latitude' => 36.9981,
@@ -190,11 +190,11 @@ Un viatge 10/10.',
             [
                 'user_id' => 3,
                 'title' => 'Cap de setmana a Amsterdam',
-                'body' => 'Canals, bicicletes i museus \n*
-            Amsterdam és una ciutat que es viu millor en bicicleta. Vam visitar el Museu Van Gogh, el barri de Jordaan i vam fer un passeig en vaixell pels canals al capvespre. \n*
-            * Llogar una bici és la millor decisió que pots prendre. \n*
-            * El mercat d\'Albert Cuyp és ideal per esmorzar. \n*
-            * Reserva els museus amb antelació, les cues són eternes. \n*
+                'body' => 'Canals, bicicletes i museus
+            Amsterdam és una ciutat que es viu millor en bicicleta. Vam visitar el Museu Van Gogh, el barri de Jordaan i vam fer un passeig en vaixell pels canals al capvespre.
+            * Llogar una bici és la millor decisió que pots prendre.
+            * El mercat d\'Albert Cuyp és ideal per esmorzar.
+            * Reserva els museus amb antelació, les cues són eternes.
             Una ciutat encantadora que sorprèn a cada cantonada.',
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093834/amsterdam.jpg_lh1nz4.avif',
                 'latitude' => 52.3676,

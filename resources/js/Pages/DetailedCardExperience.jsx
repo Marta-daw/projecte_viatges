@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Link, router } from '@inertiajs/react';
 import styles from './DetailedCardExperience.module.scss';
 import { toast } from 'sonner';
+import { FaArrowLeft } from "react-icons/fa";
+
 
 export default function DetailedCardExperience({ experience, categories, votesCount, votedByUser, reported, isAutenticated, positiveVotes: positiveVotesProp,
     negativeVotes: negativeVotesProp, }) {
@@ -98,19 +100,24 @@ export default function DetailedCardExperience({ experience, categories, votesCo
 
     return (
         <div className={styles.cardExperience}>
-            <div className="flex justify-end w-full">
+            <div className="flex justify-start w-full">
+                <Link href={route('dashboard')} className={`px-4 py-2 rounded ${styles.saveButton}`}>
+                    <FaArrowLeft />
+                </Link>
+            </div>
+            {/*             <div className="flex justify-end w-full">
                 <Link href={route('dashboard')} className={`px-4 py-2 rounded ${styles.saveButton}`}>
                     Guardar i sortir
                 </Link>
-            </div>
+            </div> */}
             <div className={styles.cardExperience}>
 
                 <div className={styles.imageContainer}>
                     <img src={experience.image_url} alt="Experience Image" className={styles.image} />
                 </div>
-                <div className={styles.imageContainer}>
+                {/*                 <div className={styles.imageContainer}>
                     <img src={experience.image_url} alt="Experience Image" className={styles.image} />
-                </div>
+                </div> */}
 
                 {/* Metadatos */}
                 <div className={styles.metadata}>

@@ -47,7 +47,7 @@ class Experiencia extends Model
     // Una experiència pot tenir molts vots (i viceversa)
     public function votes()
     {
-        return $this->belongsToMany(User::class, 'votes', 'experience_id', 'user_id')->withTimestamps();
+        return $this->hasMany(Vote::class, 'experience_id');
     }
 
     // Una experiència pot tenir molts reports
