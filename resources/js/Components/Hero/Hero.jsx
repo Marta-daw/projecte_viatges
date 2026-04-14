@@ -1,6 +1,6 @@
 import styles from './Hero.module.scss';
 
-export default function Hero({ variant = 'guest', user = null, createExperienceUrl = '#' }) {
+export default function Hero({ variant = 'guest', user = null, createExperienceUrl = '#', compactOverlay = false }) {
     return (
         <div className={styles.heroContainer}>
             <img srcSet="
@@ -15,8 +15,7 @@ export default function Hero({ variant = 'guest', user = null, createExperienceU
             " src="https://res.cloudinary.com/dadhzxpnj/image/upload/v1774030117/heroPhoto_skug90.jpg"
                 alt="Imatge de viatge" width="1200" height="600" className={styles.heroImg} />
 
-
-            <div className={styles.heroTextContainer}>
+            <div className={[styles.heroTextContainer, (compactOverlay || variant === 'guest') ? styles.heroTextContainerCompact : ''].join(' ')}>
                 {variant == 'auth' ? (
                     <>
                         <h1 className={styles.benvingutH1} >Benvingut, {user?.name || 'viatger/a'}!</h1>
@@ -26,7 +25,7 @@ export default function Hero({ variant = 'guest', user = null, createExperienceU
                 ) : (
                     <>
                         <h1 className={styles.benvingutH1} >Benvingut a Destino Incierto</h1>
-                        <p className={styles.heroParagraf}>Descobreix experiències úniques i viatges inoblidables.</p>
+                        <p className={styles.heroParagraf}>Descobreix experiències úniques i viatges extraordinaris.</p>
                     </>
                 )}
             </div>

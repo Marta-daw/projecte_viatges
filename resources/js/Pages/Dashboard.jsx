@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Hero from '@/Components/Hero/Hero';
 import ExperienceList from '@/Components/ExperienceList/ExperienceList';
 import styles from './Dashboard.module.scss';
@@ -22,6 +22,13 @@ export default function Dashboard({ llista, categories }) {
     const [categoryId, setCategoryId] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [sortOption, setSortOption] = useState('');
+
+    // Nous estats i ref per a quès es faci el Lazy loading
+    const INITIAL_VISIBLE = 6;
+    const STEP_VISIBLE = 6;
+    const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
+    const loadMoreRef = useRef(null);
+    const isLoadingRef = useRef(false); // Evita disparaments múltiples ràpids
 
     const filteredExperiences = llista.filter(exp => {
         const matchesCategory = categoryId
@@ -49,7 +56,14 @@ export default function Dashboard({ llista, categories }) {
             case 'mes_antic':
                 return new Date(a.created_at) - new Date(b.created_at);
             case 'millor_valoracio':
-                return (b.rating || 0) - (a.rating || 0);
+                //return (b.rating || 0) - (a.rating || 0);
+
+                // Adaptació del filtre per adaptar-lo als vots actuals
+                const scoreA = (a.positive_votes_count ?? 0) - (a.negative_votes_count ?? 0);
+                const scoreB = (b.positive_votes_count ?? 0) - (b.negative_votes_count ?? 0);
+                // Desempat: mes recent primer
+                if (scoreB !== scoreA) return scoreB - scoreA;
+                return new Date(b.created_at) - new Date(a.created_at);
             case 'a_z':
                 return (a.title || '').localeCompare(b.title || '');
             case 'z_a':
@@ -59,6 +73,42 @@ export default function Dashboard({ llista, categories }) {
         }
     });
 
+    // Derivats de llista per a fer el Lazy Loading
+    const visibleExperiences = sortedExperiences.slice(0, visibleCount);
+    const canLoadMore = visibleCount < sortedExperiences.length;
+
+    // Reset quan canvien filtres o cerca, i setup de l'observer per al Lazy Loading
+    useEffect(() => {
+        setVisibleCount(INITIAL_VISIBLE);
+    }, [categoryId, searchTerm, sortOption]);
+
+    // Intersection Observer pel lazy load automàtic
+    useEffect(() => {
+        if (!canLoadMore) return;
+        const target = loadMoreRef.current;
+        if (!target) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const entry = entries[0];
+                if (entry?.isIntersecting && !isLoadingRef.current) {
+                    isLoadingRef.current = true;
+                    setVisibleCount(prev => {
+                        isLoadingRef.current = false;
+                        return prev + STEP_VISIBLE;
+                    });
+                }
+            },
+            {
+                root: null,
+                rootMargin: '180px 0px',
+                threshold: 0,
+            }
+        );
+
+        observer.observe(target);
+        return () => observer.disconnect();
+    }, [canLoadMore, sortedExperiences.length]); // <-- afegit sortedExperiences.length
 
     return (
         <AuthenticatedLayout
@@ -69,7 +119,7 @@ export default function Dashboard({ llista, categories }) {
             }
         >
             <Head title="Dashboard" />
-            <Hero variant="auth" user={authUser} createExperienceUrl={route('experiences.create')} />
+            <Hero variant="guest" user={authUser} createExperienceUrl={route('experiences.create')} />
             <div className={styles.dashboardContainer}>
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden shadow-sm sm:rounded-lg">
@@ -95,10 +145,17 @@ export default function Dashboard({ llista, categories }) {
                                 label="Ordenar per"
                             />
                         </div>
-                        <ExperienceList experiences={sortedExperiences} />
-                        {/* <div className="p-6 text-gray-900">
-                            You're logged in!
-                        </div> */}
+                        <ExperienceList experiences={visibleExperiences} showActions={false} />
+                        {canLoadMore && (
+                            <div className="flex justify-center py-6 gap-4 items-center">
+                                {/* Sentinel invisible: dispara el lazy loading automàtic */}
+                                <div
+                                    ref={loadMoreRef}
+                                    aria-hidden="true"
+                                    className="h-6 w-6 animate-pulse rounded-full bg-stone-300"
+                                />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
