@@ -105,115 +105,106 @@ export default function DetailedCardExperience({ experience, categories, votesCo
                     <FaArrowLeft />
                 </Link>
             </div>
-            {/*             <div className="flex justify-end w-full">
-                <Link href={route('dashboard')} className={`px-4 py-2 rounded ${styles.saveButton}`}>
-                    Guardar i sortir
-                </Link>
-            </div> */}
-            <div className={styles.cardExperience}>
-
-                <div className={styles.imageContainer}>
-                    <img src={experience.image_url} alt="Experience Image" className={styles.image} />
-                </div>
-                {/*                 <div className={styles.imageContainer}>
+            <div className={styles.imageContainer}>
+                <img src={experience.image_url} alt="Experience Image" className={styles.image} />
+            </div>
+            {/*                 <div className={styles.imageContainer}>
                     <img src={experience.image_url} alt="Experience Image" className={styles.image} />
                 </div> */}
 
-                {/* Metadatos */}
-                <div className={styles.metadata}>
-                    <p className={styles.author}>
-                        Autor:{' '}
-                        {experience.user?.id ? (
-                            <Link href={route('users.public.show', experience.user.id)} className={styles.authorLink}>
-                                {experience.user.name}
-                            </Link>
-                        ) : (
-                            'Usuari Elimiant'
-                        )}
+            {/* Metadatos */}
+            <div className={styles.metadata}>
+                <p className={styles.author}>
+                    Autor:{' '}
+                    {experience.user?.id ? (
+                        <Link href={route('users.public.show', experience.user.id)} className={styles.authorLink}>
+                            {experience.user.name}
+                        </Link>
+                    ) : (
+                        'Usuari Elimiant'
+                    )}
+                </p>
+                <p className={styles.data}> {new Date(experience.created_at).toLocaleDateString('es-ES', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                })}</p>
+                {categoriesText && (
+                    <p className={`${styles.categories} `}>
+                        Categories: {categoriesText}
                     </p>
-                    <p className={styles.data}> {new Date(experience.created_at).toLocaleDateString('es-ES', {
-                        day: 'numeric',
-                        month: 'long',
-                        year: 'numeric'
-                    })}</p>
-                    {categoriesText && (
-                        <p className={`${styles.categories} `}>
-                            Categories: {categoriesText}
-                        </p>
-                    )}
-                </div>
+                )}
+            </div>
 
-                {/* Titol i descripcio */}
-                <div className={styles.textContainer}>
-                    <h2 className={styles.title}>{experience.title}</h2>
-                    <p className={styles.description}>{experience.body}</p>
-                </div>
+            {/* Titol i descripcio */}
+            <div className={styles.textContainer}>
+                <h2 className={styles.title}>{experience.title}</h2>
+                <p className={styles.description}>{experience.body}</p>
+            </div>
 
-                {/* Vots  */}
-                <div className={styles.voteContainer}>
-                    <div className={styles.positiveVote}>
-                        <button className={`${styles.voteButton} ${userVote === 1 ? styles.active : ''}`}
-                            onClick={() => handleVote(1)}
-                            disabled={votesLoading}>
-                            {userVote == 1 ? 'Treure vot positiu' : 'Vot positiu'}
-                        </button>
-
-                        <span className={styles.voteCount}>{positiveVotes} {positiveVotes === 1 ? 'vot positiu' : 'vots positius'}</span>
-                    </div>
-
-                    <div className={styles.negativeVote}>
-                        <span className={styles.voteCount}>{negativeVotes} {negativeVotes === 1 ? 'vot negatiu' : 'vots negatius'}</span>
-                        <button className={`${styles.voteButtonNegative} ${userVote === -1 ? styles.active : ''}`}
-                            onClick={() => handleVote(-1)}
-                            disabled={votesLoading}>
-                            {userVote == -1 ? 'Treure vot negatiu' : 'Vot Negatiu'}
-                        </button>
-
-                    </div>
-                </div>
-
-                {/* Report */}
-                <div className={styles.reportContainer}>
-                    <button
-                        className={styles.reportButton}
-                        onClick={() => setReportOpen(true)}
-                    >
-                        Reportar un abús
+            {/* Vots  */}
+            <div className={styles.voteContainer}>
+                <div className={styles.positiveVote}>
+                    <button className={`${styles.voteButton} ${userVote === 1 ? styles.active : ''}`}
+                        onClick={() => handleVote(1)}
+                        disabled={votesLoading}>
+                        {userVote == 1 ? 'Treure vot positiu' : 'Vot positiu'}
                     </button>
-                    {reportOpen && (
-                        <div className={styles.reportModal}>
-                            <h3>Reportar aquesta experiència</h3>
-                            <textarea
-                                value={reportReason}
-                                onChange={(e) => setReportReason(e.target.value)}
-                                placeholder="Explica el motiu del report"
-                                className={styles.reportTextarea}
-                                row={3}
-                                maxLength={500}
-                            />
-                            <div className={styles.reportButtons}>
-                                <button
-                                    className={styles.cancelButton}
-                                    onClick={() => setReportOpen(false)}
-                                    disabled={reportLoading}
-                                >
-                                    Cancel·lar
-                                </button>
-                                <button
-                                    className={styles.submitButton}
-                                    onClick={handleReport}
-                                    disabled={reportLoading || reportReason.trim() === ''}
-                                >
-                                    Enviar Report
-                                </button>
-                            </div>
-                        </div>
-                    )}
-                    {reported && <p className={styles.reportedMessage}>Has reportat aquesta experiència.</p>}
+
+                    <span className={styles.voteCount}>{positiveVotes} {positiveVotes === 1 ? 'vot positiu' : 'vots positius'}</span>
+                </div>
+
+                <div className={styles.negativeVote}>
+                    <span className={styles.voteCount}>{negativeVotes} {negativeVotes === 1 ? 'vot negatiu' : 'vots negatius'}</span>
+                    <button className={`${styles.voteButtonNegative} ${userVote === -1 ? styles.active : ''}`}
+                        onClick={() => handleVote(-1)}
+                        disabled={votesLoading}>
+                        {userVote == -1 ? 'Treure vot negatiu' : 'Vot Negatiu'}
+                    </button>
+
                 </div>
             </div>
-        </div>
 
+            {/* Report */}
+            <div className={styles.reportContainer}>
+                <button
+                    className={styles.reportButton}
+                    onClick={() => setReportOpen(true)}
+                >
+                    Reportar un abús
+                </button>
+                {reportOpen && (
+                    <div className={styles.reportModal}>
+                        <h3>Reportar aquesta experiència</h3>
+                        <textarea
+                            value={reportReason}
+                            onChange={(e) => setReportReason(e.target.value)}
+                            placeholder="Explica el motiu del report"
+                            className={styles.reportTextarea}
+                            row={3}
+                            maxLength={500}
+                        />
+                        <div className={styles.reportButtons}>
+                            <button
+                                className={styles.cancelButton}
+                                onClick={() => setReportOpen(false)}
+                                disabled={reportLoading}
+                            >
+                                Cancel·lar
+                            </button>
+                            <button
+                                className={styles.submitButton}
+                                onClick={handleReport}
+                                disabled={reportLoading || reportReason.trim() === ''}
+                            >
+                                Enviar Report
+                            </button>
+                        </div>
+                    </div>
+                )}
+                {reported && <p className={styles.reportedMessage}>Has reportat aquesta experiència.</p>}
+            </div>
+        </div>
 
     )
 }

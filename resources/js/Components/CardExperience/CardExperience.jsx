@@ -1,18 +1,17 @@
 import styles from './CardExperience.module.scss';
-import { Card } from "flowbite-react";
 import { Link, router } from '@inertiajs/react';
 import { FaRegThumbsUp, FaRegThumbsDown } from 'react-icons/fa'; // versió outline/light
 import PropTypes from 'prop-types';
 
 function CardExperience({ experience, isAuthenticated }) {
     return (
-        <Card className={styles.card}>
+        <div className={`${styles.card} `}>
             <Link
                 href={`/experiencia/${experience.id}`}
                 className={styles.cardContainer}
             >
 
-                <img src={experience.image_url || '/images/placeholder.png'} alt="experienceIMG" className={styles.cardImage} />
+                <img src={experience.image_url || '/images/placeholder.png'} alt="experienceIMG" className={`w-full h-48 object-cover rounded-t-lg ${styles.image}`} loading="lazy" />
 
                 <div className={styles.cardMeta}>
                     <span>Autor: </span>
@@ -57,7 +56,7 @@ function CardExperience({ experience, isAuthenticated }) {
                     )}
                 </div>
             )}
-        </Card>
+        </div>
     );
 }
 
