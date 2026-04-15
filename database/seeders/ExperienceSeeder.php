@@ -212,7 +212,7 @@ class ExperienceSeeder extends Seeder
         DB::table('experiences')->insert($experiences);
 
         // Relacionamos las experiencias con las categorías en la tabla pivot category_experience
-        // Asumiendo que: 1=Aventures, 2=Muntanyisme, 3=Familiar, 4=Històric, 5=Romàntic
+        // Asumiendo que: 1=Aventures, 2=Muntanyisme, 3=Familiar, 4=Històric, 5=Romàntic, 6=Cultura, 7=Gastronomia, 8=Relax, 9=Platja
         DB::table('category_experience')->insert([
             ['experience_id' => 1, 'category_id' => 2], // Vall de Núria -> Muntanyisme
             ['experience_id' => 1, 'category_id' => 1], // Vall de Núria -> Aventures
@@ -229,7 +229,7 @@ class ExperienceSeeder extends Seeder
             ['experience_id' => 9, 'categoria_id' => 1 ], //Toscana -> Aventures
             ['experience_id' => 10, 'categoria_id' => 4], //Praga -> Històric
             ['experience_id' => 11, 'categoria_id' => 2], //Doñana -> Muntanyisme
-            ['experience_id' => 12, 'categoria_id' => 3], //Amsterdam -> familair
+            ['experience_id' => 12, 'categoria_id' => 3], //Amsterdam -> familiar
             ['experience_id' => 12, 'categoria_id' => 5], //Amsterdam -> Romàntic
         ]);
     }
