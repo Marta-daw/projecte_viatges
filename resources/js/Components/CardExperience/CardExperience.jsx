@@ -2,8 +2,10 @@ import styles from './CardExperience.module.scss';
 import { Link, router } from '@inertiajs/react';
 import { FaRegThumbsUp, FaRegThumbsDown } from 'react-icons/fa'; // versió outline/light
 import PropTypes from 'prop-types';
+import ReactMarkdown from 'react-markdown';
+import remarkBreaks from 'remark-breaks';
 
-function CardExperience({ experience, isAuthenticated }) {
+function CardExperience({ experience, isAuthenticated, showActions = true }) {
     return (
         <div className={`${styles.card} `}>
             <Link
@@ -27,8 +29,15 @@ function CardExperience({ experience, isAuthenticated }) {
                 <div className={styles.textCard}>
                     <h5 className={styles.cardTitle}> {experience.title} </h5>
                     <p className={styles.cardDescription}>
-                        {experience.body}
+                        {experience.body?.slice(0, 150)}
+                        {experience.body?.length > 150 && '...'}
                     </p>
+                    {/*                     <div className="prose prose-sm max-w-none">
+
+                        <ReactMarkdown remarkPlugins={[remarkBreaks]} >
+                            {experience.body || ''}
+                        </ReactMarkdown>
+                    </div> */}
 
                     <div className="mt-2 flex flex-row items-center gap-4 text-md">
                         <span className="inline-flex items-center gap-1 text-green-800"><FaRegThumbsUp /> {experience.positive_votes_count ?? 0}</span>
@@ -39,7 +48,7 @@ function CardExperience({ experience, isAuthenticated }) {
             </Link >
 
             {/*Solo visible con session iniciada*/}
-            {isAuthenticated && (
+            {isAuthenticated && showActions && (
                 <div className={styles.cardActions}>
                     {experience?.can?.update && (
                         <Link className={styles.editDeletebtnCard} href={route('experiences.edit', experience.id)}>Editar</Link>

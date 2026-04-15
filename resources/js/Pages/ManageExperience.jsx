@@ -10,7 +10,7 @@ export default function ManageExperience() {
     return (
         <div className={styles.manageBody}>
             {experiencies && experiencies.map(exp => (
-                <CardExperience key={exp.id} experience={exp} isAuthenticated={isAuthenticated} />
+                <CardExperience key={exp.id} experience={exp} isAuthenticated={isAuthenticated} showActions />
             ))}
         </div>
     )

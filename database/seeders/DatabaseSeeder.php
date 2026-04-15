@@ -16,5 +16,11 @@ class DatabaseSeeder extends Seeder
             VoteSeeder::class,
             ReportSeeder::class,
         ]);
+
+        if (app()->environment('testing')) {
+            $this->call([
+                TestReportedExperienceSeeder::class,
+            ]);
+        }
     }
 }

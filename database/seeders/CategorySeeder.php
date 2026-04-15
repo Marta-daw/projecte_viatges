@@ -10,6 +10,8 @@ class CategorySeeder extends Seeder
 {
     public function run(): void
     {
+        DB::table('categories')->delete();
+
         $categories = [
             'Aventures',
             'Muntanyisme',
@@ -19,14 +21,14 @@ class CategorySeeder extends Seeder
             'Cultura',
             'Gastronomia',
             'Relax',
-            'Platja'
+            'Platja',
         ];
 
         foreach ($categories as $category) {
             DB::table('categories')->insert([
                 'name' => $category,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }

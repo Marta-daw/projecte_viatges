@@ -20,8 +20,8 @@ class ExperienceController extends Controller
     {
         $user = Auth::user();
         $experiencies = Experiencia::with('user:id,name')
-            //->where('user_id', $user->id)
-            ->with('user:id,name')
+            ->where('user_id', $user->id)
+            //->with('user:id,name')
             ->where('status', Experiencia::STATUS_PUBLICADA) // Normalitzem el valor de status a minúscules per evitar problemas de mayúsculas/minúsculas
             ->latest()
             ->get();
@@ -35,6 +35,7 @@ class ExperienceController extends Controller
                     'image_url' => $experience->image_url,
                     'status' => $experience->status,
                     'user' => [
+                        'id' => $experience->user?->id,
                         'name' => $experience->user?->name,
                     ],
                     'can' => [
