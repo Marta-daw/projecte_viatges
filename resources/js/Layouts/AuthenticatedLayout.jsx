@@ -28,7 +28,7 @@ export default function AuthenticatedLayout({ header, children }) {
         <div className="min-h-screen bg-gray-100">
             <nav className="border-b border-gray-100 bg-white">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="flex h-16 justify-between">
+                    <div className="flex h-20 justify-between">
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
                                 <Link href="/">
@@ -107,6 +107,11 @@ export default function AuthenticatedLayout({ header, children }) {
                                                 Admin Dashboard
                                             </Dropdown.Link>
                                         }
+                                        <Dropdown.Link
+                                            href={route('experiences.myExperiencies')}
+                                        >
+                                            Les meves experiencies
+                                        </Dropdown.Link>
                                         <Dropdown.Link
                                             href={route('logout')}
                                             method="post"
@@ -190,6 +195,16 @@ export default function AuthenticatedLayout({ header, children }) {
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink href={route('profile.edit')}>
                                 Profile
+                            </ResponsiveNavLink>
+                            {user.role == "admin" &&
+                                <ResponsiveNavLink
+                                    href={route('admin.dashboard')}
+                                >
+                                    Admin Dashboard
+                                </ResponsiveNavLink>
+                            }
+                            <ResponsiveNavLink href={route('experiences.myExperiencies')}>
+                                Les meves experiencies
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
                                 method="post"

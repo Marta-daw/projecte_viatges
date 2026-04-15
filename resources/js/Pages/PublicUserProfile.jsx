@@ -97,6 +97,7 @@ export default function PublicUserProfile({ profileUser, experiences = [], stats
                                         key={experience.id}
                                         experience={experience}
                                         isAuthenticated={isAuthenticated}
+                                        showActions={false}
                                     />
                                 ))}
                             </div>

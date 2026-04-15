@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Models\Categoria;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class ExperienceController extends Controller
 {
@@ -20,6 +21,8 @@ class ExperienceController extends Controller
         $user = Auth::user();
         $experiencies = Experiencia::with('user:id,name')
             ->where('user_id', $user->id)
+            //->with('user:id,name')
+            ->where('status', Experiencia::STATUS_PUBLICADA) // Normalitzem el valor de status a minúscules per evitar problemas de mayúsculas/minúsculas
             ->latest()
             ->get();
 
@@ -32,6 +35,7 @@ class ExperienceController extends Controller
                     'image_url' => $experience->image_url,
                     'status' => $experience->status,
                     'user' => [
+                        'id' => $experience->user?->id,
                         'name' => $experience->user?->name,
                     ],
                     'can' => [
@@ -52,7 +56,10 @@ class ExperienceController extends Controller
             'latitude' => ['nullable', 'numeric'],
             'longitude' => ['nullable', 'numeric'],
             'image' => ['nullable', 'file', 'image', 'max:5120'], // Max 5MB
-            'status' => ['required', 'in:publicada,esborrany'],
+            'status' => ['required', 'in:' . implode(',', [
+                Experiencia::STATUS_PUBLICADA,
+                Experiencia::STATUS_ESBORRANY,
+            ])],
             'category_id' => ['nullable', 'exists:categories,id']
         ]);
 
@@ -65,7 +72,7 @@ class ExperienceController extends Controller
             'latitude' => $validated['latitude'],
             'longitude' => $validated['longitude'],
             'status' => $status,
-            'published_at' => $status === 'publicada' ? now() : null,
+            'published_at' => $status === Experiencia::STATUS_PUBLICADA ? now() : null,
         ];
 
         if ($request->hasFile('image')) {

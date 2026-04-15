@@ -15,7 +15,7 @@ class HomeController extends Controller
         //Obtenim dades de la BBDD
         $experiencies = Experiencia::query()
             ->with(['user:id,name'])
-            ->where('status', 'publicada')
+            ->where('status', Experiencia::STATUS_PUBLICADA)//Normalitzem el valor de status a minúscules per evitar problemes de majúsculas/minúsculas
             ->withCount([
                 'votes as positive_votes_count' => fn ($q) => $q->where('value', 1),
                 'votes as negative_votes_count' => fn ($q) => $q->where('value', -1),

@@ -105,6 +105,13 @@
     flex-shrink: 0;
 }
 
+.avatarImage {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .userDetails {
     display: flex;
     flex-direction: column;
@@ -182,6 +189,7 @@
         opacity: 0;
         transform: translateY(-6px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);

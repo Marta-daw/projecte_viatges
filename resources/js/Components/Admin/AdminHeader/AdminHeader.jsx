@@ -77,7 +77,11 @@ export default function AdminHeader({ user }) {
                         type="button"
                     >
                         <div className={styles.avatar}>
-                            {getInitials(user?.name || 'A')}
+                            {user?.avatar_url ? (
+                                <img src={user.avatar_url} alt="Avatar admin" className={styles.avatarImage} />
+                            ) : (
+                                getInitials(user?.name || 'A')
+                            )}
                         </div>
                         <div className={styles.userDetails}>
                             <p className={styles.userName}>{user?.name || 'Administrador'}</p>
