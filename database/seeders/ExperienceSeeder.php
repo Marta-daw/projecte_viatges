@@ -15,6 +15,8 @@ class ExperienceSeeder extends Seeder
         DB::table('category_experience')->delete();
         DB::table('experiences')->delete();
 
+        $statusPublicada = 'publicada'; // Asegurem que el valor coincideix amb el que s'utilitza a l'aplicació (en minúscules)
+        
         $experiences = [
             [
                 'user_id' => 2,
@@ -27,7 +29,7 @@ class ExperienceSeeder extends Seeder
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093833/vall-de-nuria_arvzuf.avif',
                 'latitude' => 42.3961,
                 'longitude' => 2.1534,
-                'status' => 'publicada',
+                'status' => $statusPublicada,
                 'published_at' => Carbon::now()->subDays(2),
                 'created_at' => Carbon::now()->subDays(3),
                 'updated_at' => Carbon::now()->subDays(2),
@@ -42,7 +44,7 @@ Un viatge 10/10.',
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093833/roma_spoanz.avif',
                 'latitude' => 41.8902,
                 'longitude' => 12.4922,
-                'status' => 'publicada',
+                'status' => $statusPublicada,
                 'published_at' => Carbon::now()->subDays(1),
                 'created_at' => Carbon::now()->subDays(1),
                 'updated_at' => Carbon::now()->subDays(1),
@@ -70,7 +72,7 @@ Un viatge 10/10.',
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093834/lisboa_bmipbj.avif',
                 'latitude' => 38.7169,
                 'longitude' => -9.1399,
-                'status' => 'publicada',
+                'status' => $statusPublicada ,
                 'published_at' => Carbon::now()->subDays(4),
                 'created_at' => Carbon::now()->subDays(5),
                 'updated_at' => Carbon::now()->subDays(4),
@@ -86,7 +88,7 @@ Un viatge 10/10.',
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093833/marroc_k8gkvk.avif',
                 'latitude' => 35.1688,
                 'longitude' => -5.2636,
-                'status' => 'publicada',
+                'status' => $statusPublicada,
                 'published_at' => Carbon::now()->subDays(5),
                 'created_at' => Carbon::now()->subDays(6),
                 'updated_at' => Carbon::now()->subDays(5),
@@ -103,7 +105,7 @@ Un viatge 10/10.',
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093833/tokio_gzexqx.avif',
                 'latitude' => 35.7148,
                 'longitude' => 139.7967,
-                'status' => 'publicada',
+                'status' => $statusPublicada,
                 'published_at' => Carbon::now()->subDays(8),
                 'created_at' => Carbon::now()->subDays(9),
                 'updated_at' => Carbon::now()->subDays(8),
@@ -119,7 +121,7 @@ Un viatge 10/10.',
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093834/brava_qsrkju.avif',
                 'latitude' => 41.9109,
                 'longitude' => 3.2159,
-                'status' => 'publicada',
+                'status' => $statusPublicada,
                 'published_at' => Carbon::now()->subDays(10),
                 'created_at' => Carbon::now()->subDays(11),
                 'updated_at' => Carbon::now()->subDays(10),
@@ -148,7 +150,7 @@ Un viatge 10/10.',
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093833/toscana_bausht.avif',
                 'latitude' => 43.3186,
                 'longitude' => 11.3307,
-                'status' => 'publicada',
+                'status' => $statusPublicada,
                 'published_at' => Carbon::now()->subDays(12),
                 'created_at' => Carbon::now()->subDays(13),
                 'updated_at' => Carbon::now()->subDays(12),
@@ -165,7 +167,7 @@ Un viatge 10/10.',
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093834/praga_bpodpn.avif',
                 'latitude' => 50.0755,
                 'longitude' => 14.4378,
-                'status' => 'publicada',
+                'status' => $statusPublicada,
                 'published_at' => Carbon::now()->subDays(14),
                 'created_at' => Carbon::now()->subDays(15),
                 'updated_at' => Carbon::now()->subDays(14),
@@ -182,7 +184,7 @@ Un viatge 10/10.',
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093834/donana_ui2uvj.avif',
                 'latitude' => 36.9981,
                 'longitude' => -6.3362,
-                'status' => 'publicada',
+                'status' => $statusPublicada,
                 'published_at' => Carbon::now()->subDays(16),
                 'created_at' => Carbon::now()->subDays(17),
                 'updated_at' => Carbon::now()->subDays(16),// 
@@ -199,7 +201,7 @@ Un viatge 10/10.',
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093834/amsterdam.jpg_lh1nz4.avif',
                 'latitude' => 52.3676,
                 'longitude' => 4.9041,
-                'status' => 'publicada',
+                'status' => $statusPublicada,
                 'published_at' => Carbon::now()->subDays(18),
                 'created_at' => Carbon::now()->subDays(19),
                 'updated_at' => Carbon::now()->subDays(18),
@@ -222,13 +224,13 @@ Un viatge 10/10.',
             ['experience_id' => 5, 'category_id' => 4], // Marroc -> Històric
             ['experience_id' => 6, 'category_id' => 1], // Tokyo -> Aventures
             ['experience_id' => 6, 'category_id' => 5], // Tokyo -> Romàntic
-            ['experiencia_id' => 7, 'categoria_id' => 3 ], //Costa Brava -> Familiar
-            ['experiencia_id' => 7, 'categoria_id' => 5 ], //Costa Brava -> Romàntic
-            ['experiencia_id' => 9, 'categoria_id' => 1], //Toscana -> Aventures
-            ['experiencia_id' => 10, 'categoria_id' => 4], //Praga -> Històric
-            ['experiencia_id' => 11, 'categoria_id' => 2], //Doñana -> Muntanyisme
-            ['experiencia_id' => 12, 'categoria_id' => 3], //Amsterdam -> familair
-            ['experiencia_id' => 12, 'categoria_id' => 5], //Amsterdam -> Romàntic
+            ['experience_id' => 7, 'categoria_id' => 3 ], //Costa Brava -> Familiar
+            ['experience_id' => 7, 'categoria_id' => 5 ], //Costa Brava -> Romàntic
+            ['experience_id' => 9, 'categoria_id' => 1 ], //Toscana -> Aventures
+            ['experience_id' => 10, 'categoria_id' => 4], //Praga -> Històric
+            ['experience_id' => 11, 'categoria_id' => 2], //Doñana -> Muntanyisme
+            ['experience_id' => 12, 'categoria_id' => 3], //Amsterdam -> familair
+            ['experience_id' => 12, 'categoria_id' => 5], //Amsterdam -> Romàntic
         ]);
     }
 }
