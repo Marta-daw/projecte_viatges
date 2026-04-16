@@ -2,16 +2,16 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicUserController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\VoteController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
 use Inertia\Inertia;
-use App\Http\Controllers\VoteController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\PublicUserController;
 
 /* Route::get('/', function () {
  return Inertia::render('Welcome', [
@@ -22,7 +22,7 @@ use App\Http\Controllers\PublicUserController;
  ]);
  }); */
 
-// Rutas públicas
+// Rutes públiques
 Route::get('/', [HomeController::class, 'index'])->name('HomeViatges');
 Route::get('/usuari/{user}', [PublicUserController::class, 'show'])->name('users.public.show');
 
@@ -36,12 +36,12 @@ Route::get('/usuari/{user}', [PublicUserController::class, 'show'])->name('users
 // Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-//Rutas que solo se necesitan autenticación
+// Rutes que només necessiten autenticació
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile/experiencies', [ExperienceController::class, 'myExperiences'])
         ->name('experiences.myExperiencies');
-    // A la linia 125 del ExperienceController.php es redirigeix a aquesta ruta, però al posar-la al
-    //navegador no funciona, mirar a veure com es pot solucionar
+    // A la línia 125 d'ExperienceController.php es redirigeix a aquesta ruta, però en posar-la al
+    // navegador no funciona; cal mirar com es pot solucionar
     Route::get('/experiencies', [ExperienceController::class, 'index'])->name('experiences.index');
     Route::get('/experiencies/create', [ExperienceController::class, 'create'])->name('experiences.create');
     Route::post('/experiencia', [ExperienceController::class, 'store'])
@@ -56,7 +56,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('experiences.destroy');
 });
 
-// Rutas privadas (requieren auth y verificación de email)
+// Rutes privades (requereixen auth i verificació de correu)
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -66,7 +66,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('experiencia.vote.store');
     Route::delete('/experiencia/vote/{id}', [VoteController::class, 'destroy'])
         ->name('experiencia.vote.destroy');
-    
+
     Route::post('/experiencia/report/{id}', [ReportController::class, 'report'])
         ->name('experiencia.report');
 
@@ -76,7 +76,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('admin/experiences', [AdminController::class, 'gestionarExperiences'])->name('admin.experiences');
     Route::get('admin/users', [AdminController::class, 'gestionarUsers'])->name('admin.users');
 
-    // CRUD Categorías
+    // CRUD Categories
     Route::post('admin/categories', [CategoryController::class, 'store'])->name('admin.categories.store');
     Route::put('admin/categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
     Route::delete('admin/categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
@@ -97,4 +97,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('admin/users/{user}/unban', [AdminController::class, 'unbanUser'])->name('admin.users.unban');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

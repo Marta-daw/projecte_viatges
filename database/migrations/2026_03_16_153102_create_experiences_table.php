@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -12,31 +13,31 @@ return new class extends Migration {
     {
         Schema::create('experiences', function (Blueprint $table) {
             $table->id();
-            // Relación con el usuario creador
+            // Relació amb l'usuari creador
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
             $table->string('title'); // Títol
 
-            // Text de longitud variable (ideal per markdown o HTML) 
+            // Text de longitud variable (ideal per markdown o HTML)
             $table->longText('body');
 
             // Imatge destacada (ruta o URL del CDN)
             $table->string('image_url')->nullable();
 
-            // Coordenades per a Google Maps o OpenStreetMap + Leaflet 
+            // Coordenades per a Google Maps o OpenStreetMap + Leaflet
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
 
-            // Estat: esborrany, publicada o rebutjada 
+            // Estat: esborrany, publicada o rebutjada
             $table->enum('status', ['esborrany', 'publicada', 'rebutjada'])->default('esborrany');
-            
-            // Si la experiecia té reportes
+
+            // Si l'experiència té reports
             $table->boolean('is_reported')->default(false);
 
             // Data de publicació real
             $table->timestamp('published_at')->nullable();
 
-            // Crea automáticament 'created_at' i 'updated_at'
+            // Crea automàticament 'created_at' i 'updated_at'
             $table->timestamps();
         });
     }

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Experiencia;
+
 use App\Models\Vote;
 use Illuminate\Http\Request;
 
@@ -9,14 +9,14 @@ class VoteController extends Controller
 {
     //
 
-    public function store (Request $request, int $id)
+    public function store(Request $request, int $id)
     {
 
         $request->validate([
-            'value' => ['required', 'in:1,-1'] // Si queremos permitir votos positivos y negativos
+            'value' => ['required', 'in:1,-1'], // Si volem permetre vots positius i negatius
         ]);
 
-        // Lógica para votar una experiencia
+        // Lògica per votar una experiència
         $userId = auth()->id();
 
         Vote::updateOrCreate(
@@ -27,7 +27,7 @@ class VoteController extends Controller
         return back()->with('success', 'Voto registrado correctamente.');
     }
 
-    public function destroy (int $id)
+    public function destroy(int $id)
     {
         Vote::where('user_id', auth()->id())
             ->where('experience_id', $id)
@@ -36,4 +36,3 @@ class VoteController extends Controller
         return back()->with('success', 'Voto eliminado correctamente.');
     }
 }
-

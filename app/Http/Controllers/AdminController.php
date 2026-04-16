@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Experiencia;
 use App\Models\User;
-use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class AdminController extends Controller
 {
@@ -47,7 +47,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Gestionar experiencias
+     * Gestionar experiències
      */
     public function gestionarExperiences()
     {
@@ -59,7 +59,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Gestionar usuarios
+     * Gestionar usuaris
      */
     public function gestionarUsers()
     {
@@ -71,7 +71,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Eliminar experiencia
+     * Eliminar experiència
      */
     public function deleteExperience(Experiencia $experiencia)
     {
@@ -100,25 +100,25 @@ class AdminController extends Controller
     public function updateExperience(Request $request, Experiencia $experiencia)
     {
         $validated = $request->validate([
-            'title'       => ['required', 'string', 'max:255'],
-            'body'        => ['required', 'string'],
-            'status' => ['required', 'in:' . implode(',', [
+            'title' => ['required', 'string', 'max:255'],
+            'body' => ['required', 'string'],
+            'status' => ['required', 'in:'.implode(',', [
                 Experiencia::STATUS_PUBLICADA,
                 Experiencia::STATUS_ESBORRANY,
             ])],
-            'latitude'    => ['nullable', 'numeric'],
-            'longitude'   => ['nullable', 'numeric'],
+            'latitude' => ['nullable', 'numeric'],
+            'longitude' => ['nullable', 'numeric'],
             'category_id' => ['nullable', 'exists:categories,id'],
-            'image'       => ['nullable', 'file', 'image', 'max:5120'],
+            'image' => ['nullable', 'file', 'image', 'max:5120'],
         ]);
 
-        $status = strtolower(trim($validated['status'])); // Normalitzem el valor de status a minúscules per evitar problemas de mayúsculas/minúsculas
+        $status = strtolower(trim($validated['status'])); // Normalitzem el valor d'status en minúscules per evitar problemes de majúscules/minúscules
 
         $data = [
-            'title'     => $validated['title'],
-            'body'      => $validated['body'],
-            'status'    => $validated['status'],
-            'latitude'  => $validated['latitude'] ?? $experiencia->latitude,
+            'title' => $validated['title'],
+            'body' => $validated['body'],
+            'status' => $validated['status'],
+            'latitude' => $validated['latitude'] ?? $experiencia->latitude,
             'longitude' => $validated['longitude'] ?? $experiencia->longitude,
             'published_at' => $status === Experiencia::STATUS_PUBLICADA
                 ? ($experiencia->published_at ?? now())
@@ -133,13 +133,13 @@ class AdminController extends Controller
                 Storage::disk('public')->delete($oldPath);
             }
             $path = $request->file('image')->store('experiences', 'public');
-            $data['image_url'] = '/storage/' . $path;
+            $data['image_url'] = '/storage/'.$path;
         }
 
         $experiencia->update($data);
 
         // Sync category
-        if (!empty($validated['category_id'])) {
+        if (! empty($validated['category_id'])) {
             $experiencia->categories()->sync([$validated['category_id']]);
         } else {
             $experiencia->categories()->detach();
@@ -151,11 +151,11 @@ class AdminController extends Controller
     }
 
     /**
-     * Eliminar usuario
+     * Eliminar usuari
      */
     public function deleteUser(User $user)
     {
-        // Opcionalmente, elimina las experiencias del usuario también
+        // Opcionalment, elimina també les experiències de l'usuari
         $user->experiences()->delete();
         $user->delete();
 
@@ -163,7 +163,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Banear usuario
+     * Bandejar usuari
      */
     public function banUser(User $user)
     {
@@ -173,7 +173,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Desbanear usuario
+     * Treure el bandeig a l'usuari
      */
     public function unbanUser(User $user)
     {
@@ -183,7 +183,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Marcar un reporte como revisado
+     * Marcar un report com a revisat
      */
     public function resolveReport(Experiencia $experiencia)
     {
@@ -195,7 +195,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Eliminar una experiencia reportada
+     * Eliminar una experiència reportada
      */
     public function deleteReport(Experiencia $experiencia)
     {
@@ -205,7 +205,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Rechazar un reporte sin eliminar la experiencia
+     * Rebutjar un report sense eliminar l'experiència
      */
     public function rejectReport(Experiencia $experiencia)
     {
