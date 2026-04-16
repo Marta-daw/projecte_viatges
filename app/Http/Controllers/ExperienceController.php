@@ -21,8 +21,11 @@ class ExperienceController extends Controller
         $user = Auth::user();
         $experiencies = Experiencia::with('user:id,name')
             ->where('user_id', $user->id)
-            //->with('user:id,name')
-            ->where('status', Experiencia::STATUS_PUBLICADA) // Normalitzem el valor de status a minúscules per evitar problemas de mayúsculas/minúsculas
+            ->whereIn('status', [Experiencia::STATUS_PUBLICADA, Experiencia::STATUS_ESBORRANY,]) // Normalitzem el valor de status a minúscules per evitar problemas de mayúsculas/minúsculas
+            ->withCount([
+                'votes as positive_votes_count' => fn ($q) => $q->where('value', 1),
+                'votes as negative_votes_count' => fn ($q) => $q->where('value', -1),
+            ])
             ->latest()
             ->get();
 
@@ -34,6 +37,8 @@ class ExperienceController extends Controller
                     'body' => $experience->body,
                     'image_url' => $experience->image_url,
                     'status' => $experience->status,
+                    'positive_votes_count' => $experience->positive_votes_count,
+                    'negative_votes_count' => $experience->negative_votes_count,
                     'user' => [
                         'id' => $experience->user?->id,
                         'name' => $experience->user?->name,

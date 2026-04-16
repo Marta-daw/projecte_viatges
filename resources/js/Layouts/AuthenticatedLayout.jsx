@@ -61,6 +61,8 @@ export default function AuthenticatedLayout({ header, children }) {
                                                         src={user.avatar_url}
                                                         alt="Avatar"
                                                         className="h-12 w-12 mr-5 rounded-full object-cover"
+                                                        loading="lazy"
+                                                        decoding="async"
                                                     />
                                                 ) : (
                                                     <div className="h-12 w-12 rounded-full me-2 flex items-center justify-center text-white text-sm font-bold"

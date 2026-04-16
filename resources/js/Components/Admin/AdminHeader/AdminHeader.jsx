@@ -78,7 +78,7 @@ export default function AdminHeader({ user }) {
                     >
                         <div className={styles.avatar}>
                             {user?.avatar_url ? (
-                                <img src={user.avatar_url} alt="Avatar admin" className={styles.avatarImage} />
+                                <img src={user.avatar_url} alt="Avatar admin" className={styles.avatarImage} loading="lazy" decoding="async" />
                             ) : (
                                 getInitials(user?.name || 'A')
                             )}
