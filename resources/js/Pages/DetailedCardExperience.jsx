@@ -107,11 +107,8 @@ export default function DetailedCardExperience({ experience, categories, votesCo
                 </Link>
             </div>
             <div className={styles.imageContainer}>
-                <img src={experience.image_url} alt="Experience Image" className={styles.image} />
+                <img src={experience.image_url} alt="ExperiencePhoto" className={styles.image} loading="eager" decoding="async" />
             </div>
-            {/*                 <div className={styles.imageContainer}>
-                    <img src={experience.image_url} alt="Experience Image" className={styles.image} />
-                </div> */}
 
             {/* Metadatos */}
             <div className={styles.metadata}>

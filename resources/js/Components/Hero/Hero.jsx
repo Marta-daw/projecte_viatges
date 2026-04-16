@@ -13,7 +13,8 @@ export default function Hero({ variant = 'guest', user = null, createExperienceU
                 (max-width: 1240px) 33vw,
                 400px
             " src="https://res.cloudinary.com/dadhzxpnj/image/upload/v1774030117/heroPhoto_skug90.jpg"
-                alt="Imatge de viatge" width="1200" height="600" className={styles.heroImg} />
+                alt="Imatge de viatge" width="1200" height="600" className={styles.heroImg} loading="eager"
+                fetchPriority="high" decoding="async" />
 
             <div className={[styles.heroTextContainer, (compactOverlay || variant === 'guest') ? styles.heroTextContainerCompact : ''].join(' ')}>
                 {variant == 'auth' ? (

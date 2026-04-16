@@ -13,7 +13,7 @@ function CardExperience({ experience, isAuthenticated, showActions = true }) {
                 className={styles.cardContainer}
             >
 
-                <img src={experience.image_url || '/images/placeholder.png'} alt="experienceIMG" className={`w-full h-48 object-cover rounded-t-lg ${styles.image}`} loading="lazy" />
+                <img src={experience.image_url || '/images/placeholder.png'} alt="experienceIMG" className={`w-full h-48 object-cover rounded-t-lg ${styles.image}`} loading="lazy" decoding="async" />
 
                 <div className={styles.cardMeta}>
                     <span>Autor: </span>
