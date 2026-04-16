@@ -3,7 +3,8 @@ import { Link, router } from '@inertiajs/react';
 import styles from './DetailedCardExperience.module.scss';
 import { toast } from 'sonner';
 import { FaArrowLeft } from "react-icons/fa";
-
+import ReactMarkdown from 'react-markdown';
+import remarkBreaks from 'remark-breaks';
 
 export default function DetailedCardExperience({ experience, categories, votesCount, votedByUser, reported, isAutenticated, positiveVotes: positiveVotesProp,
     negativeVotes: negativeVotesProp, }) {
@@ -106,11 +107,8 @@ export default function DetailedCardExperience({ experience, categories, votesCo
                 </Link>
             </div>
             <div className={styles.imageContainer}>
-                <img src={experience.image_url} alt="Experience Image" className={styles.image} />
+                <img src={experience.image_url} alt="ExperiencePhoto" className={styles.image} loading="eager" decoding="async" />
             </div>
-            {/*                 <div className={styles.imageContainer}>
-                    <img src={experience.image_url} alt="Experience Image" className={styles.image} />
-                </div> */}
 
             {/* Metadatos */}
             <div className={styles.metadata}>
@@ -139,7 +137,19 @@ export default function DetailedCardExperience({ experience, categories, votesCo
             {/* Titol i descripcio */}
             <div className={styles.textContainer}>
                 <h2 className={styles.title}>{experience.title}</h2>
-                <p className={styles.description}>{experience.body}</p>
+                {/* <p className={styles.description}>{experience.body}</p> */}
+                <div className={styles.description}>
+                    <div className="prose prose-sm max-w-none">
+
+                        <ReactMarkdown remarkPlugins={[remarkBreaks]} >
+                            {experience.body || ''}
+                        </ReactMarkdown>
+                    </div>
+
+                    {/*                     <ReactMarkdown remarkPlugins={[remarkBreaks]} >
+                        {experience.body || ''}
+                    </ReactMarkdown> */}
+                </div>
             </div>
 
             {/* Vots  */}

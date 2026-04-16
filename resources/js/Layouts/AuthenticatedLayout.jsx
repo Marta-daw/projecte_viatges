@@ -58,6 +58,8 @@ export default function AuthenticatedLayout({ header, children }) {
                                                         src={user.avatar_url}
                                                         alt="Avatar"
                                                         className="h-12 w-12 mr-5 rounded-full object-cover"
+                                                        loading="lazy"
+                                                        decoding="async"
                                                     />
                                                 ) : (
                                                     <div className="h-12 w-12 rounded-full me-2 flex items-center justify-center text-white text-sm font-bold"
@@ -95,11 +97,17 @@ export default function AuthenticatedLayout({ header, children }) {
                                         <Dropdown.Link href={route('profile.edit')}>
                                             Profile
                                         </Dropdown.Link>
+
                                         {user.role === "admin" &&
                                             <Dropdown.Link href={route('admin.dashboard')}>
                                                 Admin Dashboard
                                             </Dropdown.Link>
                                         }
+
+                                        <Dropdown.Link href={route('experiences.myExperiencies')}>
+                                            Les meves experiencies
+                                        </Dropdown.Link>
+
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
                                             Log Out
                                         </Dropdown.Link>
@@ -143,6 +151,17 @@ export default function AuthenticatedLayout({ header, children }) {
 
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
+
+                            {user.role === "admin" &&
+                                <ResponsiveNavLink href={route('admin.dashboard')}>
+                                    Admin Dashboard
+                                </ResponsiveNavLink>
+                            }
+
+                            <ResponsiveNavLink href={route('experiences.myExperiencies')}>
+                                Les meves experiencies
+                            </ResponsiveNavLink>
+
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
                                 Log Out
                             </ResponsiveNavLink>

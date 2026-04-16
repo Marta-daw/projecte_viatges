@@ -102,12 +102,17 @@ class AdminController extends Controller
         $validated = $request->validate([
             'title'       => ['required', 'string', 'max:255'],
             'body'        => ['required', 'string'],
-            'status'      => ['required', 'in:publicada,esborrany'],
+            'status' => ['required', 'in:' . implode(',', [
+                Experiencia::STATUS_PUBLICADA,
+                Experiencia::STATUS_ESBORRANY,
+            ])],
             'latitude'    => ['nullable', 'numeric'],
             'longitude'   => ['nullable', 'numeric'],
             'category_id' => ['nullable', 'exists:categories,id'],
             'image'       => ['nullable', 'file', 'image', 'max:5120'],
         ]);
+
+        $status = strtolower(trim($validated['status'])); // Normalitzem el valor de status a minúscules per evitar problemas de mayúsculas/minúsculas
 
         $data = [
             'title'     => $validated['title'],
@@ -115,7 +120,7 @@ class AdminController extends Controller
             'status'    => $validated['status'],
             'latitude'  => $validated['latitude'] ?? $experiencia->latitude,
             'longitude' => $validated['longitude'] ?? $experiencia->longitude,
-            'published_at' => $validated['status'] === 'publicada'
+            'published_at' => $status === Experiencia::STATUS_PUBLICADA
                 ? ($experiencia->published_at ?? now())
                 : null,
         ];

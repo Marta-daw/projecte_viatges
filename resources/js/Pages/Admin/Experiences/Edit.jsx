@@ -195,6 +195,8 @@ export default function ExperienceEdit({ auth, experience, categories = [] }) {
                                                 alt="Preview"
                                                 className="w-full h-40 object-cover rounded-lg"
                                                 style={{ border: '1px solid #cfbfa4' }}
+                                                loading="lazy"
+                                                decoding="async"
                                             />
                                             <button
                                                 type="button"
