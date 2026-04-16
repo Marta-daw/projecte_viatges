@@ -28,16 +28,15 @@ function CardExperience({ experience, isAuthenticated, showActions = true }) {
 
                 <div className={styles.textCard}>
                     <h5 className={styles.cardTitle}> {experience.title} </h5>
-                    <p className={styles.cardDescription}>
+                    {/* <p className={styles.cardDescription}>
                         {experience.body?.slice(0, 150)}
                         {experience.body?.length > 150 && '...'}
-                    </p>
-                    {/*                     <div className="prose prose-sm max-w-none">
-
+                    </p> */}
+                    <div className={styles.cardDescription}>
                         <ReactMarkdown remarkPlugins={[remarkBreaks]} >
                             {experience.body || ''}
                         </ReactMarkdown>
-                    </div> */}
+                    </div>
 
                     <div className="mt-2 flex flex-row items-center gap-4 text-md">
                         <span className="inline-flex items-center gap-1 text-green-800"><FaRegThumbsUp /> {experience.positive_votes_count ?? 0}</span>

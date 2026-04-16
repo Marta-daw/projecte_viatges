@@ -217,19 +217,21 @@ class ExperienceSeeder extends Seeder
             ['experience_id' => 1, 'category_id' => 2], // Vall de Núria -> Muntanyisme
             ['experience_id' => 1, 'category_id' => 1], // Vall de Núria -> Aventures
             ['experience_id' => 2, 'category_id' => 5], // Roma -> Romàntic
-            ['experience_id' => 2, 'category_id' => 4], // Roma -> Històric
-            ['experience_id' => 4, 'category_id' => 3], // Lisboa -> Familiar
+            ['experience_id' => 2, 'category_id' => 8], // Roma -> Relax
+            ['experience_id' => 4, 'category_id' => 7], // Lisboa -> Gastronomia
             ['experience_id' => 4, 'category_id' => 4], // Lisboa -> Històric
             ['experience_id' => 5, 'category_id' => 1], // Marroc -> Aventures
-            ['experience_id' => 5, 'category_id' => 4], // Marroc -> Històric
             ['experience_id' => 6, 'category_id' => 1], // Tokyo -> Aventures
-            ['experience_id' => 6, 'category_id' => 5], // Tokyo -> Romàntic
-            ['experience_id' => 7, 'categoria_id' => 3 ], //Costa Brava -> Familiar
-            ['experience_id' => 7, 'categoria_id' => 5 ], //Costa Brava -> Romàntic
+            ['experience_id' => 6, 'category_id' => 6], // Tokyo -> Cultura
+            ['experience_id' => 7, 'categoria_id' => 9 ], //Costa Brava -> Platja
+            ['experience_id' => 7, 'categoria_id' => 7 ], //Costa Brava -> Gastronomia
             ['experience_id' => 9, 'categoria_id' => 1 ], //Toscana -> Aventures
+            ['experience_id' => 9, 'categoria_id' => 8 ], // Toscana -> Relax
             ['experience_id' => 10, 'categoria_id' => 4], //Praga -> Històric
+            ['experience_id' => 10, 'categoria_id' => 6], //Praga -> Cultura
+            ['experience_id' => 11, 'categoria_id' => 1], //Doñana -> Aventures
             ['experience_id' => 11, 'categoria_id' => 2], //Doñana -> Muntanyisme
-            ['experience_id' => 12, 'categoria_id' => 3], //Amsterdam -> familiar
+            ['experience_id' => 12, 'categoria_id' => 6], //Amsterdam -> Cultura
             ['experience_id' => 12, 'categoria_id' => 5], //Amsterdam -> Romàntic
         ]);
     }

@@ -1,8 +1,4 @@
 .manageBody {
-    background-color: var(--ivory-beige);
-    padding: 0 150px;
-    display: grid;
-    gap: 1.25rem;
     grid-template-columns: 1fr;
 }
 
@@ -16,12 +12,4 @@
     .manageBody {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
-}
-
-
-.myExpTitle {
-    color: var(--brown-compass);
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 20px;
 }
