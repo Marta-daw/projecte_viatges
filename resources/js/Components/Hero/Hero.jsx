@@ -17,7 +17,7 @@ export default function Hero({ variant = 'guest', user = null, createExperienceU
                 fetchPriority="high" decoding="async" />
 
             <div className={[styles.heroTextContainer, (compactOverlay || variant === 'guest') ? styles.heroTextContainerCompact : ''].join(' ')}>
-                {variant == 'auth' ? (
+                {user ? (
                     <>
                         <h1 className={styles.benvingutH1} >Benvingut, {user?.name || 'viatger/a'}!</h1>
                         <p className={styles.pgfUserLog}>Comparteix la teva propera aventura amb la comunitat.</p>
