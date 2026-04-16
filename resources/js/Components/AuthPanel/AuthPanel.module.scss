@@ -1,0 +1,100 @@
+$color-bg: #E8E3D9;
+$color-text: #7F5539;
+$color-btn-bg: #282F3B;
+$color-btn-text: #ffffff;
+$color-focus: #3B82F6;
+
+.panelContainer {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    background: $color-bg;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    animation: slideInRight 0.3s ease-out;
+}
+
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.header {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: $color-text;
+    }
+
+    .closeButton {
+        background: none;
+        border: none;
+        color: #999;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: background 0.2s, color 0.2s;
+
+        svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.05);
+            color: #333;
+        }
+    }
+}
+
+.tabs {
+    display: flex;
+    padding: 1rem 1.5rem 0;
+    gap: 0.5rem;
+    background: rgba(0, 0, 0, 0.02);
+
+    .tabButton {
+        flex: 1;
+        padding: 0.75rem;
+        border: none;
+        background: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #666;
+        cursor: pointer;
+        border-radius: 8px 8px 0 0;
+        transition: all 0.2s;
+
+        &:hover {
+            color: $color-text;
+        }
+
+        &.active {
+            background: $color-bg;
+            color: $color-text;
+            box-shadow: 0 -2px 0 $color-text inset;
+        }
+    }
+}
+
+.content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem 1.5rem;
+}

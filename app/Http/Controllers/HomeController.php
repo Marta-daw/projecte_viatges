@@ -8,11 +8,8 @@ use Inertia\Inertia;
 
 class HomeController extends Controller
 {
-    //
-
     public function index()
     {
-        //Obtenim dades de la BBDD
         $experiencies = Experiencia::query()
             ->with(['user:id,name'])
             ->where('status', 'publicada')
@@ -24,13 +21,11 @@ class HomeController extends Controller
             ->take(3)
             ->get();
 
-        //Renderitzem la pàgina de React i li passem les dades com a array
         return Inertia::render('HomeViatges', [
             'llista' => $experiencies,
             'auth' => [
                 'user' => auth()->user(),
             ],
-            //'auth' => auth() -> user(), //null si no hay session
         ]);
     }
 }
