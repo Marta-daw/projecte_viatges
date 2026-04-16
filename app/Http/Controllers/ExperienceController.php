@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Experiencia;
-use Inertia\Inertia;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Models\Categoria;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Experiencia;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class ExperienceController extends Controller
 {
     use AuthorizesRequests;
+
     public function index() {}
 
     public function myExperiences()
@@ -21,8 +20,8 @@ class ExperienceController extends Controller
         $user = Auth::user();
         $experiencies = Experiencia::with('user:id,name')
             ->where('user_id', $user->id)
-            //->with('user:id,name')
-            ->where('status', Experiencia::STATUS_PUBLICADA) // Normalitzem el valor de status a minúscules per evitar problemas de mayúsculas/minúsculas
+            // ->with('user:id,name')
+            ->where('status', Experiencia::STATUS_PUBLICADA) // Normalitzem el valor d'status en minúscules per evitar problemes de majúscules/minúscules
             ->latest()
             ->get();
 
@@ -41,7 +40,7 @@ class ExperienceController extends Controller
                     'can' => [
                         'update' => Auth::user()->can('update', $experience),
                         'delete' => Auth::user()->can('delete', $experience),
-                    ]
+                    ],
                 ];
             }),
             'isAuthenticated' => Auth::check(),
@@ -56,11 +55,11 @@ class ExperienceController extends Controller
             'latitude' => ['nullable', 'numeric'],
             'longitude' => ['nullable', 'numeric'],
             'image' => ['nullable', 'file', 'image', 'max:5120'], // Max 5MB
-            'status' => ['required', 'in:' . implode(',', [
+            'status' => ['required', 'in:'.implode(',', [
                 Experiencia::STATUS_PUBLICADA,
                 Experiencia::STATUS_ESBORRANY,
             ])],
-            'category_id' => ['nullable', 'exists:categories,id']
+            'category_id' => ['nullable', 'exists:categories,id'],
         ]);
 
         $status = $validated['status'];
@@ -77,12 +76,12 @@ class ExperienceController extends Controller
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('experiences', 'public');
-            $data['image_url'] = '/storage/' . $path;
+            $data['image_url'] = '/storage/'.$path;
         }
 
         $experiencia = Experiencia::create($data);
 
-        if (!empty($validated['category_id'])) {
+        if (! empty($validated['category_id'])) {
             // Relacionem la categoria escollida des del select
             $experiencia->categories()->attach($validated['category_id']);
         }
@@ -115,7 +114,7 @@ class ExperienceController extends Controller
     {
         $categories = Categoria::all();
 
-        // Le enviamos los datos al componente de React llamado 'Home'
+        // Li enviem les dades al component de React anomenat 'Home'
         return Inertia::render('CreateExperience', [
             'categories' => $categories,
             'experience' => null,
@@ -127,7 +126,7 @@ class ExperienceController extends Controller
             'body' => ['required'],
             'latitude' => ['nullable'],
             'longitude' => ['nullable'],
-            'image' => ['nullable', 'image']
+            'image' => ['nullable', 'image'],
         ]);
 
         $data['user_id'] = Auth::id(); // assignem id d'usuari
@@ -137,11 +136,11 @@ class ExperienceController extends Controller
         return redirect()->route('experiences.index');
     }
 
-    public function edit ($id)
+    public function edit($id)
     {
         // Busquem l'experiència o llançem un error 404 si no existeix
         $experience = Experiencia::findOrFail($id);
-        $this -> authorize('update', $experience);
+        $this->authorize('update', $experience);
         // Verifiquem que l'experiència pertany a l'usuari autenticat
         // Si no és així, retornem un error 403 (Forbidden)
         if ($experience->user_id !== Auth::id()) {
@@ -162,9 +161,9 @@ class ExperienceController extends Controller
     public function update(Request $request, Experiencia $experiencia)
     {
         // Busquem l'experiència o llançem un error 404 si no existeix
-        //$experience = Experiencia::findOrFail($id);
-        
-        $this -> authorize('update', $experiencia);
+        // $experience = Experiencia::findOrFail($id);
+
+        $this->authorize('update', $experiencia);
 
         // Validem les dades del formulari d'edició
         $data = $request->validate([
@@ -173,16 +172,16 @@ class ExperienceController extends Controller
             'latitude' => ['nullable'],
             'longitude' => ['nullable'],
             'image' => ['nullable', 'image'],
-            'category_id' => ['nullable', 'exists:categories,id']
+            'category_id' => ['nullable', 'exists:categories,id'],
         ]);
 
-        //Afegim la gestió de la imatge
+        // Afegim la gestió de la imatge
         if ($request->hasFile('image')) {
-            $data['image_url'] = '/storage/' . $request->file('image')->store('experiences', 'public');
+            $data['image_url'] = '/storage/'.$request->file('image')->store('experiences', 'public');
         }
 
         unset($data['image']); // Treiem el camp 'image' ja que el camp del model és 'image_url'
-        
+
         // Actualitzem les dades de l'experiència
         $experiencia->update($data);
 

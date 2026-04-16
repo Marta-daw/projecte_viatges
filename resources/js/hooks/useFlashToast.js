@@ -3,9 +3,9 @@ import { usePage } from '@inertiajs/react';
 import { toast } from 'sonner';
 
 /**
- * Hook que escucha los mensajes flash de Laravel (via Inertia shared props)
- * y los muestra automáticamente como toasts.
- * Úsalo en cualquier layout o página top-level.
+ * Hook que escolta els missatges flash de Laravel (via Inertia shared props)
+ * i els mostra automàticament com a toasts.
+ * Fes-lo servir en qualsevol layout o pàgina de nivell superior.
  */
 export function useFlashToast() {
     const { flash } = usePage().props;

@@ -1,18 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Experiencia;
 use App\Models\Report;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    // Lógica para reportar una experiencia
-    public function report (Request $request, $id)
+    // Lògica per reportar una experiència
+    public function report(Request $request, $id)
     {
         $experience = Experiencia::findOrFail($id);
         $userId = auth()->id();
-        
+
         // $isReport = Report::where('user_id', $userId)->where('experience_id', $id)->exists();
         // //Comprovar si l'usuari ja ha reportat l'experiència
         // if ($isReport) {
@@ -21,7 +22,7 @@ class ReportController extends Controller
         //         'reported' => true,
         //     ], 400);
         // }
-        
+
         $data = $request->validate([
             'reason' => ['required', 'string', 'min:10', 'max:255'],
         ]);
@@ -32,7 +33,7 @@ class ReportController extends Controller
         );
 
         // Filtrar per is_reported per adaptar-ho a el panell admin actual.
-        $experience -> update (['is_reported' => true]);
+        $experience->update(['is_reported' => true]);
 
         return back()->with('success', 'Experiencia reportada correctamente.');
     }

@@ -13,7 +13,7 @@ class TestReportedExperienceSeeder extends Seeder
      */
     public function run(): void
     {
-        // Obtener el primer usuario o crear uno si no existe
+        // Obtenir el primer usuari o crear-ne un si no existeix
         $user = User::first();
         if (! $user) {
             $user = User::create([
@@ -23,7 +23,7 @@ class TestReportedExperienceSeeder extends Seeder
             ]);
         }
 
-        // Crear una experiencia reportada de prueba
+        // Crear una experiència reportada de prova
         Experiencia::create([
             'user_id' => $user->id,
             'title' => 'Trekking en Montserrat',
