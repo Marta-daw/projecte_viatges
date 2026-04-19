@@ -31,18 +31,18 @@ export default function ExperiencesIndex({ auth, experiences = [] }) {
 
     return (
         <>
-            <Head title="Gestió d'Experiències" />
+            <Head title="Gestió d'experiències" />
             <AdminLayout user={auth.user}>
                 <div className="space-y-6">
 
-                    {/* Header */}
+                    {/* Capçalera */}
                     <div className="pb-5" style={{ borderBottom: '2px solid #cfbfa4' }}>
                         <div className="flex justify-between items-center">
                             <div className="flex items-center gap-3">
                                 <span className="text-3xl">✈️</span>
                                 <div>
                                     <h2 className="text-admin-text" style={{ fontSize: '1.7rem', fontWeight: 800, fontFamily: 'Montserrat, sans-serif' }}>
-                                        Gestió d'Experiències
+                                        Gestió d'experiències
                                     </h2>
                                     <p className="text-admin-text-muted text-sm mt-0.5">
                                         {experiences.length > 0
@@ -56,12 +56,12 @@ export default function ExperiencesIndex({ auth, experiences = [] }) {
                                 className="flex items-center gap-2 px-5 py-2.5 text-white font-semibold rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg text-sm"
                                 style={{ background: 'linear-gradient(135deg, #C0634A, #8B7335)' }}
                             >
-                                ➕ Nova Experiència
+                                ➕ Nova experiència
                             </Link>
                         </div>
                     </div>
 
-                    {/* Empty state */}
+                    {/* Estat buit */}
                     {experiences.length === 0 ? (
                         <div
                             className="rounded-xl p-14 text-center"
@@ -79,7 +79,7 @@ export default function ExperiencesIndex({ auth, experiences = [] }) {
                                 className="inline-block px-6 py-3 text-white font-semibold rounded-xl transition-all hover:-translate-y-0.5"
                                 style={{ background: 'linear-gradient(135deg, #C0634A, #8B7335)' }}
                             >
-                                Crear Primera Experiència
+                                Crear primera experiència
                             </Link>
                         </div>
                     ) : (
@@ -155,7 +155,7 @@ export default function ExperiencesIndex({ auth, experiences = [] }) {
                                                     </Td>
                                                     <Td>
                                                         <div className="flex items-center gap-2">
-                                                            {/* View */}
+                                                            {/* Veure */}
                                                             <a
                                                                 href={route('experiences.show', experience.id)}
                                                                 target="_blank"
@@ -166,7 +166,7 @@ export default function ExperiencesIndex({ auth, experiences = [] }) {
                                                             >
                                                                 👁️
                                                             </a>
-                                                            {/* Edit */}
+                                                            {/* Editar */}
                                                             <Link
                                                                 href={route('admin.experiences.edit', experience.id)}
                                                                 className="px-3 py-1.5 text-white rounded-lg font-semibold text-xs transition-all hover:-translate-y-0.5"
@@ -175,7 +175,7 @@ export default function ExperiencesIndex({ auth, experiences = [] }) {
                                                             >
                                                                 ✏️
                                                             </Link>
-                                                            {/* Delete */}
+                                                            {/* Eliminar */}
                                                             <button
                                                                 onClick={() => handleDeleteExperience(experience.id)}
                                                                 className="px-3 py-1.5 text-white rounded-lg font-semibold text-xs transition-all hover:-translate-y-0.5"

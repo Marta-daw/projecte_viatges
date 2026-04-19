@@ -42,7 +42,7 @@ export default function ExperienceEdit({ auth, experience, categories = [] }) {
             <AdminLayout user={auth.user}>
                 <div className="max-w-4xl mx-auto space-y-6">
 
-                    {/* Header */}
+                    {/* Capçalera */}
                     <div className="pb-5" style={{ borderBottom: '2px solid #cfbfa4' }}>
                         <div className="flex items-center gap-3 mb-1">
                             <Link
@@ -55,7 +55,7 @@ export default function ExperienceEdit({ auth, experience, categories = [] }) {
                             </Link>
                             <div>
                                 <h2 className="text-admin-text" style={{ fontSize: '1.7rem', fontWeight: 800, fontFamily: 'Montserrat, sans-serif' }}>
-                                    ✏️ Editar Experiència
+                                    ✏️ Editar experiència
                                 </h2>
                                 <p className="text-admin-text-muted text-sm mt-0.5">
                                     #{experience.id} · creada per <strong>{experience.user?.name || 'Anònim'}</strong>
@@ -64,14 +64,14 @@ export default function ExperienceEdit({ auth, experience, categories = [] }) {
                         </div>
                     </div>
 
-                    {/* Form */}
+                    {/* Formulari */}
                     <form onSubmit={handleSubmit} encType="multipart/form-data">
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-                            {/* Left: main fields */}
+                            {/* Esquerra: camps principals */}
                             <div className="lg:col-span-2 space-y-5">
 
-                                {/* Title */}
+                                {/* Títol */}
                                 <FormCard title="Informació principal">
                                     <div className="space-y-4">
                                         <FormField label="Títol *" error={errors.title}>
@@ -98,7 +98,7 @@ export default function ExperienceEdit({ auth, experience, categories = [] }) {
                                     </div>
                                 </FormCard>
 
-                                {/* Location */}
+                                {/* Ubicació */}
                                 <FormCard title="📍 Ubicació">
                                     <div className="grid grid-cols-2 gap-4">
                                         <FormField label="Latitud" error={errors.latitude}>
@@ -126,10 +126,10 @@ export default function ExperienceEdit({ auth, experience, categories = [] }) {
 
                             </div>
 
-                            {/* Right: sidebar fields */}
+                            {/* Dreta: camps laterals */}
                             <div className="space-y-5">
 
-                                {/* Publish actions */}
+                                {/* Accions de publicació */}
                                 <FormCard title="🚀 Publicació">
                                     <FormField label="Estat *" error={errors.status}>
                                         <select
@@ -142,7 +142,7 @@ export default function ExperienceEdit({ auth, experience, categories = [] }) {
                                         </select>
                                     </FormField>
 
-                                    {/* Submit */}
+                                    {/* Enviament */}
                                     <div className="mt-5 space-y-3">
                                         <button
                                             type="submit"
@@ -168,7 +168,7 @@ export default function ExperienceEdit({ auth, experience, categories = [] }) {
                                     </div>
                                 </FormCard>
 
-                                {/* Category */}
+                                {/* Categoria */}
                                 <FormCard title="📂 Categoria">
                                     <FormField label="Categoria" error={errors.category_id}>
                                         <select
@@ -186,13 +186,13 @@ export default function ExperienceEdit({ auth, experience, categories = [] }) {
                                     </FormField>
                                 </FormCard>
 
-                                {/* Image */}
+                                {/* Imatge */}
                                 <FormCard title="🖼️ Imatge">
                                     {imagePreview ? (
                                         <div className="space-y-3">
                                             <img
                                                 src={imagePreview}
-                                                alt="Preview"
+                                                alt="Previsualització"
                                                 className="w-full h-40 object-cover rounded-lg"
                                                 style={{ border: '1px solid #cfbfa4' }}
                                                 loading="lazy"

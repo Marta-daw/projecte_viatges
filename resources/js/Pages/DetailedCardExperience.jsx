@@ -6,10 +6,17 @@ import { FaArrowLeft } from "react-icons/fa";
 import ReactMarkdown from 'react-markdown';
 import remarkBreaks from 'remark-breaks';
 
-export default function DetailedCardExperience({ experience, categories, votesCount, votedByUser, reported, isAutenticated, positiveVotes: positiveVotesProp,
-    negativeVotes: negativeVotesProp, }) {
-
-    const [votes, setVotes] = useState(votesCount);
+export default function DetailedCardExperience({
+    experience,
+    categories,
+    votesCount: _votesCount,
+    votedByUser,
+    reported,
+    isAutenticated,
+    positiveVotes: positiveVotesProp,
+    negativeVotes: negativeVotesProp,
+    relatedExperiences = [],
+}) {
     const [userVote, setUserVote] = useState(votedByUser);
     const [votesLoading, setVotesLoading] = useState(false);
 
@@ -23,16 +30,14 @@ export default function DetailedCardExperience({ experience, categories, votesCo
 
     const [error, setError] = useState(null);
 
-    // Crear string amb el nom de les categories separades per comes
     const categoriesText = (categories ?? [])
         .map((cat) => cat?.name)
         .filter(Boolean)
         .join(', ');
 
-    // Funció per gestionar el vot
     const handleVote = (value) => {
         if (!isAutenticated) return setError('Cal iniciar sessió per votar aquesta experiència.');
-        if (votesLoading) return; // Evitar múltiples clics ràpids
+        if (votesLoading) return;
 
         setVotesLoading(true);
         setError(null);
@@ -55,7 +60,6 @@ export default function DetailedCardExperience({ experience, categories, votesCo
             return;
         }
 
-        // Determinar el valor del vot: si l'usuari ja ha votat, el toggle eliminarà el vot, sinó, el toggle registrarà un vot positiu
         router.post(`/experiencia/vote/${experience.id}`, { value }, {
             preserveScroll: true,
             onSuccess: (response) => {
@@ -71,10 +75,9 @@ export default function DetailedCardExperience({ experience, categories, votesCo
         })
     }
 
-    // Funció per gestionar el report
     const handleReport = () => {
         if (!isAutenticated) return setError('Cal iniciar sessió per reportar aquesta experiència.');
-        if (reportLoading) return; // Evitar múltiples clics ràpids
+        if (reportLoading) return;
 
         setReportLoading(true);
         setError(null);
@@ -89,8 +92,8 @@ export default function DetailedCardExperience({ experience, categories, votesCo
                     setReportReason('');
                     toast.success('Experiència reportada correctament. Gràcies per ajudar a mantenir la comunitat! 🙏');
                 },
-                onError: (error) => {
-                    const msg = error?.report || 'Error al enviar el report. Torna-ho a intentar.';
+                onError: (err) => {
+                    const msg = err?.report || 'Error al enviar el report. Torna-ho a intentar.';
                     setError(msg);
                     toast.error(msg);
                 },
@@ -100,98 +103,155 @@ export default function DetailedCardExperience({ experience, categories, votesCo
     };
 
     return (
-        <div className={styles.cardExperience}>
-            <div className="flex justify-start w-full">
-                <Link href={route('dashboard')} className={`px-4 py-2 rounded ${styles.saveButton}`}>
-                    <FaArrowLeft />
-                </Link>
-            </div>
-            <div className={styles.imageContainer}>
-                <img src={experience.image_url} alt="ExperiencePhoto" className={styles.image} loading="eager" decoding="async" />
-            </div>
+        <div className={styles.pageWrapper}>
+            <article className={styles.cardExperience}>
+                <div className={styles.topBar}>
+                    <Link href={route('dashboard')} className={styles.saveButton} aria-label="Tornar al dashboard">
+                        <FaArrowLeft />
+                        <span>Tornar</span>
+                    </Link>
+                </div>
 
-            {/* Metadatos */}
-            <div className={styles.metadata}>
-                <p className={styles.author}>
-                    Autor:{' '}
-                    {experience.user?.id ? (
-                        <Link href={route('users.public.show', experience.user.id)} className={styles.authorLink}>
-                            {experience.user.name}
-                        </Link>
-                    ) : (
-                        'Usuari Elimiant'
-                    )}
-                </p>
-                <p className={styles.data}> {new Date(experience.created_at).toLocaleDateString('es-ES', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric'
-                })}</p>
-                {categoriesText && (
-                    <p className={`${styles.categories} `}>
-                        Categories: {categoriesText}
-                    </p>
-                )}
-            </div>
+                <div className={styles.imageContainer}>
+                    <img src={experience.image_url} alt="Imatge de l'experiència" className={styles.image} />
+                </div>
 
-            {/* Titol i descripcio */}
-            <div className={styles.textContainer}>
-                <h2 className={styles.title}>{experience.title}</h2>
-                {/* <p className={styles.description}>{experience.body}</p> */}
-                <div className={styles.description}>
-                    <div className="prose prose-sm max-w-none">
+                <div className={styles.contentBody}>
+                    <div className={styles.metadata}>
+                        <p className={styles.metaChip}>
+                            <span className={styles.metaLabel}>Autor</span>
+                            {experience.user?.id ? (
+                                <Link href={route('users.public.show', experience.user.id)} className={styles.authorLink}>
+                                    {experience.user.name}
+                                </Link>
+                            ) : (
+                                'Usuari eliminat'
+                            )}
+                        </p>
 
-                        <ReactMarkdown remarkPlugins={[remarkBreaks]} >
-                            {experience.body || ''}
-                        </ReactMarkdown>
+                        <p className={styles.metaChip}>
+                            <span className={styles.metaLabel}>Data</span>
+                            {new Date(experience.created_at).toLocaleDateString('es-ES', {
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric'
+                            })}
+                        </p>
+
+                        {categoriesText && (
+                            <p className={styles.metaChip}>
+                                <span className={styles.metaLabel}>Categories</span>
+                                {categoriesText}
+                            </p>
+                        )}
                     </div>
 
-                    {/*                     <ReactMarkdown remarkPlugins={[remarkBreaks]} >
-                        {experience.body || ''}
-                    </ReactMarkdown> */}
+                    <div className={styles.textContainer}>
+                        <h2 className={styles.title}>{experience.title}</h2>
+                        <div className={styles.description}>
+                            <div className="prose prose-sm max-w-none">
+                                <ReactMarkdown remarkPlugins={[remarkBreaks]}>
+                                    {experience.body || ''}
+                                </ReactMarkdown>
+                            </div>
+                        </div>
+                    </div>
+
+                    {error && <p className={styles.errorMessage}>{error}</p>}
+
+                    <div className={styles.voteContainer}>
+                        <div className={styles.votePanel}>
+                            <span className={styles.voteLabel}>Valoració positiva</span>
+                            <span className={styles.voteCount}>{positiveVotes} {positiveVotes === 1 ? 'vot positiu' : 'vots positius'}</span>
+                            <button
+                                className={`${styles.voteButton} ${userVote === 1 ? styles.active : ''}`}
+                                onClick={() => handleVote(1)}
+                                disabled={votesLoading}
+                            >
+                                {userVote == 1 ? 'Treure vot positiu' : 'Votar positiu'}
+                            </button>
+                        </div>
+
+                        <div className={styles.votePanel}>
+                            <span className={styles.voteLabel}>Valoració negativa</span>
+                            <span className={styles.voteCount}>{negativeVotes} {negativeVotes === 1 ? 'vot negatiu' : 'vots negatius'}</span>
+                            <button
+                                className={`${styles.voteButtonNegative} ${userVote === -1 ? styles.active : ''}`}
+                                onClick={() => handleVote(-1)}
+                                disabled={votesLoading}
+                            >
+                                {userVote == -1 ? 'Treure vot negatiu' : 'Votar negatiu'}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className={styles.reportContainer}>
+                        <button
+                            className={styles.reportButton}
+                            onClick={() => setReportOpen(true)}
+                            disabled={reported || reportSent}
+                        >
+                            {reported || reportSent ? 'Report enviat' : 'Reportar un abús'}
+                        </button>
+                        {(reported || reportSent) && (
+                            <p className={styles.reportedMessage}>Has reportat aquesta experiència.</p>
+                        )}
+                    </div>
                 </div>
-            </div>
+            </article>
 
-            {/* Vots  */}
-            <div className={styles.voteContainer}>
-                <div className={styles.positiveVote}>
-                    <button className={`${styles.voteButton} ${userVote === 1 ? styles.active : ''}`}
-                        onClick={() => handleVote(1)}
-                        disabled={votesLoading}>
-                        {userVote == 1 ? 'Treure vot positiu' : 'Vot positiu'}
-                    </button>
+            {relatedExperiences.length > 0 && (
+                <section className={styles.relatedSection}>
+                    <div className={styles.relatedHeader}>
+                        <h3>Experiències relacionades</h3>
+                        <p>Descobreix altres experiències similars recents.</p>
+                    </div>
 
-                    <span className={styles.voteCount}>{positiveVotes} {positiveVotes === 1 ? 'vot positiu' : 'vots positius'}</span>
-                </div>
+                    <div className={styles.relatedGrid}>
+                        {relatedExperiences.map((related) => {
+                            const relatedCategories = (related.categories ?? [])
+                                .map((cat) => cat?.name)
+                                .filter(Boolean)
+                                .slice(0, 2)
+                                .join(' · ');
 
-                <div className={styles.negativeVote}>
-                    <span className={styles.voteCount}>{negativeVotes} {negativeVotes === 1 ? 'vot negatiu' : 'vots negatius'}</span>
-                    <button className={`${styles.voteButtonNegative} ${userVote === -1 ? styles.active : ''}`}
-                        onClick={() => handleVote(-1)}
-                        disabled={votesLoading}>
-                        {userVote == -1 ? 'Treure vot negatiu' : 'Vot Negatiu'}
-                    </button>
+                            return (
+                                <Link
+                                    key={related.id}
+                                    href={route('experiences.show', related.id)}
+                                    className={styles.relatedCard}
+                                >
+                                    <img
+                                        src={related.image_url || '/images/placeholder.png'}
+                                        alt={related.title}
+                                        className={styles.relatedImage}
+                                        loading="lazy"
+                                    />
+                                    <div className={styles.relatedContent}>
+                                        <h4>{related.title}</h4>
+                                        <p>{related.body?.slice(0, 115)}{related.body?.length > 115 ? '...' : ''}</p>
+                                        <div className={styles.relatedMeta}>
+                                            <span>{related.user?.name || 'Usuari anònim'}</span>
+                                            {relatedCategories && <span>{relatedCategories}</span>}
+                                        </div>
+                                    </div>
+                                </Link>
+                            );
+                        })}
+                    </div>
+                </section>
+            )}
 
-                </div>
-            </div>
-
-            {/* Report */}
-            <div className={styles.reportContainer}>
-                <button
-                    className={styles.reportButton}
-                    onClick={() => setReportOpen(true)}
-                >
-                    Reportar un abús
-                </button>
-                {reportOpen && (
-                    <div className={styles.reportModal}>
+            {reportOpen && (
+                <div className={styles.reportOverlay} onClick={() => !reportLoading && setReportOpen(false)}>
+                    <div className={styles.reportModal} onClick={(e) => e.stopPropagation()}>
                         <h3>Reportar aquesta experiència</h3>
                         <textarea
                             value={reportReason}
                             onChange={(e) => setReportReason(e.target.value)}
                             placeholder="Explica el motiu del report"
                             className={styles.reportTextarea}
-                            row={3}
+                            rows={4}
                             maxLength={500}
                         />
                         <div className={styles.reportButtons}>
@@ -207,14 +267,12 @@ export default function DetailedCardExperience({ experience, categories, votesCo
                                 onClick={handleReport}
                                 disabled={reportLoading || reportReason.trim() === ''}
                             >
-                                Enviar Report
+                                {reportLoading ? 'Enviant...' : 'Enviar report'}
                             </button>
                         </div>
                     </div>
-                )}
-                {reported && <p className={styles.reportedMessage}>Has reportat aquesta experiència.</p>}
-            </div>
+                </div>
+            )}
         </div>
-
     )
 }
