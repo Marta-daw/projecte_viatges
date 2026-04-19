@@ -54,18 +54,18 @@ export default function CategoriesIndex({ auth, categories }) {
 
     return (
         <>
-            <Head title="Gestió de Categoríes" />
+            <Head title="Gestió de Categories" />
             <AdminLayout user={auth.user}>
                 <div className="max-w-3xl mx-auto space-y-6">
 
-                    {/* Header */}
+                    {/* Capçalera */}
                     <div className="pb-5" style={{ borderBottom: '2px solid #cfbfa4' }}>
                         <div className="flex justify-between items-center">
                             <div className="flex items-center gap-3">
                                 <span className="text-3xl">📂</span>
                                 <div>
                                     <h2 className="text-admin-text" style={{ fontSize: '1.7rem', fontWeight: 800, fontFamily: 'Montserrat, sans-serif' }}>
-                                        Gestió de Categoríes
+                                        Gestió de Categories
                                     </h2>
                                     <p className="text-admin-text-muted text-sm mt-0.5">
                                         {categories?.length ?? 0} categoria{categories?.length !== 1 ? 's' : ''} creades
@@ -78,13 +78,13 @@ export default function CategoriesIndex({ auth, categories }) {
                                     className="flex items-center gap-2 px-5 py-2.5 text-white font-semibold rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg text-sm"
                                     style={{ background: 'linear-gradient(135deg, #C0634A, #8B7335)' }}
                                 >
-                                    ➕ Nova Categoria
+                                    ➕ Nova categoria
                                 </button>
                             )}
                         </div>
                     </div>
 
-                    {/* Create form */}
+                    {/* Formulari de creació */}
                     {showCreateForm && (
                         <div
                             className="rounded-xl p-6 shadow-sm"
@@ -94,7 +94,7 @@ export default function CategoriesIndex({ auth, categories }) {
                                 className="font-bold text-admin-text mb-4 pb-3"
                                 style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '1rem', borderBottom: '1px solid #EDE4D3' }}
                             >
-                                ➕ Nova Categoria
+                                ➕ Nova categoria
                             </h3>
                             <form onSubmit={handleCreate}>
                                 <div className="flex gap-3">
@@ -135,7 +135,7 @@ export default function CategoriesIndex({ auth, categories }) {
                         </div>
                     )}
 
-                    {/* Edit form */}
+                    {/* Formulari d'edició */}
                     {editingCategory && (
                         <div
                             className="rounded-xl p-6 shadow-sm"
@@ -186,7 +186,7 @@ export default function CategoriesIndex({ auth, categories }) {
                         </div>
                     )}
 
-                    {/* Categories table */}
+                    {/* Taula de categories */}
                     <div
                         className="rounded-xl overflow-hidden shadow-sm"
                         style={{ background: '#FFFFFF', border: '1px solid #cfbfa4' }}

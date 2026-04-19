@@ -55,7 +55,7 @@ class ExperienceController extends Controller
             'latitude' => ['nullable', 'numeric'],
             'longitude' => ['nullable', 'numeric'],
             'image' => ['nullable', 'file', 'image', 'max:5120'], // Max 5MB
-            'status' => ['required', 'in:'.implode(',', [
+            'status' => ['required', 'in:' . implode(',', [
                 Experiencia::STATUS_PUBLICADA,
                 Experiencia::STATUS_ESBORRANY,
             ])],
@@ -76,7 +76,7 @@ class ExperienceController extends Controller
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('experiences', 'public');
-            $data['image_url'] = '/storage/'.$path;
+            $data['image_url'] = '/storage/' . $path;
         }
 
         $experiencia = Experiencia::create($data);
@@ -95,6 +95,39 @@ class ExperienceController extends Controller
         // Busquem l'experiència o llançem un error 404 si no existeix
         $experience = Experiencia::with('user', 'categories')->findOrFail($id);
 
+        $categoryIds = $experience->categories->pluck('id');
+
+        // Experiències relacionades: prioritzem mateixes categories i, si no n'hi ha prou,
+        // completem amb les últimes publicades.
+        $relatedExperiences = Experiencia::query()
+            ->with(['user:id,name', 'categories:id,name'])
+            ->where('status', Experiencia::STATUS_PUBLICADA)
+            ->where('id', '!=', $experience->id)
+            ->when(
+                $categoryIds->isNotEmpty(),
+                fn($query) => $query->whereHas('categories', fn($q) => $q->whereIn('categories.id', $categoryIds))
+            )
+            ->orderByDesc('published_at')
+            ->orderByDesc('created_at')
+            ->limit(4)
+            ->get();
+
+        if ($relatedExperiences->count() < 4) {
+            $remaining = 4 - $relatedExperiences->count();
+
+            $fallbackExperiences = Experiencia::query()
+                ->with(['user:id,name', 'categories:id,name'])
+                ->where('status', Experiencia::STATUS_PUBLICADA)
+                ->where('id', '!=', $experience->id)
+                ->whereNotIn('id', $relatedExperiences->pluck('id'))
+                ->orderByDesc('published_at')
+                ->orderByDesc('created_at')
+                ->limit($remaining)
+                ->get();
+
+            $relatedExperiences = $relatedExperiences->concat($fallbackExperiences)->values();
+        }
+
         return Inertia::render('DetailedCardExperience', [
             'experience' => $experience,
             'Auth' => [
@@ -107,6 +140,7 @@ class ExperienceController extends Controller
             'votedByUser' => Auth::check() ? $experience->votes()->where('user_id', Auth::id())->value('value') : null,
             'reported' => Auth::check() ? $experience->reports()->where('user_id', Auth::id())->exists() : false,
             'isAutenticated' => Auth::check(),
+            'relatedExperiences' => $relatedExperiences,
         ]);
     }
 
@@ -177,7 +211,7 @@ class ExperienceController extends Controller
 
         // Afegim la gestió de la imatge
         if ($request->hasFile('image')) {
-            $data['image_url'] = '/storage/'.$request->file('image')->store('experiences', 'public');
+            $data['image_url'] = '/storage/' . $request->file('image')->store('experiences', 'public');
         }
 
         unset($data['image']); // Treiem el camp 'image' ja que el camp del model és 'image_url'
@@ -186,7 +220,7 @@ class ExperienceController extends Controller
         $experiencia->update($data);
 
         return redirect()->route('experiences.myExperiencies')
-            ->with('success', 'Experiencia actualizada correctamente!');
+            ->with('success', 'Experiència actualitzada correctament!');
     }
 
     public function destroy($id)

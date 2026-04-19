@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 import remarkBreaks from 'remark-breaks';
 
-function CardExperience({ experience, isAuthenticated, showActions = true }) {
+function CardExperience({ experience, isAuthenticated, showActions = true, compact = false }) {
     return (
-        <div className={`${styles.card} `}>
+        <div className={`${styles.card} ${compact ? styles.compact : ''}`}>
             <Link
                 href={`/experiencia/${experience.id}`}
                 className={styles.cardContainer}
@@ -87,6 +87,7 @@ CardExperience.propTypes = {
         }),
     }).isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
+    compact: PropTypes.bool,
 };
 
 export default CardExperience;

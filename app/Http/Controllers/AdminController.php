@@ -102,7 +102,7 @@ class AdminController extends Controller
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'body' => ['required', 'string'],
-            'status' => ['required', 'in:'.implode(',', [
+            'status' => ['required', 'in:' . implode(',', [
                 Experiencia::STATUS_PUBLICADA,
                 Experiencia::STATUS_ESBORRANY,
             ])],
@@ -133,7 +133,7 @@ class AdminController extends Controller
                 Storage::disk('public')->delete($oldPath);
             }
             $path = $request->file('image')->store('experiences', 'public');
-            $data['image_url'] = '/storage/'.$path;
+            $data['image_url'] = '/storage/' . $path;
         }
 
         $experiencia->update($data);
@@ -159,17 +159,17 @@ class AdminController extends Controller
         $user->experiences()->delete();
         $user->delete();
 
-        return back()->with('success', 'Usuario eliminado correctamente');
+        return back()->with('success', 'Usuari eliminat correctament');
     }
 
     /**
-     * Bandejar usuari
+     * Banejar usuari
      */
     public function banUser(User $user)
     {
         $user->update(['is_banned' => true]);
 
-        return back()->with('success', 'Usuario baneado correctamente');
+        return back()->with('success', 'Usuari banejat correctament');
     }
 
     /**
@@ -179,7 +179,7 @@ class AdminController extends Controller
     {
         $user->update(['is_banned' => false]);
 
-        return back()->with('success', 'Usuario desbaneado correctamente');
+        return back()->with('success', 'Usuari desbanejat correctament');
     }
 
     /**
@@ -191,7 +191,7 @@ class AdminController extends Controller
             'is_reported' => false,
         ]);
 
-        return back()->with('success', 'Reporte marcado como revisado');
+        return back()->with('success', 'Report marcat com a revisat');
     }
 
     /**
@@ -201,7 +201,7 @@ class AdminController extends Controller
     {
         $experiencia->delete();
 
-        return back()->with('success', 'Experiencia eliminada correctamente');
+        return back()->with('success', 'Experiècia eliminada correctament');
     }
 
     /**
@@ -213,6 +213,6 @@ class AdminController extends Controller
             'is_reported' => false,
         ]);
 
-        return back()->with('success', 'Reporte rechazado');
+        return back()->with('success', 'Report rebutjat');
     }
 }
