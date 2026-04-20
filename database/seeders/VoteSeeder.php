@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class VoteSeeder extends Seeder
 {
@@ -12,114 +12,40 @@ class VoteSeeder extends Seeder
     {
         DB::table('votes')->delete();
 
-        $votes = [
-            [
-                'user_id' => 3,
-                'experience_id' => 1,
-                'value' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'user_id' => 2,
-                'experience_id' => 2,
-                'value' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'user_id' => 2,
-                'experience_id' => 3,
-                'value' => -1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'user_id' => 1,
-                'experience_id' => 4,
-                'value' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'user_id' => 3,
-                'experience_id' => 4,
-                'value' => -1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'user_id' => 2,
-                'experience_id' => 5,
-                'value' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'user_id' => 1,
-                'experience_id' => 5,
-                'value' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'user_id' => 3,
-                'experience_id' => 6,
-                'value' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'user_id' => 2,
-                'experience_id' => 7,
-                'value' => -1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'user_id' => 1,
-                'experience_id' => 7,
-                'value' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'user_id' => 3,
-                'experience_id' => 8,
-                'value' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'user_id' => 2,
-                'experience_id' => 9,
-                'value' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'user_id' => 1,
-                'experience_id' => 9,
-                'value' => -1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'user_id' => 3,
-                'experience_id' => 10,
-                'value' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'user_id' => 2,
-                'experience_id' => 12,
-                'value' => -1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-        ];
+        $userIds = DB::table('users')->pluck('id')->all();
+        $experienceIds = DB::table('experiences')
+            ->where('status', 'publicada')
+            ->pluck('id')
+            ->all();
 
-        DB::table('votes')->insert($votes);
+        if (empty($userIds) || empty($experienceIds)) {
+            return;
+        }
+
+        $rows = [];
+        $now = Carbon::now();
+
+        foreach ($experienceIds as $experienceId) {
+            // Entre 1 i 3 vots per experiència (o el màxim d'usuaris disponibles)
+            $votesForExperience = random_int(1, min(3, count($userIds)));
+            $randomUsers = collect($userIds)->shuffle()->take($votesForExperience)->values();
+
+            foreach ($randomUsers as $index => $userId) {
+                // Lleuger biaix cap al vot positiu
+                $value = random_int(1, 100) <= 72 ? 1 : -1;
+
+                $rows[] = [
+                    'user_id' => $userId,
+                    'experience_id' => $experienceId,
+                    'value' => $value,
+                    'created_at' => $now->copy()->subMinutes(($index + 1) * random_int(3, 40)),
+                    'updated_at' => $now,
+                ];
+            }
+        }
+
+        if (!empty($rows)) {
+            DB::table('votes')->insert($rows);
+        }
     }
 }

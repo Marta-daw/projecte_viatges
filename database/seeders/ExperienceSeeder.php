@@ -10,229 +10,180 @@ class ExperienceSeeder extends Seeder
 {
     public function run(): void
     {
-        // Netegem i reiniciem l'auto-increment per evitar conflictes
-        // Netegem la taula
         DB::table('category_experience')->delete();
         DB::table('experiences')->delete();
 
-        $statusPublicada = 'publicada'; // Assegurem que el valor coincideix amb el que s'utilitza a l'aplicació (en minúscules)
+        $statusPublicada = 'publicada';
+        $now = Carbon::now();
 
-        $experiences = [
+        // Mapa de categories per fer el codi més llegible
+        $categoryMap = [
+            'aventura' => 1,
+            'muntanya' => 2,
+            'familiar' => 3,
+            'historic' => 4,
+            'romantic' => 5,
+            'cultura' => 6,
+            'gastronomia' => 7,
+            'relax' => 8,
+            'platja' => 9,
+        ];
+
+        $baseExperiences = [
             [
                 'user_id' => 2,
                 'title' => 'Ruta pels Pirineus: Vall de Núria',
-                'body' => "**Una escapada inoblidable**.\n\n" .
-                    "Aquest cap de setmana hem fet una ruta impressionant per la **Vall de Núria**. Hem agafat el cremallera des de Ribes de Freser. \n\n" .
-                    "- Vistes espectaculars.\n\n" .
-                    "- Clima perfecte.\n\n" .
-                    'Recomano portar bon calçat i aigua.',
+                'body' => "**Una escapada inoblidable**.\n\nAquest cap de setmana hem fet una ruta impressionant per la Vall de Núria.\n\n- Vistes espectaculars\n- Clima perfecte\n\nRecomano portar bon calçat i aigua.",
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093833/vall-de-nuria_arvzuf.avif',
                 'latitude' => 42.3961,
                 'longitude' => 2.1534,
                 'status' => $statusPublicada,
-                'published_at' => Carbon::now()->subDays(2),
-                'created_at' => Carbon::now()->subDays(3),
-                'updated_at' => Carbon::now()->subDays(2),
+                'days_ago' => 2,
+                'categories' => ['muntanya', 'aventura'],
             ],
             [
                 'user_id' => 3,
                 'title' => 'Cap de setmana romàntic a Roma',
-                'body' => "**La Ciutat Eterna**\n\n" .
-                    "No hi ha res com passejar de nit pel centre de Roma. Vam visitar el Coliseu i vam tirar una moneda a la Fontana di Trevi.\n\n" .
-                    "_**Roma no es va fer en un dia, però es pot estimar en un segon.**_\n\n" .
-                    'Un viatge 10/10.',
+                'body' => "**La Ciutat Eterna**\n\nNo hi ha res com passejar de nit pel centre de Roma.\n\n_**Roma no es va fer en un dia, però es pot estimar en un segon.**_",
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093833/roma_spoanz.avif',
                 'latitude' => 41.8902,
                 'longitude' => 12.4922,
                 'status' => $statusPublicada,
-                'published_at' => Carbon::now()->subDays(1),
-                'created_at' => Carbon::now()->subDays(1),
-                'updated_at' => Carbon::now()->subDays(1),
-            ],
-            [
-                'user_id' => 2,
-                'title' => 'Trekking pel Montseny (Esborrany)',
-                'body' => 'Encara estic preparant les fotos d\'aquesta ruta. Aviat actualitzaré el post!',
-                'image_url' => null,
-                'latitude' => 41.7833,
-                'longitude' => 2.4000,
-                'status' => 'esborrany',
-                'published_at' => null,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
+                'days_ago' => 3,
+                'categories' => ['romantic', 'historic'],
             ],
             [
                 'user_id' => 2,
                 'title' => 'Descobrint Lisboa a peu',
-                'body' => "**La Ciutat dels Set Turons**\n\n" .
-                    "Lisboa és una ciutat que s\'ha de caminar sense pressa. Vam pujar al mirador de Santa Luzia al capvespre i la vista sobre el Tejo va ser increïble.\n\n" .
-                    "- Els elèctrics històrics són una experiència única.\n\n" .
-                    "- El pastís de nata de Belém és obligatori.\n\n" .
-                    'Imprescindible portar calçat còmode per als empedrats.',
+                'body' => "**La Ciutat dels Set Turons**\n\nLisboa és una ciutat que s'ha de caminar sense pressa.\n\n- Miradors espectaculars\n- Gastronomia brutal",
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093834/lisboa_bmipbj.avif',
                 'latitude' => 38.7169,
                 'longitude' => -9.1399,
                 'status' => $statusPublicada,
-                'published_at' => Carbon::now()->subDays(4),
-                'created_at' => Carbon::now()->subDays(5),
-                'updated_at' => Carbon::now()->subDays(4),
-            ],
-            [
-                'user_id' => 3,
-                'title' => 'Una setmana al nord de Marroc',
-                'body' => "**Xaouen, la Ciutat Blava**\n\n" .
-                    "Les medines blaves de Xaouen són com cap altre lloc del món. Ens vam perdre pels seus carrers estrets i vam trobar racons màgics a cada cantonada.\n\n" .
-                    "Viatjar és la única cosa que compres que et fa més ric.\n\n" .
-                    "- El soc és un caos meravellós ple de colors i olors.\n\n" .
-                    '- Recomanem allotjar-se a un riad local.',
-                'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093833/marroc_k8gkvk.avif',
-                'latitude' => 35.1688,
-                'longitude' => -5.2636,
-                'status' => $statusPublicada,
-                'published_at' => Carbon::now()->subDays(5),
-                'created_at' => Carbon::now()->subDays(6),
-                'updated_at' => Carbon::now()->subDays(5),
+                'days_ago' => 4,
+                'categories' => ['gastronomia', 'historic', 'cultura'],
             ],
             [
                 'user_id' => 3,
                 'title' => 'Tokyo: entre tradició i modernitat',
-                'body' => "**El Japó que no oblides**\n\n" .
-                    "Arribar a Tokyo és com aterrar en un altre planeta. Vam visitar el temple de Senso-ji a l\'alba, abans que arribessin els turistes.\n\n" .
-                    "- El transport públic és impecable i puntual.\n\n" .
-                    "- El menjar al mercat de Tsukiji és una experiència única.\n\n" .
-                    "_**El Japó no és un destí, és una sensació.**_\n\n" .
-                    'Totalment recomanable per a viatgers curiosos.',
+                'body' => "**El Japó que no oblides**\n\nTemple de Senso-ji a l'alba, menjar al mercat i barris plens de vida.\n\n- Transport impecable\n- Cultura a cada cantonada",
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093833/tokio_gzexqx.avif',
                 'latitude' => 35.7148,
                 'longitude' => 139.7967,
                 'status' => $statusPublicada,
-                'published_at' => Carbon::now()->subDays(8),
-                'created_at' => Carbon::now()->subDays(9),
-                'updated_at' => Carbon::now()->subDays(8),
+                'days_ago' => 5,
+                'categories' => ['cultura', 'aventura'],
             ],
             [
                 'user_id' => 2,
                 'title' => 'Escapada a la Costa Brava',
-                'body' => "**Cales i Tramuntana**\n\n" .
-                    "La Costa Brava a principis de temporada és un altre món. Sense masses, amb l\'aigua cristal·lina i els camins de ronda per a nosaltres sols. \n\n" .
-                    "- La cala de Tamariu és la més tranquil·la.\n\n" .
-                    "- El suro i la gastronomia local són imprescindibles.\n\n" .
-                    'Recomanem anar en temporada baixa per gaudir-ho de veritat.',
+                'body' => "**Cales i Tramuntana**\n\nCamins de ronda, mar transparent i menjar local.\n\nIdeal en temporada baixa.",
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093834/brava_qsrkju.avif',
                 'latitude' => 41.9109,
                 'longitude' => 3.2159,
                 'status' => $statusPublicada,
-                'published_at' => Carbon::now()->subDays(10),
-                'created_at' => Carbon::now()->subDays(11),
-                'updated_at' => Carbon::now()->subDays(10),
+                'days_ago' => 6,
+                'categories' => ['platja', 'gastronomia', 'relax'],
+            ],
+            [
+                'user_id' => 2,
+                'title' => 'Trekking pel Montseny (Esborrany)',
+                'body' => "Estic preparant les fotos i el track de la ruta.\n\nPublicaré la versió final aviat.",
+                'image_url' => null,
+                'latitude' => 41.7833,
+                'longitude' => 2.4000,
+                'status' => 'esborrany',
+                'days_ago' => 1,
+                'categories' => ['muntanya'],
             ],
             [
                 'user_id' => 3,
                 'title' => 'Setmana a Islàndia (Esborrany)',
-                'body' => 'Estic preparant el resum del viatge. Tenim més de 500 fotos per seleccionar!',
+                'body' => "Amb més de 500 fotos per triar.\n\nPublicaré glaceres, cascades i rutes en 4x4.",
                 'image_url' => null,
                 'latitude' => 64.9631,
                 'longitude' => -19.0208,
                 'status' => 'esborrany',
-                'published_at' => null,
-                'created_at' => Carbon::now()->subDays(1),
-                'updated_at' => Carbon::now()->subDays(1),
+                'days_ago' => 1,
+                'categories' => ['aventura', 'muntanya'],
             ],
-            [
-                'user_id' => 2,
-                'title' => 'Ruta per la Toscana en cotxe',
-                'body' => "**Entre vinyes i ciprers**\n\n" .
-                    "La Toscana és d\'aquells llocs que semblen una pintura a l\'oli. Vam recórrer els pobles medievals de Siena, San Gimignano i Montepulciano en tres dies.\n\n" .
-                    "- Les carreteres secundàries entre vinyes són espectaculars.\n\n" .
-                    "- Un bon chianti local és obligatori a cada àpat.\n\n" .
-                    "_**La Toscana et roba el cor sense demanar permís.**_\n\n" .
-                    'Recomanem llogar cotxe i allotjar-se en un agriturismo.',
-                'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093833/toscana_bausht.avif',
-                'latitude' => 43.3186,
-                'longitude' => 11.3307,
-                'status' => $statusPublicada,
-                'published_at' => Carbon::now()->subDays(12),
-                'created_at' => Carbon::now()->subDays(13),
-                'updated_at' => Carbon::now()->subDays(12),
-            ],
-            [
-                'user_id' => 3,
-                'title' => 'Tres dies a Praga',
-                'body' => "**La Ciutat de les Cent Torres**\n\n" .
-                    "Praga és una de les ciutats més ben conservades d\'Europa. El barri jueu, el castell i el pont de Carles van ser els nostres favorits.\n\n" .
-                    "- Millor evitar el centre en cap de setmana: és ple de turistes.\n\n" .
-                    "- La cervesa txeca és la millor del món, i és baratíssima.\n\n" .
-                    "- El mercat de Nadal a la plaça de la Ciutat Vella és màgic.\n\n" .
-                    'Un viatge molt recomanable i assequible.',
-                'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093834/praga_bpodpn.avif',
-                'latitude' => 50.0755,
-                'longitude' => 14.4378,
-                'status' => $statusPublicada,
-                'published_at' => Carbon::now()->subDays(14),
-                'created_at' => Carbon::now()->subDays(15),
-                'updated_at' => Carbon::now()->subDays(14),
-            ],
-            [
-                'user_id' => 2,
-                'title' => 'Aventura al Parc Nacional de Doñana',
-                'body' => "**Natura salvatge al sud d\'Espanya**\n\n" .
-                    "Doñana és un dels espais naturals més importants d\'Europa i és a tocar de casa. Vam fer una excursió guiada en tot terreny 
-            per veure linx ibèric i àguila imperial. \n\n" .
-                    "- És imprescindible reservar l\'excursió amb antelació.\n\n" .
-                    "- L\'alba al parc, amb la boira sobre les marismes, és inoblidable.\n\n" .
-                    "_**La naturalesa no necessita nosaltres, nosaltres la necessitem a ella.**_\n\n" .
-                    'Perfecte per a amants de la fauna i el birdwatching.',
-                'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093834/donana_ui2uvj.avif',
-                'latitude' => 36.9981,
-                'longitude' => -6.3362,
-                'status' => $statusPublicada,
-                'published_at' => Carbon::now()->subDays(16),
-                'created_at' => Carbon::now()->subDays(17),
-                'updated_at' => Carbon::now()->subDays(16), //
-            ],
-            [
-                'user_id' => 3,
-                'title' => 'Cap de setmana a Amsterdam',
-                'body' => "**Canals, bicicletes i museus**\n\n" .
-                    "Amsterdam és una ciutat que es viu millor en bicicleta.\n\n" .
-                    "- Llogar una bici és la millor decisió.\n\n" .
-                    "- El mercat d'Albert Cuyp és ideal per esmorzar.\n\n" .
-                    'Una ciutat encantadora.',
-                'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093834/amsterdam.jpg_lh1nz4.avif',
-                'latitude' => 52.3676,
-                'longitude' => 4.9041,
-                'status' => $statusPublicada,
-                'published_at' => Carbon::now()->subDays(18),
-                'created_at' => Carbon::now()->subDays(19),
-                'updated_at' => Carbon::now()->subDays(18),
-            ],
-
         ];
 
-        DB::table('experiences')->insert($experiences);
+        // Entrades extra per tenir força contingut a scroll infinit
+        $extraTemplates = [
+            ['title' => 'Roadtrip per Andalusia', 'body' => 'Granada, Còrdova i Sevilla en una setmana. Història, tapes i capvespres memorables.', 'lat' => 37.3891, 'lng' => -5.9845, 'img' => 'https://images.unsplash.com/photo-1543783207-ec64e4d95325?q=80&w=1200&auto=format&fit=crop', 'categories' => ['historic', 'cultura', 'gastronomia']],
+            ['title' => 'Berlín alternatiu en 48 hores', 'body' => 'Art urbà, cafès i museus. Una ciutat plena d’energia i contrastos.', 'lat' => 52.5200, 'lng' => 13.4050, 'img' => 'https://images.unsplash.com/photo-1560969184-10fe8719e047?q=80&w=1200&auto=format&fit=crop', 'categories' => ['cultura', 'historic']],
+            ['title' => 'Menorca en kayak', 'body' => 'Cales amagades, aigües transparents i jornades llargues al mar.', 'lat' => 39.9496, 'lng' => 4.1106, 'img' => 'https://images.unsplash.com/photo-1493558103817-58b2924bce98?q=80&w=1200&auto=format&fit=crop', 'categories' => ['aventura', 'platja', 'relax']],
+            ['title' => 'Senderisme als Alps francesos', 'body' => 'Ruta exigent amb refugis i panoràmiques increïbles.', 'lat' => 45.9237, 'lng' => 6.8694, 'img' => 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop', 'categories' => ['muntanya', 'aventura']],
+            ['title' => 'Budapest termal i cultural', 'body' => 'Banys termals, arquitectura imperial i bona gastronomia.', 'lat' => 47.4979, 'lng' => 19.0402, 'img' => 'https://images.unsplash.com/photo-1549877452-9c387954fbc2?q=80&w=1200&auto=format&fit=crop', 'categories' => ['relax', 'cultura', 'historic']],
+            ['title' => 'Escapada familiar a PortAventura', 'body' => 'Atraccions, espectacles i molta diversió per a tothom.', 'lat' => 41.0878, 'lng' => 1.1570, 'img' => 'https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?q=80&w=1200&auto=format&fit=crop', 'categories' => ['familiar', 'aventura']],
+            ['title' => 'Nàpols i la Costa Amalfitana', 'body' => 'Pizza autèntica, carreteres costaneres i pobles de postal.', 'lat' => 40.8518, 'lng' => 14.2681, 'img' => 'https://images.unsplash.com/photo-1533633220915-609f661a6a2d?q=80&w=1200&auto=format&fit=crop', 'categories' => ['gastronomia', 'romantic', 'platja']],
+            ['title' => 'Camí de Sant Jaume (etapa curta)', 'body' => 'Una etapa de 22 km plena de natura i calma.', 'lat' => 42.8782, 'lng' => -8.5448, 'img' => 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop', 'categories' => ['aventura', 'muntanya', 'historic']],
+            ['title' => 'València gastronòmica', 'body' => 'Orxata, paella i mercats locals en un cap de setmana.', 'lat' => 39.4699, 'lng' => -0.3763, 'img' => 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?q=80&w=1200&auto=format&fit=crop', 'categories' => ['gastronomia', 'cultura']],
+            ['title' => 'Praga nadalenca', 'body' => 'Mercats de Nadal, pont de Carles i ambient màgic.', 'lat' => 50.0755, 'lng' => 14.4378, 'img' => 'https://images.unsplash.com/photo-1519677100203-a0e668c92439?q=80&w=1200&auto=format&fit=crop', 'categories' => ['romantic', 'historic', 'cultura']],
+            ['title' => 'Mallorca tranquil·la fora de temporada', 'body' => 'Pobles tranquils, cales buides i bon clima.', 'lat' => 39.6953, 'lng' => 3.0176, 'img' => 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop', 'categories' => ['platja', 'relax']],
+            ['title' => 'Brussel·les i Bruges en tren', 'body' => 'Xocolata, cervesa i arquitectura preciosa.', 'lat' => 50.8503, 'lng' => 4.3517, 'img' => 'https://images.unsplash.com/photo-1549899593-f73fb10fd1d4?q=80&w=1200&auto=format&fit=crop', 'categories' => ['historic', 'cultura', 'gastronomia']],
+            ['title' => 'Ruta en bici per Girona', 'body' => 'Una escapada activa entre pobles medievals i vies verdes.', 'lat' => 41.9794, 'lng' => 2.8214, 'img' => 'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=1200&auto=format&fit=crop', 'categories' => ['aventura', 'familiar']],
+            ['title' => 'Viena clàssica', 'body' => 'Palaus, música i cafeteries històriques.', 'lat' => 48.2082, 'lng' => 16.3738, 'img' => 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?q=80&w=1200&auto=format&fit=crop', 'categories' => ['cultura', 'historic', 'romantic']],
+            ['title' => 'Cap de setmana a Porto', 'body' => 'Celleres, ponts i carrers plens de vida.', 'lat' => 41.1579, 'lng' => -8.6291, 'img' => 'https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?q=80&w=1200&auto=format&fit=crop', 'categories' => ['gastronomia', 'romantic']],
+            ['title' => 'Parcs naturals del País Basc', 'body' => 'Natura verda, costa abrupta i menjar espectacular.', 'lat' => 43.2630, 'lng' => -2.9350, 'img' => 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1200&auto=format&fit=crop', 'categories' => ['muntanya', 'aventura', 'gastronomia']],
+            ['title' => 'Londres cultural low-cost', 'body' => 'Museus gratuïts, mercats i rutes a peu.', 'lat' => 51.5072, 'lng' => -0.1276, 'img' => 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=1200&auto=format&fit=crop', 'categories' => ['cultura', 'historic']],
+            ['title' => 'Escapada romàntica a París', 'body' => 'Passejos pel Sena, Montmartre i sopars especials.', 'lat' => 48.8566, 'lng' => 2.3522, 'img' => 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1200&auto=format&fit=crop', 'categories' => ['romantic', 'cultura']],
+            ['title' => 'Surf a Cantàbria', 'body' => 'Ones, penya-segats i ambient molt relaxat.', 'lat' => 43.4623, 'lng' => -3.8099, 'img' => 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=1200&auto=format&fit=crop', 'categories' => ['aventura', 'platja']],
+            ['title' => 'Ruta medieval per Carcassona', 'body' => 'Muralles, carrerons i història viva.', 'lat' => 43.2130, 'lng' => 2.3491, 'img' => 'https://images.unsplash.com/photo-1520637836862-4d197d17c55a?q=80&w=1200&auto=format&fit=crop', 'categories' => ['historic', 'cultura']],
+        ];
 
-        // Relacionem les experiències amb les categories a la taula pivot category_experience
-        // Assumint que: 1=Aventures, 2=Muntanyisme, 3=Familiar, 4=Històric, 5=Romàntic, 6=Cultura, 7=Gastronomia, 8=Relax, 9=Platja
-        DB::table('category_experience')->insert([
-            ['experience_id' => 1, 'category_id' => 2], // Vall de Núria -> Muntanyisme
-            ['experience_id' => 1, 'category_id' => 1], // Vall de Núria -> Aventures
-            ['experience_id' => 2, 'category_id' => 5], // Roma -> Romàntic
-            ['experience_id' => 2, 'category_id' => 8], // Roma -> Relax
-            ['experience_id' => 4, 'category_id' => 7], // Lisboa -> Gastronomia
-            ['experience_id' => 4, 'category_id' => 4], // Lisboa -> Històric
-            ['experience_id' => 5, 'category_id' => 1], // Marroc -> Aventures
-            ['experience_id' => 6, 'category_id' => 1], // Tokyo -> Aventures
-            ['experience_id' => 6, 'category_id' => 6], // Tokyo -> Cultura
-            ['experience_id' => 7, 'categoria_id' => 9], //Costa Brava -> Platja
-            ['experience_id' => 7, 'categoria_id' => 7], //Costa Brava -> Gastronomia
-            ['experience_id' => 9, 'categoria_id' => 1], //Toscana -> Aventures
-            ['experience_id' => 9, 'categoria_id' => 8], // Toscana -> Relax
-            ['experience_id' => 10, 'categoria_id' => 4], //Praga -> Històric
-            ['experience_id' => 10, 'categoria_id' => 6], //Praga -> Cultura
-            ['experience_id' => 11, 'categoria_id' => 1], //Doñana -> Aventures
-            ['experience_id' => 11, 'categoria_id' => 2], //Doñana -> Muntanyisme
-            ['experience_id' => 12, 'categoria_id' => 6], //Amsterdam -> Cultura
-            ['experience_id' => 12, 'categoria_id' => 5], //Amsterdam -> Romàntic
-        ]);
+        // Construïm 28 experiències totals aprox. (base + extres)
+        $allExperiences = $baseExperiences;
+        foreach ($extraTemplates as $index => $template) {
+            $allExperiences[] = [
+                'user_id' => $index % 2 === 0 ? 2 : 3,
+                'title' => $template['title'],
+                'body' => $template['body'],
+                'image_url' => $template['img'],
+                'latitude' => $template['lat'],
+                'longitude' => $template['lng'],
+                'status' => $statusPublicada,
+                'days_ago' => 7 + $index,
+                'categories' => $template['categories'],
+            ];
+        }
+
+        $pivotRows = [];
+
+        foreach ($allExperiences as $experience) {
+            $isPublished = $experience['status'] === $statusPublicada;
+            $publishedAt = $isPublished ? $now->copy()->subDays($experience['days_ago']) : null;
+            $createdAt = $now->copy()->subDays($experience['days_ago'] + ($isPublished ? 1 : 0));
+
+            $experienceId = DB::table('experiences')->insertGetId([
+                'user_id' => $experience['user_id'],
+                'title' => $experience['title'],
+                'body' => $experience['body'],
+                'image_url' => $experience['image_url'],
+                'latitude' => $experience['latitude'],
+                'longitude' => $experience['longitude'],
+                'status' => $experience['status'],
+                'is_reported' => false,
+                'published_at' => $publishedAt,
+                'created_at' => $createdAt,
+                'updated_at' => $publishedAt ?? $createdAt,
+            ]);
+
+            foreach ($experience['categories'] as $categoryKey) {
+                if (! isset($categoryMap[$categoryKey])) {
+                    continue;
+                }
+
+                $pivotRows[] = [
+                    'experience_id' => $experienceId,
+                    'category_id' => $categoryMap[$categoryKey],
+                ];
+            }
+        }
+
+        if (! empty($pivotRows)) {
+            DB::table('category_experience')->insert($pivotRows);
+        }
     }
 }

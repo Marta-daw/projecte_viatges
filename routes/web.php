@@ -24,8 +24,9 @@ use Inertia\Inertia;
 
 // Rutes públiques
 Route::get('/', [HomeController::class, 'index'])->name('HomeViatges');
+Route::get('/experiencies/load-more', [HomeController::class, 'loadMore'])->name('experiences.loadMore');
 Route::get('/usuari/{user}', [PublicUserController::class, 'show'])->name('users.public.show');
-
+Route::get('/condicions-us', fn() => Inertia::render('TermsOfUse'))->name('terms.show');
 // Experiencies
 // Route::get('/experiencies', [ExperienceController::class, 'index'])->name('experiences.index');
 // Route::get('/experiencies/create', [ExperienceController::class, 'create'])->name('experiences.create');
