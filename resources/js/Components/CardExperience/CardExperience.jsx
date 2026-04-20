@@ -52,7 +52,7 @@ function CardExperience({ experience, isAuthenticated, showActions = true }) {
             </div>
 
             {isAuthenticated && showActions && (
-                <div className={styles.cardActions}>
+                <div className={`mt-auto ${styles.cardActions}`}>
                     {experience?.can?.update && (
                         <Link className={styles.editDeletebtnCard} href={route('experiences.edit', experience.id)}>Editar</Link>
                     )}
@@ -67,8 +67,9 @@ function CardExperience({ experience, isAuthenticated, showActions = true }) {
                         </button>
                     )}
                 </div>
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 }
 

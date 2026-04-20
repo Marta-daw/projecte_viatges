@@ -119,7 +119,7 @@ export default function Dashboard({ llista, categories }) {
             }
         >
             <Head title="Dashboard" />
-            <Hero user={authUser} createExperienceUrl={route('experiences.create')} />
+            <Hero user={authUser} createExperienceUrl={route('experiencies.create')} />
             <div className={styles.dashboardContainer}>
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden shadow-sm sm:rounded-lg">
