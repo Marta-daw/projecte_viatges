@@ -7,18 +7,18 @@ export default function AdminSidebar({ auth }) {
     const { url } = usePage();
 
     const menuItems = [
-        { label: 'Dashboard', href: route('admin.dashboard'), icon: '📊' },
-        { label: 'Categoríes', href: route('admin.categories'), icon: '📂' },
+        { label: 'Tauler', href: route('admin.dashboard'), icon: '📊' },
+        { label: 'Categories', href: route('admin.categories'), icon: '📂' },
         { label: 'Experiències', href: route('admin.experiences'), icon: '✈️' },
         { label: 'Usuaris', href: route('admin.users'), icon: '👥' },
-        { label: 'Reportes', href: route('admin.reports'), icon: '⚠️' },
+        { label: 'Reports', href: route('admin.reports'), icon: '⚠️' },
     ];
 
     const isActive = (href) => url === href || url.startsWith(href + '/');
 
     return (
         <aside className={`${styles.adminSidebar} ${isOpen ? '' : styles.collapsed}`}>
-            {/* Top section: logo + toggle */}
+            {/* Secció superior: logotip + commutador */}
             <div className={styles.sidebarTop}>
                 {isOpen && (
                     <div className={styles.sidebarLogo}>
@@ -35,7 +35,7 @@ export default function AdminSidebar({ auth }) {
                 </button>
             </div>
 
-            {/* Navigation menu */}
+            {/* Menú de navegació */}
             <nav className={styles.sidebarNav}>
                 {menuItems.map((item, index) => (
                     <Link
@@ -50,7 +50,7 @@ export default function AdminSidebar({ auth }) {
                 ))}
             </nav>
 
-            {/* Footer: system status */}
+            {/* Peu: estat del sistema */}
             <div className={styles.sidebarFooter}>
                 <div className={styles.footerDot} title="Sistema actiu"></div>
                 {isOpen && <span className={styles.footerText}>Sistema actiu</span>}

@@ -15,6 +15,12 @@
     margin: 20px auto;
 }
 
+.compact {
+    max-width: none;
+    margin: 0;
+    height: 100%;
+}
+
 .card>div {
     padding: 0 0 1.25rem 0;
 }

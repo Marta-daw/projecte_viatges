@@ -12,16 +12,16 @@ export default function Dashboard({ auth, stats = {} }) {
 
     return (
         <>
-            <Head title="Panel d'Administració" />
+            <Head title="Panell d'Administració" />
             <AdminLayout user={auth.user}>
                 <div className="space-y-8">
 
-                    {/* Page header */}
+                    {/* Capçalera de pàgina */}
                     <div className="pb-6" style={{ borderBottom: '2px solid #cfbfa4' }}>
                         <div className="flex items-center gap-3 mb-1">
                             <span className="text-3xl">📊</span>
                             <h2 className="text-admin-text" style={{ fontSize: '1.9rem', fontWeight: 800, fontFamily: 'Montserrat, sans-serif' }}>
-                                Benvingut al Dashboard
+                                Benvingut al tauler
                             </h2>
                         </div>
                         <p className="text-admin-text-muted text-base mt-1 ml-12">
@@ -29,7 +29,7 @@ export default function Dashboard({ auth, stats = {} }) {
                         </p>
                     </div>
 
-                    {/* Stats grid */}
+                    {/* Graella d'estadístiques */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                         <StatCard
                             title="Experiències"
@@ -48,7 +48,7 @@ export default function Dashboard({ auth, stats = {} }) {
                             href={route('admin.users')}
                         />
                         <StatCard
-                            title="Categoríes"
+                            title="Categories"
                             value={categoriesCount}
                             icon="📂"
                             accent="#8B7335"
@@ -56,19 +56,19 @@ export default function Dashboard({ auth, stats = {} }) {
                             href={route('admin.categories')}
                         />
                         <StatCard
-                            title="Reportes Pendents"
+                            title="Reports pendents"
                             value={reportsCount}
                             icon="⚠️"
                             accent={reportsCount > 0 ? '#C0634A' : '#7A6050'}
-                            trend={reportsCount > 0 ? 'Revisió necessària' : 'Cap reportes'}
+                            trend={reportsCount > 0 ? 'Revisió necessària' : 'Cap reports'}
                             href={route('admin.reports')}
                         />
                     </div>
 
-                    {/* Main content grid */}
+                    {/* Graella de contingut principal */}
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-                        {/* Quick actions */}
+                        {/* Accions ràpides */}
                         <div className="lg:col-span-2">
                             <div className="bg-admin-surface rounded-xl p-6 border border-admin-border shadow-sm">
                                 <h3 className="text-lg font-bold text-admin-text mb-5 flex items-center gap-2"
@@ -79,36 +79,36 @@ export default function Dashboard({ auth, stats = {} }) {
                                     <QuickAction
                                         href={route('admin.categories')}
                                         icon="📂"
-                                        label="Gestionar Categoríes"
+                                        label="Gestionar categories"
                                         description="Crear, editar i eliminar categories"
                                         color="#8B7335"
                                     />
                                     <QuickAction
                                         href={route('admin.experiences')}
                                         icon="✈️"
-                                        label="Gestionar Experiències"
+                                        label="Gestionar experiències"
                                         description="Moderar i editar experiències"
                                         color="#C0634A"
                                     />
                                     <QuickAction
                                         href={route('admin.reports')}
                                         icon="⚠️"
-                                        label="Revisar Reportes"
-                                        description={reportsCount > 0 ? `${reportsCount} reportes pendents` : 'Cap reportes pendents'}
+                                        label="Revisar reports"
+                                        description={reportsCount > 0 ? `${reportsCount} reports pendents` : 'Cap report pendent'}
                                         color={reportsCount > 0 ? '#C0634A' : '#7A6050'}
                                     />
                                     <QuickAction
                                         href={route('admin.users')}
                                         icon="👥"
-                                        label="Gestionar Usuaris"
-                                        description="Banear, eliminar usuaris"
+                                        label="Gestionar usuaris"
+                                        description="Bandejar i eliminar usuaris"
                                         color="#4A7C6F"
                                     />
                                 </div>
                             </div>
                         </div>
 
-                        {/* System status */}
+                        {/* Estat del sistema */}
                         <div className="bg-admin-surface rounded-xl p-6 border border-admin-border shadow-sm">
                             <h3 className="text-lg font-bold text-admin-text mb-5 flex items-center gap-2"
                                 style={{ fontFamily: 'Montserrat, sans-serif' }}>
@@ -119,14 +119,14 @@ export default function Dashboard({ auth, stats = {} }) {
                                 <StatusRow icon="🟢" label="Moderació activa" ok />
                                 <StatusRow
                                     icon={reportsCount > 0 ? '🔴' : '🟢'}
-                                    label={reportsCount > 0 ? `${reportsCount} reportes pendents` : 'Cap reportes pendents'}
+                                    label={reportsCount > 0 ? `${reportsCount} reports pendents` : 'Cap report pendent'}
                                     ok={reportsCount === 0}
                                 />
                             </div>
                         </div>
                     </div>
 
-                    {/* Info footer */}
+                    {/* Peu informatiu */}
                     <div className="bg-admin-surface rounded-xl p-6 border border-admin-border shadow-sm">
                         <h3 className="text-lg font-bold text-admin-text mb-5 flex items-center gap-2"
                             style={{ fontFamily: 'Montserrat, sans-serif' }}>
@@ -134,7 +134,7 @@ export default function Dashboard({ auth, stats = {} }) {
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <InfoStat
-                                label="Categoríes disponibles"
+                                label="Categories disponibles"
                                 value={categoriesCount}
                                 color="#8B7335"
                             />

@@ -8,49 +8,35 @@ export default function ManageExperience() {
     const { experiencies = [], isAuthenticated } = usePage().props;
 
     return (
-        <section
-            className="min-h-screen"
-            style={{
-                background: 'var(--ivory-beige)',
-            }}
-        >
-            <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-                <section className="mt-8">
-                    {experiencies.length === 0 ? (
-                        <div
-                            className="rounded-2xl border p-8 text-center"
-                            style={{
-                                borderColor: 'var(--warm-sand-darker)',
-                                backgroundColor: 'rgba(237, 228, 211, 0.45)',
-                            }}
-                        >
-                            <h2
-                                className="text-xl font-semibold"
-                                style={{ color: 'var(--brown-compass)' }}
-                            >
-                                Encara no tens cap experiència creada
-                            </h2>
-                            <p className="mt-2" style={{ color: 'var(--earth-grey)' }}>
-                                Comença a crear les teves rutes i aventures!
-                            </p>
-                        </div>
-                    ) : (
-                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-                            {experiencies.map((exp) => (
-                                <CardExperience
-                                    key={exp.id}
-                                    experience={exp}
-                                    isAuthenticated={isAuthenticated}
-                                    showActions
-                                />
-                            ))}
-                        </div>
-                    )}
-                </section>
+        <section className={styles.pageSection}>
+            <div className={styles.manageContainer}>
+                <div className={styles.sectionHeader}>
+                    <div>
+                        <h1 className={styles.sectionTitle}>Les meves experiències</h1>
+                        <p className={styles.sectionSubtitle}>Gestiona, revisa i edita les teves publicacions en un sol lloc.</p>
+                    </div>
+                    <span className={styles.counterBadge}>
+                        {experiencies.length} {experiencies.length === 1 ? 'experiència' : 'experiències'}
+                    </span>
+                </div>
+
+                {experiencies.length > 0 ? (
+                    <div className={styles.manageGrid}>
+                        {experiencies.map(exp => (
+                            <div key={exp.id} className={styles.gridItem}>
+                                <CardExperience experience={exp} isAuthenticated={isAuthenticated} showActions compact />
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className={styles.emptyState}>
+                        <h2>Encara no tens experiències</h2>
+                        <p>Quan en creïs una, apareixerà aquí per poder gestionar-la fàcilment.</p>
+                    </div>
+                )}
             </div>
         </section>
-
-    );
+    )
 }
 
 ManageExperience.layout = (page) => (

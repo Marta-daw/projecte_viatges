@@ -15,7 +15,7 @@ export default function AdminHeader({ user }) {
         return () => clearInterval(timer);
     }, []);
 
-    // Close dropdown when clicking outside
+    // Tanca el desplegable en clicar fora
     useEffect(() => {
         function handleClickOutside(event) {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -50,18 +50,18 @@ export default function AdminHeader({ user }) {
 
     return (
         <header className={styles.adminHeader}>
-            {/* Left: Logo/Title */}
+            {/* Esquerra: logotip/títol */}
             <div className={styles.headerLeft}>
                 <div className={styles.logo}>🧭</div>
-                <h1>Panel d'Administració</h1>
+                <h1>Panell d'Administració</h1>
             </div>
 
-            {/* Center: empty space for future search */}
+            {/* Centre: espai buit per a una cerca futura */}
             <div className={styles.headerCenter}></div>
 
-            {/* Right: Time + User Dropdown */}
+            {/* Dreta: hora + desplegable d'usuari */}
             <div className={styles.headerRight}>
-                {/* Time indicator */}
+                {/* Indicador d'hora */}
                 <div className={styles.timeInfo}>
                     <span>🕐</span>
                     <span>{formatTime(currentTime)}</span>
@@ -69,7 +69,7 @@ export default function AdminHeader({ user }) {
 
                 <div className={styles.separator}></div>
 
-                {/* User dropdown — like AuthenticatedLayout */}
+                {/* Desplegable d'usuari — com a AuthenticatedLayout */}
                 <div className={styles.userDropdown} ref={dropdownRef}>
                     <button
                         className={styles.dropdownTrigger}
@@ -85,7 +85,7 @@ export default function AdminHeader({ user }) {
                         </div>
                         <div className={styles.userDetails}>
                             <p className={styles.userName}>{user?.name || 'Administrador'}</p>
-                            <p className={styles.userRole}>Admin</p>
+                            <p className={styles.userRole}>Administrador</p>
                         </div>
                         <svg
                             className={`${styles.chevron} ${dropdownOpen ? styles.open : ''}`}
@@ -104,29 +104,35 @@ export default function AdminHeader({ user }) {
 
                     {dropdownOpen && (
                         <div className={styles.dropdownMenu}>
-                            {/* User info header */}
+                            {/* Capçalera d'informació d'usuari */}
                             <div className={styles.dropdownHeader}>
                                 <p className={styles.dropdownName}>{user?.name || 'Administrador'}</p>
                                 <p className={styles.dropdownEmail}>{user?.email || 'admin@example.com'}</p>
                             </div>
 
-                            {/* Menu items */}
+                            {/* Elements del menú */}
                             <Link
                                 href={route('profile.edit')}
                                 className={styles.dropdownItem}
                                 onClick={() => setDropdownOpen(false)}
                             >
-                                <span className={styles.itemIcon}>👤</span>
-                                El meu perfil
+                                Profile
                             </Link>
 
                             <Link
-                                href={route('HomeViatges')}
+                                href={route('admin.dashboard')}
                                 className={styles.dropdownItem}
                                 onClick={() => setDropdownOpen(false)}
                             >
-                                <span className={styles.itemIcon}>🌍</span>
-                                Veure lloc web
+                                Admin Dashboard
+                            </Link>
+
+                            <Link
+                                href={route('experiences.myExperiencies')}
+                                className={styles.dropdownItem}
+                                onClick={() => setDropdownOpen(false)}
+                            >
+                                Les meves experiencies
                             </Link>
 
                             <div className={styles.dropdownDivider}></div>
@@ -135,8 +141,7 @@ export default function AdminHeader({ user }) {
                                 onClick={handleLogout}
                                 className={`${styles.dropdownItem} ${styles.danger}`}
                             >
-                                <span className={styles.itemIcon}>🚪</span>
-                                Tancar sessió
+                                Log Out
                             </button>
                         </div>
                     )}

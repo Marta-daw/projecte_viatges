@@ -222,11 +222,9 @@
 }
 
 .dropdownItem {
-    display: flex;
-    align-items: center;
-    gap: 0.625rem;
+    display: block;
     width: 100%;
-    padding: 0.7rem 1rem;
+    padding: 0.72rem 1rem;
     font-size: 0.875rem;
     color: #3D2010;
     font-weight: 500;
@@ -248,13 +246,6 @@
         &:hover {
             background: rgba(192, 99, 74, 0.07);
         }
-    }
-
-    .itemIcon {
-        width: 18px;
-        text-align: center;
-        font-size: 0.95rem;
-        flex-shrink: 0;
     }
 }
 

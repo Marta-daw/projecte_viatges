@@ -7,7 +7,7 @@ export default function UsersIndex({ auth, users = [] }) {
     const { delete: destroy, post } = useForm();
 
     const handleDeleteUser = (userId) => {
-        if (window.confirm('¿Estás seguro de que quieres eliminar este usuario? Esta acción no se puede deshacer.')) {
+        if (window.confirm('Estàs segur que vols eliminar aquest usuari? Aquesta acció no es pot desfer.')) {
             destroy(route('admin.users.delete', userId), {
                 onSuccess: () => {
                     setConfirmDelete(null);
@@ -17,7 +17,7 @@ export default function UsersIndex({ auth, users = [] }) {
     };
 
     const handleBanUser = (userId) => {
-        if (window.confirm('¿Estás seguro de que quieres banear este usuario?')) {
+        if (window.confirm('Estàs segur que vols bandejar aquest usuari?')) {
             post(route('admin.users.ban', userId), {
                 preserveScroll: true,
             });
@@ -25,7 +25,7 @@ export default function UsersIndex({ auth, users = [] }) {
     };
 
     const handleUnbanUser = (userId) => {
-        if (window.confirm('¿Estás seguro de que quieres desbanear este usuario?')) {
+        if (window.confirm('Estàs segur que vols treure el bandeig a aquest usuari?')) {
             post(route('admin.users.unban', userId), {
                 preserveScroll: true,
             });
@@ -35,39 +35,39 @@ export default function UsersIndex({ auth, users = [] }) {
     const getStatusBadge = (user) => {
         const isBanned = user.is_banned || false;
         return isBanned
-            ? { color: 'bg-admin-danger', text: '🚫 Baneado' }
-            : { color: 'bg-admin-success', text: '✅ Activo' };
+            ? { color: 'bg-admin-danger', text: '🚫 Bandejat' }
+            : { color: 'bg-admin-success', text: '✅ Actiu' };
     };
 
     return (
         <>
-            <Head title="Gestión de Usuaris" />
+            <Head title="Gestió d'usuaris" />
             <AdminLayout user={auth.user}>
                 <div className="space-y-6">
-                    {/* Header */}
+                    {/* Capçalera */}
                     <div className="border-b border-admin-border pb-6">
                         <div className="flex justify-between items-start">
                             <div>
-                                <h2 className="text-4xl font-bold text-admin-text mb-2">Gestión de Usuaris</h2>
+                                <h2 className="text-4xl font-bold text-admin-text mb-2">Gestió d'usuaris</h2>
                                 <p className="text-admin-text-muted text-lg">
                                     {users.length > 0
                                         ? `Total: ${users.length} usuari${users.length !== 1 ? 's' : ''}`
-                                        : 'No hay usuarios registrados'}
+                                        : 'No hi ha usuaris registrats'}
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    {/* Estado vacío */}
+                    {/* Estat buit */}
                     {users.length === 0 ? (
                         <div className="bg-admin-surface rounded-lg p-12 border border-admin-border text-center">
                             <div className="text-6xl mb-4">👥</div>
-                            <h3 className="text-xl font-semibold text-admin-text mb-2">¡Sin usuarios!</h3>
-                            <p className="text-admin-text-muted">No hay usuarios registrados en este momento.</p>
+                            <h3 className="text-xl font-semibold text-admin-text mb-2">Cap usuari!</h3>
+                            <p className="text-admin-text-muted">No hi ha usuaris registrats en aquest moment.</p>
                         </div>
                     ) : (
                         <div className="bg-admin-surface rounded-lg border border-admin-border overflow-hidden">
-                            {/* Tabla responsiva */}
+                            {/* Taula responsiva */}
                             <div className="overflow-x-auto">
                                 <table className="w-full">
                                     <thead>
@@ -76,22 +76,22 @@ export default function UsersIndex({ auth, users = [] }) {
                                                 ID
                                             </th>
                                             <th className="px-6 py-4 text-left text-sm font-semibold text-admin-text">
-                                                Nombre
+                                                Nom
                                             </th>
                                             <th className="px-6 py-4 text-left text-sm font-semibold text-admin-text">
                                                 Email
                                             </th>
                                             <th className="px-6 py-4 text-left text-sm font-semibold text-admin-text">
-                                                Experiências
+                                                Experiències
                                             </th>
                                             <th className="px-6 py-4 text-left text-sm font-semibold text-admin-text">
-                                                Estado
+                                                Estat
                                             </th>
                                             <th className="px-6 py-4 text-left text-sm font-semibold text-admin-text">
-                                                Registro
+                                                Registre
                                             </th>
                                             <th className="px-6 py-4 text-left text-sm font-semibold text-admin-text">
-                                                Acciones
+                                                Accions
                                             </th>
                                         </tr>
                                     </thead>
@@ -131,23 +131,23 @@ export default function UsersIndex({ auth, users = [] }) {
                                                             <button
                                                                 onClick={() => handleBanUser(user.id)}
                                                                 className="px-3 py-2 bg-admin-warning hover:bg-admin-warning/80 text-white rounded-md transition duration-200 font-medium text-xs whitespace-nowrap"
-                                                                title="Banear usuario"
+                                                                title="Bandejar usuari"
                                                             >
-                                                                🚫 Banear
+                                                                🚫 Bandejar
                                                             </button>
                                                         ) : (
                                                             <button
                                                                 onClick={() => handleUnbanUser(user.id)}
                                                                 className="px-3 py-2 bg-admin-success hover:bg-admin-success/80 text-white rounded-md transition duration-200 font-medium text-xs whitespace-nowrap"
-                                                                title="Desbanear usuario"
+                                                                title="Treure el bandeig a l'usuari"
                                                             >
-                                                                ✅ Desbanear
+                                                                ✅ Treure bandeig
                                                             </button>
                                                         )}
                                                         <button
                                                             onClick={() => handleDeleteUser(user.id)}
                                                             className="px-3 py-2 bg-admin-danger hover:bg-admin-danger/80 text-white rounded-md transition duration-200 font-medium text-xs whitespace-nowrap"
-                                                            title="Eliminar usuario"
+                                                            title="Eliminar usuari"
                                                         >
                                                             🗑️ Eliminar
                                                         </button>

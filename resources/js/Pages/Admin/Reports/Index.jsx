@@ -7,8 +7,8 @@ export default function ReportsIndex({ auth, reports = [] }) {
     const { delete: destroy } = useForm();
 
     const handleResolveReport = (experienciaId) => {
-        // Marcar como revisado (cambiar is_reported a false)
-        if (window.confirm('¿Estás seguro de que quieres marcar este reporte como revisado?')) {
+        // Marcar com a revisat (canviar is_reported a false)
+        if (window.confirm('Estàs segur que vols marcar aquest report com a revisat?')) {
             destroy(route('admin.reports.resolve', experienciaId), {
                 onSuccess: () => {
                     setConfirmDelete(null);
@@ -18,7 +18,7 @@ export default function ReportsIndex({ auth, reports = [] }) {
     };
 
     const handleDeleteExperience = (experienciaId) => {
-        if (window.confirm('¿Estás seguro de que quieres eliminar esta experiencia? Esta acción no se puede deshacer.')) {
+        if (window.confirm('Estàs segur que vols eliminar aquesta experiència? Aquesta acció no es pot desfer.')) {
             destroy(route('admin.reports.delete', experienciaId), {
                 onSuccess: () => {
                     setConfirmDelete(null);
@@ -29,29 +29,29 @@ export default function ReportsIndex({ auth, reports = [] }) {
 
     return (
         <>
-            <Head title="Gestión de Reportes" />
+            <Head title="Gestió de reports" />
             <AdminLayout user={auth.user}>
                 <div className="space-y-6">
-                    {/* Header */}
+                    {/* Capçalera */}
                     <div className="border-b border-admin-border pb-6">
-                        <h2 className="text-4xl font-bold text-admin-text mb-2">Gestión de Reportes</h2>
+                        <h2 className="text-4xl font-bold text-admin-text mb-2">Gestió de reports</h2>
                         <p className="text-admin-text-muted text-lg">
                             {reports.length > 0
-                                ? `Tienes ${reports.length} experiencia${reports.length !== 1 ? 's' : ''} reportada${reports.length !== 1 ? 's' : ''}`
-                                : 'No hay experiencias reportadas'}
+                                ? `Tens ${reports.length} experiència${reports.length !== 1 ? 's' : ''} reportada${reports.length !== 1 ? 'es' : ''}`
+                                : 'No hi ha experiències reportades'}
                         </p>
                     </div>
 
-                    {/* Estado vacío */}
+                    {/* Estat buit */}
                     {reports.length === 0 ? (
                         <div className="bg-admin-surface rounded-lg p-12 border border-admin-border text-center">
                             <div className="text-6xl mb-4">✅</div>
-                            <h3 className="text-xl font-semibold text-admin-text mb-2">¡Perfecto!</h3>
-                            <p className="text-admin-text-muted">No hay experiencias reportadas en este momento.</p>
+                            <h3 className="text-xl font-semibold text-admin-text mb-2">Perfecte!</h3>
+                            <p className="text-admin-text-muted">No hi ha experiències reportades en aquest moment.</p>
                         </div>
                     ) : (
                         <div className="bg-admin-surface rounded-lg border border-admin-border overflow-hidden">
-                            {/* Tabla responsiva */}
+                            {/* Taula responsiva */}
                             <div className="overflow-x-auto">
                                 <table className="w-full">
                                     <thead>
@@ -60,19 +60,19 @@ export default function ReportsIndex({ auth, reports = [] }) {
                                                 ID
                                             </th>
                                             <th className="px-6 py-4 text-left text-sm font-semibold text-admin-text">
-                                                Título
+                                                Títol
                                             </th>
                                             <th className="px-6 py-4 text-left text-sm font-semibold text-admin-text">
                                                 Autor
                                             </th>
                                             <th className="px-6 py-4 text-left text-sm font-semibold text-admin-text">
-                                                Descripción
+                                                Descripció
                                             </th>
                                             <th className="px-6 py-4 text-left text-sm font-semibold text-admin-text">
-                                                Fecha
+                                                Data
                                             </th>
                                             <th className="px-6 py-4 text-left text-sm font-semibold text-admin-text">
-                                                Acciones
+                                                Accions
                                             </th>
                                         </tr>
                                     </thead>
@@ -89,10 +89,10 @@ export default function ReportsIndex({ auth, reports = [] }) {
                                                     <span className="font-medium text-admin-text">{report.titulo}</span>
                                                 </td>
                                                 <td className="px-6 py-4 text-sm text-admin-text-muted">
-                                                    {report.user?.name || 'Anónimo'}
+                                                    {report.user?.name || 'Anònim'}
                                                 </td>
                                                 <td className="px-6 py-4 text-sm text-admin-text-muted max-w-xs truncate">
-                                                    {report.descripcion?.substring(0, 50) || 'N/A'}...
+                                                    {report.descripcion?.substring(0, 50) || 'N/D'}...
                                                 </td>
                                                 <td className="px-6 py-4 text-sm text-admin-text-muted">
                                                     {new Date(report.created_at).toLocaleDateString('ca-ES')}
@@ -101,14 +101,14 @@ export default function ReportsIndex({ auth, reports = [] }) {
                                                     <button
                                                         onClick={() => handleResolveReport(report.id)}
                                                         className="px-3 py-2 bg-admin-success hover:bg-admin-success/80 text-white rounded-md transition duration-200 font-medium text-xs whitespace-nowrap"
-                                                        title="Marcar como revisado"
+                                                        title="Marcar com a revisat"
                                                     >
-                                                        ✓ Revisado
+                                                        ✓ Revisat
                                                     </button>
                                                     <button
                                                         onClick={() => handleDeleteExperience(report.id)}
                                                         className="px-3 py-2 bg-admin-danger hover:bg-admin-danger/80 text-white rounded-md transition duration-200 font-medium text-xs whitespace-nowrap"
-                                                        title="Eliminar experiencia"
+                                                        title="Eliminar experiència"
                                                     >
                                                         🗑️ Eliminar
                                                     </button>
@@ -117,9 +117,9 @@ export default function ReportsIndex({ auth, reports = [] }) {
                                                         target="_blank"
                                                         rel="noopener noreferrer"
                                                         className="px-3 py-2 bg-admin-accent hover:bg-admin-accent/80 text-white rounded-md transition duration-200 font-medium text-xs whitespace-nowrap"
-                                                        title="Ver experiencia completa"
+                                                        title="Veure experiència completa"
                                                     >
-                                                        👁️ Ver
+                                                        👁️ Veure
                                                     </a>
                                                 </td>
                                             </tr>
