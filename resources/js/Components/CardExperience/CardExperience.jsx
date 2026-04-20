@@ -59,7 +59,7 @@ function CardExperience({ experience, isAuthenticated, showActions = true, compa
                     {experience?.can?.delete && (
                         <button
                             onClick={() => {
-                                if (confirm('¿Estás seguro de que deseas eliminar esta experiencia?')) {
+                                if (confirm('Estàs segur que vols eliminar aquesta experiència? Aquesta acció no es pot desfer.')) {
                                     router.delete(route('experiences.destroy', experience.id));
                                 }
                             }} className={styles.editDeletebtnCard}>

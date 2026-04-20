@@ -95,7 +95,7 @@ export default function AuthenticatedLayout({ header, children }) {
 
                                     <Dropdown.Content>
                                         <Dropdown.Link href={route('profile.edit')}>
-                                            Profile
+                                            Perfil
                                         </Dropdown.Link>
 
                                         {user.role === "admin" &&
@@ -109,7 +109,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                         </Dropdown.Link>
 
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
-                                            Log Out
+                                            Tancar la sessió
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
