@@ -95,17 +95,25 @@ export default function ExperienceForm() {
     }
 
     return (
-        <div className={styles.formWrapper}>
-            <h2>{isEdit ? "Editar Experiència" : "Nova Experiència"}</h2>
+        //<div className={styles.formWrapper}>
+        <div className="max-w-2xl mx-auto my-8 mb-12 px-10 py-8 rounded-xl border shadow-sm"
+            style={{ backgroundColor: 'var(--warm-sand)', borderColor: 'var(--medium-bronze)' }}>
+
+            <h2 className="text-center font-bold mb-7 tracking-wide"
+                style={{ fontFamily: 'var(--font-principal)', color: 'var(--brown-compass)', fontSize: 'var(--font-size-xxl)' }}>
+                {isEdit ? "Editar Experiència" : "Nova Experiència"}
+            </h2>
 
             <form onSubmit={handleSubmit} encType="multipart/form-data">
 
                 {/* Títol */}
-                <div className={styles.fieldGroup}>
-                    <InputLabel htmlFor="titol" value="Títol" className={styles.label} />
+                <div className="flex flex-col gap-1 mb-5">
+                    <InputLabel htmlFor="titol" value="Títol" className="text-sm font-semibold uppercase tracking-wider"
+                        style={{ fontFamily: 'var(--font-principal)', color: 'var(--brown-compass)' }} />
                     <TextInput
                         id="titol"
-                        className={styles.input}
+                        className="w-full rounded-lg px-3 py-2 border outline-none transition"
+                        style={{ fontFamily: 'var(--font-secundaria)', backgroundColor: 'var(--ivory-beige)', borderColor: 'var(--warm-sand-darker)' }}
                         type="text"
                         name="titol"
                         value={data.titol}
@@ -113,43 +121,48 @@ export default function ExperienceForm() {
                         placeholder="Escriu el títol de l'experiència..."
                     />
                     {/* Utilitzar nom de base per errors genèrics retornats (title en lloc de titol) */}
-                    <InputError message={errors.title || errors.titol} className={styles.errorMsg} />
+                    <InputError message={errors.title || errors.titol} className="text-xs mt-1" style={{ color: 'var(--accent-color)' }} />
                 </div >
 
                 {/* Descripció */}
                 < div className={styles.fieldGroup} >
-                    <InputLabel htmlFor="descripcio" value="Descripció" className={styles.label} />
+                    <InputLabel htmlFor="descripcio" value="Descripció" className="text-sm font-semibold uppercase tracking-wider"
+                        style={{ fontFamily: 'var(--font-principal)', color: 'var(--brown-compass)' }} />
                     <textarea
                         id="descripcio"
-                        className={styles.textarea}
+                        className="w-full rounded-lg px-3 py-2 border outline-none transition resize-y min-h-28"
+                        style={{ fontFamily: 'var(--font-secundaria)', backgroundColor: 'var(--ivory-beige)', borderColor: 'var(--warm-sand-darker)' }}
                         name="descripcio"
                         value={data.descripcio}
                         onChange={e => setData('descripcio', e.target.value)}
                         placeholder="Descriu l'experiència..."
                     />
-                    <InputError message={errors.body || errors.descripcio} className={styles.errorMsg} />
+                    <InputError message={errors.body || errors.descripcio} className="text-xs mt-1" style={{ color: 'var(--accent-color)' }} />
                 </div >
 
                 {/* Imatge */}
-                < div className={styles.fieldGroup} >
-                    <InputLabel value="Imatge" className={styles.label} />
-                    <div className={styles.fileInputWrapper}>
+                < div className="flex flex-col gap-1 mb-5" >
+                    <InputLabel value="Imatge" className="text-sm font-semibold uppercase tracking-wider"
+                        style={{ fontFamily: 'var(--font-principal)', color: 'var(--brown-compass)' }} />
+                    <div className="flex items-center gap-3">
                         <InputLabel htmlFor="imatge" value="Triar arxiu" className={styles.fileInputLabel} />
                         <ImageInput
                             id="imatge"
-                            className={styles.fileInput}
+                            className="hidden"
                             accept="image/*"
                             ref={fileInputRef}
                             onChange={handleFileChange}
                         />
-                        <span className={styles.fileName}>{fileName}</span>
+                        <span className="text-md italic truncate max-w-xs"
+                            style={{ color: 'var(--earth-grey)' }}>{fileName}</span>
                     </div>
-                    <InputError message={errors.image || errors.imatge} className={styles.errorMsg} />
+                    <InputError message={errors.image || errors.imatge} className="text-xs mt-1" style={{ color: 'var(--accent-color)' }} />
                 </div >
 
                 {/* Localització (MapInput) */}
-                < div className={styles.fieldGroup} >
-                    <InputLabel value="Localització" className={styles.label} />
+                < div className="flex flex-col gap-1 mb-5" >
+                    <InputLabel value="Localització" className="text-sm font-semibold uppercase tracking-wider"
+                        style={{ fontFamily: 'var(--font-principal)', color: 'var(--brown-compass)' }} />
                     {/* Guardar coordenades individualment */}
                     <MapInput
                         onChange={val => {
@@ -158,16 +171,18 @@ export default function ExperienceForm() {
                             }
                         }}
                     />
-                    <InputError message={errors.latitude} className={styles.errorMsg} />
-                    <InputError message={errors.longitude} className={styles.errorMsg} />
+                    <InputError message={errors.latitude} className="text-xs mt-1" style={{ color: 'var(--accent-color)' }} />
+                    <InputError message={errors.longitude} className="text-xs mt-1" style={{ color: 'var(--accent-color)' }} />
                 </div >
 
                 {/* Categoria */}
-                < div className={styles.fieldGroup} >
-                    <InputLabel htmlFor="categoria" value="Categoria" className={styles.label} />
+                < div className="flex flex-col gap-1 mb-5" >
+                    <InputLabel htmlFor="categoria" value="Categoria" className="text-sm font-semibold uppercase tracking-wider"
+                        style={{ fontFamily: 'var(--font-principal)', color: 'var(--brown-compass)' }} />
                     <SelectInput
                         id="categoria"
-                        className={styles.select}
+                        className="w-full rounded-lg px-3 py-3 border outline-none transition cursor-pointer appearance-none"
+                        style={{ fontFamily: 'var(--font-secundaria)', backgroundColor: 'var(--ivory-beige)', borderColor: 'var(--warm-sand-darker)' }}
                         name="categoria_id"
                         value={data.categoria_id}
                         onChange={e => setData('categoria_id', e.target.value)}
@@ -177,11 +192,11 @@ export default function ExperienceForm() {
                             <SelectOption key={cat.id} value={cat.id}>{cat.name}</SelectOption>
                         ))}
                     </SelectInput>
-                    <InputError message={errors.category_id} className={styles.errorMsg} />
+                    <InputError message={errors.category_id} className="text-xs mt-1" style={{ color: 'var(--accent-color)' }} />
                 </div >
 
                 {/* Buttons wrapper */}
-                <div className={styles.buttonsContainer}>
+                <div className="flex flex-wrap justify-end gap-4 mt-6">
                     <SecondaryButton
                         type="submit"
                         disabled={processing}
@@ -196,7 +211,7 @@ export default function ExperienceForm() {
                         className={styles.submitBtn}
                         disabled={processing}
                         onClick={() => formAction.current = 'publicada'}
-                        style={{ margin: 0, width: 'auto' }}
+                        style={{ margin: 0, width: 'auto', fontFamily: 'var(--font-principal)' }}
                     >
                         {processing ? 'Desant...' : (isEdit ? 'Guardar Canvis' : 'Publicar Experiència')}
                     </PrimaryButton>

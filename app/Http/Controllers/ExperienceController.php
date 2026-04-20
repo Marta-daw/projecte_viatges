@@ -190,7 +190,7 @@ class ExperienceController extends Controller
         $categories = Categoria::all();
 
         // Retornem la vista d'edició amb les dades de l'experiència i les categories
-        return Inertia::render('CreateExperience', [
+        return Inertia::render('EditExperience', [
             'categories' => $categories,
             'experience' => $experience,
             'isEdit' => true,

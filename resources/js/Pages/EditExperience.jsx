@@ -2,19 +2,19 @@ import ExperienceForm from '@/Components/Experiences/ExperienceForm';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import React from 'react';
 
-export default function CreateExperience({ experiencies, categoria, isEdit }) {
+export default function EditExperience({ experiencies, categoria, isEdit }) {
     console.log(experiencies); // Per a poder veure les dades a la consola del navegador
     return (
         <ExperienceForm experiencie={experiencies} categoria={categoria} isEdit={isEdit} />
     );
 }
 
-CreateExperience.layout = (page) => {
+EditExperience.layout = (page) => {
     return (
         <AuthenticatedLayout
             header={
                 <h2 className="text-xl font-semibold leading-tight" style={{ color: 'var(--brown-compass)' }}>
-                    Nova Experiència
+                    Editar Experiència
                 </h2>
             }
         >
