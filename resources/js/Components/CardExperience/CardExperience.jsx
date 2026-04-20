@@ -52,14 +52,14 @@ function CardExperience({ experience, isAuthenticated, showActions = true, compa
             </div>
 
             {isAuthenticated && showActions && (
-                <div className={styles.cardActions}>
+                <div className={`mt-auto ${styles.cardActions}`}>
                     {experience?.can?.update && (
                         <Link className={styles.editDeletebtnCard} href={route('experiences.edit', experience.id)}>Editar</Link>
                     )}
                     {experience?.can?.delete && (
                         <button
                             onClick={() => {
-                                if (confirm('¿Estás seguro de que deseas eliminar esta experiencia?')) {
+                                if (confirm('Estàs segur que vols eliminar aquesta experiència? Aquesta acció no es pot desfer.')) {
                                     router.delete(route('experiences.destroy', experience.id));
                                 }
                             }} className={styles.editDeletebtnCard}>
@@ -67,8 +67,9 @@ function CardExperience({ experience, isAuthenticated, showActions = true, compa
                         </button>
                     )}
                 </div>
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 }
 

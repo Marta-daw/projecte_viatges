@@ -13,18 +13,12 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-/* Route::get('/', function () {
- return Inertia::render('Welcome', [
- 'canLogin' => Route::has('login'),
- 'canRegister' => Route::has('register'),
- 'laravelVersion' => Application::VERSION,
- 'phpVersion' => PHP_VERSION,
- ]);
- }); */
-
 // Rutes públiques
 Route::get('/', [HomeController::class, 'index'])->name('HomeViatges');
 Route::get('/usuari/{user}', [PublicUserController::class, 'show'])->name('users.public.show');
+Route::get('/politica-privacitat', function () {
+    return Inertia::render('PrivacyPolicy');
+})->name('politica.privacitat');
 Route::get('/condicions-us', fn() => Inertia::render('TermsOfUse'))->name('terms.show');
 
 // Experiencies
@@ -41,10 +35,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile/experiencies', [ExperienceController::class, 'myExperiences'])
         ->name('experiences.myExperiencies');
-    // A la línia 125 d'ExperienceController.php es redirigeix a aquesta ruta, però en posar-la al
-    // navegador no funciona; cal mirar com es pot solucionar
     Route::get('/experiencies', [ExperienceController::class, 'index'])->name('experiences.index');
-    Route::get('/experiencies/create', [ExperienceController::class, 'create'])->name('experiences.create');
+    Route::resource('/experiencies', ExperienceController::class); // Aquesta línia crea totes les rutes necessàries tant per la creació com l'edició d'experiències, incloent la ruta per mostrar una experiència específica
     Route::post('/experiencia', [ExperienceController::class, 'store'])
         ->name('experiences.store');
     Route::get('/experiencia/{experiencia}', [ExperienceController::class, 'show'])
@@ -98,4 +90,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('admin/users/{user}/unban', [AdminController::class, 'unbanUser'])->name('admin.users.unban');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

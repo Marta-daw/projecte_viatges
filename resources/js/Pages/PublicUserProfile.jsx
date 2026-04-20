@@ -33,7 +33,11 @@ export default function PublicUserProfile({ profileUser, experiences = [], stats
                                         className="flex h-14 w-14 items-center justify-center rounded-full text-xl font-bold text-white"
                                         style={{ backgroundColor: 'var(--brown-compass)' }}
                                     >
-                                        {(profileUser?.name || 'U').slice(0, 1).toUpperCase()}
+                                        {profileUser?.avatar_url ? (
+                                            <img src={profileUser.avatar_url} alt="Avatar usuari" className="w-full h-full rounded-full object-cover" loading="lazy" decoding="async" />
+                                        ) : (
+                                            (profileUser?.name || 'U').slice(0, 1).toUpperCase()
+                                        )}
                                     </div>
                                     <div>
                                         <p className="text-sm font-semibold uppercase tracking-wider"
@@ -123,5 +127,5 @@ PublicUserProfile.layout = (page) => {
         );
     }
 
-    return <GuestLayout children={page} />;
+    return <GuestLayout fullWidth>{page}</GuestLayout>;
 };
