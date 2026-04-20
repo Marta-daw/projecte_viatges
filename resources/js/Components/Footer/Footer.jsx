@@ -31,7 +31,7 @@ export default function Footer() {
                         <div className="flex gap-4 mt-2 text-xs">
                             <Link href={route('politica.privacitat')} className="hover:text-blue-600 transition-colors">Política de Privacitat</Link>
                             <span className="text-gray-300">|</span>
-                            <a href="#" className="hover:text-blue-600 transition-colors">Condicions d'Ús</a>
+                            <Link href={route('terms.show')} className="hover:text-blue-600 transition-colors">Condicions d'Ús</Link>
                         </div>
                     </div>
 

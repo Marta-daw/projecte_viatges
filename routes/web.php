@@ -15,10 +15,12 @@ use Inertia\Inertia;
 
 // Rutes públiques
 Route::get('/', [HomeController::class, 'index'])->name('HomeViatges');
+Route::get('/experiencies/load-more', [HomeController::class, 'loadMore'])->name('experiences.loadMore');
 Route::get('/usuari/{user}', [PublicUserController::class, 'show'])->name('users.public.show');
 Route::get('/politica-privacitat', function () {
     return Inertia::render('PrivacyPolicy');
 })->name('politica.privacitat');
+Route::get('/condicions-us', fn() => Inertia::render('TermsOfUse'))->name('terms.show');
 
 // Experiencies
 // Route::get('/experiencies', [ExperienceController::class, 'index'])->name('experiences.index');
@@ -89,4 +91,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('admin/users/{user}/unban', [AdminController::class, 'unbanUser'])->name('admin.users.unban');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
