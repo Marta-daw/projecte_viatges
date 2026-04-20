@@ -22,6 +22,27 @@ class HomeController extends Controller
 
     public function index()
     {
+        $isAuthenticated = auth()->check();
+
+        if (! $isAuthenticated) {
+            $latestExperiences = $this->publishedExperiencesQuery()
+                ->take(3)
+                ->get();
+
+            return Inertia::render('HomeViatges', [
+                'llista' => $latestExperiences,
+                'pagination' => [
+                    'current_page' => 1,
+                    'last_page' => 1,
+                    'has_more_pages' => false,
+                    'per_page' => 3,
+                ],
+                'auth' => [
+                    'user' => null,
+                ],
+            ]);
+        }
+
         $perPage = 6;
         $paginator = $this->publishedExperiencesQuery()->paginate($perPage);
 
@@ -41,6 +62,15 @@ class HomeController extends Controller
 
     public function loadMore(Request $request)
     {
+        if (! auth()->check()) {
+            return response()->json([
+                'data' => [],
+                'current_page' => 1,
+                'has_more_pages' => false,
+                'per_page' => 3,
+            ]);
+        }
+
         $page = max(1, (int) $request->integer('page', 1));
         $perPage = (int) $request->integer('per_page', 6);
         $perPage = min(max($perPage, 3), 24);

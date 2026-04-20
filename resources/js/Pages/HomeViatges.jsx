@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Header from '@/Components/Header/Header.jsx';
 import Footer from '@/Components/Footer/Footer.jsx';
@@ -6,6 +6,9 @@ import CardExperience from '@/Components/CardExperience/CardExperience.jsx';
 import Hero from '@/Components/Hero/Hero.jsx';
 
 export default function HomeViatges({ llista = [], pagination = {} }) {
+    const { auth } = usePage().props;
+    const isAuthenticated = Boolean(auth?.user);
+
     const [experiences, setExperiences] = useState(llista);
     const [currentPage, setCurrentPage] = useState(pagination?.current_page ?? 1);
     const [hasMore, setHasMore] = useState(Boolean(pagination?.has_more_pages));
@@ -21,7 +24,7 @@ export default function HomeViatges({ llista = [], pagination = {} }) {
     }, [llista, pagination?.current_page, pagination?.has_more_pages]);
 
     const loadMore = useCallback(async () => {
-        if (isLoading || !hasMore) return;
+        if (!isAuthenticated || isLoading || !hasMore) return;
 
         const nextPage = currentPage + 1;
         setIsLoading(true);
@@ -54,7 +57,7 @@ export default function HomeViatges({ llista = [], pagination = {} }) {
         } finally {
             setIsLoading(false);
         }
-    }, [currentPage, hasMore, isLoading, perPage]);
+    }, [currentPage, hasMore, isLoading, isAuthenticated, perPage]);
 
     useEffect(() => {
         if (!loaderRef.current || !hasMore) return;
@@ -101,18 +104,18 @@ export default function HomeViatges({ llista = [], pagination = {} }) {
                                 ))}
                             </div>
 
-                            <div ref={loaderRef} className="mt-8 flex justify-center min-h-10">
-                                {isLoading && (
-                                    <p className="text-sm" style={{ color: 'var(--earth-grey)' }}>
-                                        Carregant més experiències...
-                                    </p>
-                                )}
-                                {!hasMore && !isLoading && (
-                                    <p className="text-xs" style={{ color: 'var(--earth-grey)' }}>
-                                        Ja has arribat al final.
-                                    </p>
-                                )}
-                            </div>
+            <div ref={loaderRef} className="mt-8 flex justify-center min-h-10">
+                {isAuthenticated && isLoading && (
+                    <p className="text-sm" style={{ color: 'var(--earth-grey)' }}>
+                        Carregant més experiències...
+                    </p>
+                )}
+                {isAuthenticated && !hasMore && !isLoading && (
+                    <p className="text-xs" style={{ color: 'var(--earth-grey)' }}>
+                        Ja has arribat al final.
+                    </p>
+                )}
+            </div>
                         </>
                     ) : (
                         <p className="text-center text-gray-500">Encara no hi ha experiències publicades.</p>
