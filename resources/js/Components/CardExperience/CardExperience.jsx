@@ -53,10 +53,8 @@ function CardExperience({ experience, isAuthenticated, showActions = true, compa
                 <Link href={`/experiencia/${experience.id}`} className="block hover:no-underline">
                     <div className={styles.textCard}>
                         <h5 className={styles.cardTitle}> {experience.title} </h5>
-                        <div className={styles.cardDescription}>
-                            <ReactMarkdown remarkPlugins={[remarkBreaks]}>
-                                {experience.body || ''}
-                            </ReactMarkdown>
+                        <div className={`text-justify ${styles.cardDescription}`}>
+                            {experience.body || ''}
                         </div>
                     </div>
                 </Link>

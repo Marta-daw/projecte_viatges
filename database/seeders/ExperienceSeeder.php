@@ -32,9 +32,7 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 2,
                 'title' => 'Ruta pels Pirineus: Vall de Núria',
-                'body' => "Una escapada inoblidable. Aquest cap de setmana hem fet una ruta impressionant per la Vall de Núria, agafant
-                    el cremallera des de Ribes de Freser. Les vistes han estat espectaculars i el clima, perfecte. Si hi voleu anar, us
-                    recomano portar bon calçat i aigua.",
+                'body' => "Una escapada inoblidable. Aquest cap de setmana hem fet una ruta impressionant per la Vall de Núria, agafant el cremallera des de Ribes de Freser. Les vistes han estat espectaculars i el clima, perfecte. Si hi voleu anar, us recomano portar bon calçat i aigua.",
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093833/vall-de-nuria_arvzuf.avif',
                 'latitude' => 42.3961,
                 'longitude' => 2.1534,
@@ -46,8 +44,7 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 1,
                 'title' => 'Cap de setmana romàntic a Roma',
-                'body' => "La Ciutat Eterna. No hi ha res com passejar de nit pel centre de Roma. Vam visitar el Coliseu i
-                    vam tirar una moneda a la Fontana di Trevi. Un viatge 10/10.\n\n" .
+                'body' => "La Ciutat Eterna. No hi ha res com passejar de nit pel centre de Roma. Vam visitar el Coliseu i vam tirar una moneda a la Fontana di Trevi. Un viatge 10/10.\n\n" .
                     "Roma no es va fer en un dia, però es pot estimar en un segon.",
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093833/roma_spoanz.avif',
                 'latitude' => 41.8902,
@@ -60,10 +57,7 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 2,
                 'title' => 'Descobrint Lisboa a peu',
-                'body' => "La Ciutat dels Set Turons. Lisboa és una ciutat que s'ha de caminar sense pressa. Vam pujar al 
-                    mirador de Santa Luzia al capvespre i la vista sobre el Tejo va ser increïble. Els elèctrics històrics són 
-                    una experiència única i el pastís de nata de Belém és obligatori. Imprescindible portar calçat còmode per als 
-                    empedrats.",
+                'body' => "La Ciutat dels Set Turons. Lisboa és una ciutat que s'ha de caminar sense pressa. Vam pujar al mirador de Santa Luzia al capvespre i la vista sobre el Tejo va ser increïble. Els elèctrics històrics són una experiència única i el pastís de nata de Belém és obligatori. Imprescindible portar calçat còmode per als empedrats.",
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093834/lisboa_bmipbj.avif',
                 'latitude' => 38.7169,
                 'longitude' => -9.1399,
@@ -75,9 +69,7 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 3,
                 'title' => 'Una setmana al nord de Marroc',
-                'body' => "Xaouen, la Ciutat Blava.Les medines blaves de Xaouen són com cap altre lloc del món. Ens vam perdre 
-                pels seus carrers estrets i vam trobar racons màgics a cada cantonada. El soc és un caos meravellós ple de colors 
-                i olors, i recomanem allotjar-se en un riad local. Viatjar és l'única cosa que compres que et fa més ric.",
+                'body' => "Xaouen, la Ciutat Blava.Les medines blaves de Xaouen són com cap altre lloc del món. Ens vam perdre pels seus carrers estrets i vam trobar racons màgics a cada cantonada. El soc és un caos meravellós ple de colors i olors, i recomanem allotjar-se en un riad local. Viatjar és l'única cosa que compres que et fa més ric.",
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093833/marroc_k8gkvk.avif',
                 'latitude' => 35.1688,
                 'longitude' => -5.2636,
@@ -89,9 +81,7 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 3,
                 'title' => 'Tokyo: entre tradició i modernitat',
-                'body' => "El Japó que no oblides. Arribar a Tokyo és com aterrar en un altre planeta. Vam visitar el 
-                temple de Senso-ji a l'alba, abans que arribessin els turistes. El transport públic és impecable i
-                puntual, i el menjar al mercat de Tsukiji és una experiència única. Totalment recomanable per a viatgers curiosos.\n\n" .
+                'body' => "El Japó que no oblides. Arribar a Tokyo és com aterrar en un altre planeta. Vam visitar el temple de Senso-ji a l'alba, abans que arribessin els turistes. El transport públic és impecable i puntual, i el menjar al mercat de Tsukiji és una experiència única. Totalment recomanable per a viatgers curiosos.\n\n" .
                 "El Japó no és un destí, és una sensació.",
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093833/tokio_gzexqx.avif',
                 'latitude' => 35.7148,
@@ -104,9 +94,7 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 2,
                 'title' => 'Escapada a la Costa Brava',
-                'body' => "Cales i Tramuntana. La Costa Brava a principis de temporada és un altre món: sense masses, amb 
-                    l'aigua cristal·lina i els camins de ronda per a nosaltres sols. La cala de Tamariu és la més tranquil·la, 
-                    i el suro i la gastronomia local són imprescindibles. Recomanem anar en temporada baixa per gaudir-ho de veritat.",
+                'body' => "Cales i Tramuntana. La Costa Brava a principis de temporada és un altre món: sense masses, amb l'aigua cristal·lina i els camins de ronda per a nosaltres sols. La cala de Tamariu és la més tranquil·la, i el suro i la gastronomia local són imprescindibles. Recomanem anar en temporada baixa per gaudir-ho de veritat.",
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093834/brava_qsrkju.avif',
                 'latitude' => 41.9109,
                 'longitude' => 3.2159,
@@ -142,9 +130,7 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 1,
                 'title' => 'Ruta per la Toscana en cotxe',
-                'body' => "Entre vinyes i ciprers. La Toscana és d'aquells llocs que semblen una pintura a l'oli. Vam recórrer
-                    els pobles medievals de Siena, San Gimignano i Montepulciano en tres dies, per carreteres secundàries espectaculars 
-                    entre vinyes i un bon chianti local a cada àpat. Recomanem llogar cotxe i allotjar-se en un agriturismo. \n\n".
+                'body' => "Entre vinyes i ciprers. La Toscana és d'aquells llocs que semblen una pintura a l'oli. Vam recórrer els pobles medievals de Siena, San Gimignano i Montepulciano en tres dies, per carreteres secundàries espectaculars entre vinyes i un bon chianti local a cada àpat. Recomanem llogar cotxe i allotjar-se en un agriturismo. \n\n".
                     "La Toscana et roba el cor sense demanar permís.",
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093833/toscana_bausht.avif',
                 'latitude' => 43.3186,
@@ -157,9 +143,7 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 3,
                 'title' => 'Tres dies a Praga',
-                'body' => "La Ciutat de les Cent Torres. Praga és una de les ciutats més ben conservades d'Europa. El barri 
-                    jueu, el castell i el pont de Carles van ser els nostres favorits. Millor evitar el centre en cap de setmana, 
-                    però la cervesa txeca és la millor del món i és baratíssima. Un viatge molt recomanable i assequible.",
+                'body' => "La Ciutat de les Cent Torres. Praga és una de les ciutats més ben conservades d'Europa. El barri jueu, el castell i el pont de Carles van ser els nostres favorits. Millor evitar el centre en cap de setmana, però la cervesa txeca és la millor del món i és baratíssima. Un viatge molt recomanable i assequible.",
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093834/praga_bpodpn.avif',
                 'latitude' => 50.0755,
                 'longitude' => 14.4378,
@@ -171,9 +155,7 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 2,
                 'title' => 'Aventura al Parc Nacional de Doñana',
-                'body' => "Natura salvatge al sud d'Espanya. Doñana és un dels espais naturals més importants d'Europa i és 
-                    a tocar de casa. Vam fer una excursió guiada en tot terreny per veure linx ibèric i àguila imperial: cal 
-                    reservar amb antelació. L'alba al parc, amb la boira sobre les marismes, és inoblidable. Perfecte per a amants de la fauna i el birdwatching.\n\n".
+                'body' => "Natura salvatge al sud d'Espanya. Doñana és un dels espais naturals més importants d'Europa i és a tocar de casa. Vam fer una excursió guiada en tot terreny per veure linx ibèric i àguila imperial: cal reservar amb antelació. L'alba al parc, amb la boira sobre les marismes, és inoblidable. Perfecte per a amants de la fauna i el birdwatching.\n\n".
                     "La naturalesa no necessita nosaltres, nosaltres la necessitem a ella.",
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093834/donana_ui2uvj.avif',
                 'latitude' => 36.9981,
@@ -186,9 +168,7 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 1,
                 'title' => 'Cap de setmana a Amsterdam',
-                'body' => "Canals, bicicletes i museus. Amsterdam és una ciutat que es viu millor en bicicleta: llogar-ne una és la 
-                    millor decisió. El mercat d'Albert Cuyp és ideal per esmorzar i cada canal amaga un racó encantador. 
-                    Una ciutat que no defrauda.",
+                'body' => "Canals, bicicletes i museus. Amsterdam és una ciutat que es viu millor en bicicleta: llogar-ne una és la millor decisió. El mercat d'Albert Cuyp és ideal per esmorzar i cada canal amaga un racó encantador. Una ciutat que no defrauda.",
                 'image_url' => 'https://res.cloudinary.com/dadhzxpnj/image/upload/q_auto/f_auto/v1776093834/amsterdam.jpg_lh1nz4.avif',
                 'latitude' => 52.3676,
                 'longitude' => 4.9041,
@@ -200,9 +180,8 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 2,
                 'title' => 'Meravelles de Dubrovnik',
-                'body' => "**La Perla de l'Adriàtic.** Dubrovnik és una de les ciutats medievals més ben conservades del Mediterrani. 
-                    Vam recórrer les muralles al capvespre amb vistes al mar cristal·lí i als teulats de terracota. _**Dubrovnik no és una postal, és una experiència que et canvia.**_ 
-                    Recomanem visitar-la fora de temporada per evitar les masses.",
+                'body' => "La Perla de l'Adriàtic. Dubrovnik és una de les ciutats medievals més ben conservades del Mediterrani. Vam recórrer les muralles al capvespre amb vistes al mar cristal·lí i als teulats de terracota. Recomanem visitar-la fora de temporada per evitar les masses.\n\n" .
+                    "Dubrovnik no és una postal, és una experiència que et canvia.",
                 'image_url' => "https://res.cloudinary.com/dadhzxpnj/image/upload/v1776703804/dubrovnik_jwb2ar.avif",
                 'latitude' => 42.6507,
                 'longitude' => 18.0944,
@@ -214,10 +193,7 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 3,
                 'title' => 'Set dies per les Illes Canàries',
-                'body' => "Volcans, platges i cel estrellat.
-                    Lanzarote és un paisatge marcià: els camps de lava negra del Parc Nacional de Timanfaya et deixen 
-                    sense paraules. Vam fer snorkel a les piscines naturals i vam observar les estrelles des del mirador 
-                    del Haría, lliures de contaminació llumínica. Un destí sorprenent que va molt més enllà de les platges.",
+                'body' => "Volcans, platges i cel estrellat. Lanzarote és un paisatge marcià: els camps de lava negra del Parc Nacional de Timanfaya et deixen sense paraules. Vam fer snorkel a les piscines naturals i vam observar les estrelles des del mirador del Haría, lliures de contaminació llumínica. Un destí sorprenent que va molt més enllà de les platges.",
                 'image_url' => "https://res.cloudinary.com/dadhzxpnj/image/upload/v1776703804/canarias-lanzarote_qnyft2.avif",
                 'latitude' => 29.0469,
                 'longitude' => -13.5899,
@@ -229,10 +205,8 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 2,
                 'title' => 'Cap de setmana a Viena',
-                'body' => "**La Capital de la Música.** Viena és una ciutat que respira cultura per tots els seus 
-                    racons. Vam visitar el Palau de Schönbrunn, vam assistir a un concert al Musikverein i vam esmorzar 
-                    com a vienesos en un kaffehaus centenari. _**Viena no s'entén, es viu amb calma i amb un cafè amb nata a la mà.**_ 
-                    Imprescindible per a amants de l'art i la història.",
+                'body' => "La Capital de la Música. Viena és una ciutat que respira cultura per tots els seus racons. Vam visitar el Palau de Schönbrunn, vam assistir a un concert al Musikverein i vam esmorzar com a vienesos en un kaffehaus centenari. Imprescindible per a amants de l'art i la història.\n\n" .
+                    "Viena no s'entén, es viu amb calma i amb un cafè amb nata a la mà.",
                 'image_url' => "https://res.cloudinary.com/dadhzxpnj/image/upload/v1776703803/viena_nrznx8.avif",
                 'latitude' => 48.2082,
                 'longitude' => 16.3738,
@@ -256,10 +230,7 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 1,
                 'title' => 'Aventura al Pirineu Aragonès',
-                'body' => "Pics, llacs i silenci. El Parc Nacional d'Ordesa i Monte Perdido és un dels racons més 
-                    espectaculars de la Península. Vam fer la ruta del Cañón de Añisclo en dos dies i vam dormir en un 
-                    refugi de muntanya envoltat d'estrelles. Imprescindible portar mapes en paper i avisar de la ruta 
-                    abans de sortir. Una experiència que recomano a qualsevol amant de la muntanya.",
+                'body' => "Pics, llacs i silenci. El Parc Nacional d'Ordesa i Monte Perdido és un dels racons més espectaculars de la Península. Vam fer la ruta del Cañón de Añisclo en dos dies i vam dormir en un refugi de muntanya envoltat d'estrelles. Imprescindible portar mapes en paper i avisar de la ruta abans de sortir. Una experiència que recomano a qualsevol amant de la muntanya.",
                 'image_url' => "https://res.cloudinary.com/dadhzxpnj/image/upload/v1776703804/PirineoAragones_jxlirv.avif",
                 'latitude' => 42.6386,
                 'longitude' => -0.0617,
@@ -271,10 +242,8 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 2,
                 'title' => 'Deu dies pel Vietnam',
-                'body' => "Del Nord al Sud en tren i moto. El Vietnam és un país que et sorprèn a cada quilòmetre: des 
-                    de les terrasses d'arròs de Sapa fins a les llums de lanternes de Hội An. Vam recórrer la costa en moto 
-                    i vam menjar als mercats locals per menys d'un euro. _**El Vietnam et desperta els sentits i no te'ls 
-                    torna mai més.**_ Un país imprescindible per a viatgers adventurers.",
+                'body' => "Del Nord al Sud en tren i moto. El Vietnam és un país que et sorprèn a cada quilòmetre: des de les terrasses d'arròs de Sapa fins a les llums de lanternes de Hội An. Vam recórrer la costa en moto i vam menjar als mercats locals per menys d'un euro. Un país imprescindible per a viatgers adventurers.\n\n" .
+                    " _**Vietnam et desperta els sentits i no te'ls torna mai més.**_ ",
                 'image_url' => "https://res.cloudinary.com/dadhzxpnj/image/upload/v1776703803/vietnam_fqyer0.avif",
                 'latitude' => 16.0544,
                 'longitude' => 108.2022,
@@ -286,9 +255,7 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 3,
                 'title' => 'Tres dies a Edimburg',
-                'body' => "Castells, whisky i llegenda. Edimburg és una de les capitals europees amb més caràcter. Vam pujar al castell 
-                    que domina la ciutat, vam passejat pel barri de Grassmarket i vam fer una ruta per les destil·leries de les Highlands en 
-                    un dia. La boira escocesa li dóna un aire misteriós únic. Molt recomanable visitar-la durant el Festival Fringe a l'agost.",
+                'body' => "Castells, whisky i llegenda. Edimburg és una de les capitals europees amb més caràcter. Vam pujar al castell que domina la ciutat, vam passejat pel barri de Grassmarket i vam fer una ruta per les destil·leries de les Highlands en un dia. La boira escocesa li dóna un aire misteriós únic. Molt recomanable visitar-la durant el Festival Fringe a l'agost.",
                 'image_url' => "https://res.cloudinary.com/dadhzxpnj/image/upload/v1776703804/edimburgo_ikdirg.avif",
                 'latitude' => 55.9533,
                 'longitude' => -3.1883,
@@ -312,9 +279,7 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 2,
                 'title' => 'Cap de setmana al País Basc',
-                'body' => "Pintxos, surf i cultura. Sant Sebastià és una de les ciutats amb millor gastronomia del món, i ho sap. 
-                    Vam fer la ruta dels pintxos pel barri de la Part Vella, vam visitar el Museu Guggenheim a Bilbao i vam acabar el 
-                    dia veient el surf a la platja de la Zurriola. Una escapada perfecta i molt fàcil d'organitzar des de Catalunya.",
+                'body' => "Pintxos, surf i cultura. Sant Sebastià és una de les ciutats amb millor gastronomia del món, i ho sap. Vam fer la ruta dels pintxos pel barri de la Part Vella, vam visitar el Museu Guggenheim a Bilbao i vam acabar el dia veient el surf a la platja de la Zurriola. Una escapada perfecta i molt fàcil d'organitzar des de Catalunya.",
                 'image_url' => "https://res.cloudinary.com/dadhzxpnj/image/upload/v1776703804/pais-vasco_rgx1al.avif",
                 'latitude' => 43.3183,
                 'longitude' => -1.9812,
@@ -326,9 +291,7 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 3,
                 'title' => 'Quatre dies a Budapest',
-                'body' => "La Reina del Danubi. Budapest és una de les capitals europees més belles i més asequibles. Vam banyar-nos 
-                    als banys termals Széchenyi, vam creuar el pont de les Cadenes al capvespre i vam sopar a un dels ruin bars del barri 
-                    jueu. Una combinació perfecta d'història, arquitectura i vida nocturna que no decep.",
+                'body' => "La Reina del Danubi. Budapest és una de les capitals europees més belles i més asequibles. Vam banyar-nos als banys termals Széchenyi, vam creuar el pont de les Cadenes al capvespre i vam sopar a un dels ruin bars del barri jueu. Una combinació perfecta d'història, arquitectura i vida nocturna que no decep.",
                 'image_url' => "https://res.cloudinary.com/dadhzxpnj/image/upload/v1776703805/budapest_uifnjt.avif",
                 'latitude' => 47.4979,
                 'longitude' => 19.0402,
@@ -340,7 +303,8 @@ class ExperienceSeeder extends Seeder
             [
                 'user_id' => 1,
                 'title' => 'Escapada a la Provença Francesa',
-                'body' => "**Lavanda, mercats i llum del sud.** La Provença a l'estiu és un somni de color malva i ocre. Vam recórrer els camps de lavanda de Valensole, vam visitar el mercat de Aix-en-Provence i vam acabar el dia amb un rosé local a l'ombra d'un plàtan centenari. _**La Provença no s'explica, es respira.**_ Perfecte per a una escapada tranquil·la i sensorial.",
+                'body' => "Lavanda, mercats i llum del sud. La Provença a l'estiu és un somni de color malva i ocre. Vam recórrer els camps de lavanda de Valensole, vam visitar el mercat de Aix-en-Provence i vam acabar el dia amb un rosé local a l'ombra d'un plàtan centenari. Perfecte per a una escapada tranquil·la i sensorial.\n\n" .
+                    "La Provença no s'explica, es respira.",
                 'image_url' => "https://res.cloudinary.com/dadhzxpnj/image/upload/v1776703804/proven%C3%A7aFrancesa_n37gr0.avif",
                 'latitude' => 43.8927,
                 'longitude' => 5.9370,
