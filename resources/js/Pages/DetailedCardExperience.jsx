@@ -6,6 +6,16 @@ import { FaArrowLeft } from "react-icons/fa";
 import ReactMarkdown from 'react-markdown';
 import remarkBreaks from 'remark-breaks';
 
+const withCloudinaryWidth = (url, width) => {
+    if (!url || !url.includes('res.cloudinary.com') || !url.includes('/upload/')) return url;
+    return url.replace('/upload/', `/upload/q_auto,f_auto,w_${width}/`);
+};
+
+const buildSrcSet = (url, widths) => {
+    if (!url || !url.includes('res.cloudinary.com') || !url.includes('/upload/')) return undefined;
+    return widths.map((w) => `${withCloudinaryWidth(url, w)} ${w}w`).join(', ');
+};
+
 export default function DetailedCardExperience({
     experience,
     categories,
@@ -29,6 +39,10 @@ export default function DetailedCardExperience({
     const [reportSent, setReportSent] = useState(false);
 
     const [error, setError] = useState(null);
+
+    const mainBaseImage = experience.image_url || '/images/placeholder.png';
+    const mainImageSrc = withCloudinaryWidth(mainBaseImage, 1280) || mainBaseImage;
+    const mainImageSrcSet = buildSrcSet(mainBaseImage, [640, 960, 1280, 1600]);
 
     const categoriesText = (categories ?? [])
         .map((cat) => cat?.name)
@@ -113,7 +127,18 @@ export default function DetailedCardExperience({
                 </div>
 
                 <div className={styles.imageContainer}>
-                    <img src={experience.image_url} alt="Imatge de l'experiència" className={styles.image} />
+                    <img
+                        src={mainImageSrc}
+                        srcSet={mainImageSrcSet}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 960px"
+                        alt="Imatge de l'experiència"
+                        width="1280"
+                        height="720"
+                        className={styles.image}
+                        loading="eager"
+                        fetchPriority="high"
+                        decoding="async"
+                    />
                 </div>
 
                 <div className={styles.contentBody}>
@@ -215,6 +240,10 @@ export default function DetailedCardExperience({
                                 .slice(0, 2)
                                 .join(' · ');
 
+                            const relatedBaseImage = related.image_url || '/images/placeholder.png';
+                            const relatedImageSrc = withCloudinaryWidth(relatedBaseImage, 640) || relatedBaseImage;
+                            const relatedImageSrcSet = buildSrcSet(relatedBaseImage, [320, 480, 640]);
+
                             return (
                                 <Link
                                     key={related.id}
@@ -222,10 +251,15 @@ export default function DetailedCardExperience({
                                     className={styles.relatedCard}
                                 >
                                     <img
-                                        src={related.image_url || '/images/placeholder.png'}
+                                        src={relatedImageSrc}
+                                        srcSet={relatedImageSrcSet}
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 320px"
                                         alt={related.title}
+                                        width="640"
+                                        height="360"
                                         className={styles.relatedImage}
                                         loading="lazy"
+                                        decoding="async"
                                     />
                                     <div className={styles.relatedContent}>
                                         <h4>{related.title}</h4>
