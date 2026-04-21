@@ -11,6 +11,7 @@ const buildSrcSet = (url, widths) => {
 };
 
 export default function Hero({ variant = 'guest', user = null, createExperienceUrl = '#', compactOverlay = false }) {
+    // Hero amb imatge optimitzada: prioritat alta perquè és contingut above-the-fold.
     const heroBaseImage = 'https://res.cloudinary.com/dadhzxpnj/image/upload/v1774030117/heroPhoto_skug90.jpg';
     const heroSrc = withCloudinaryWidth(heroBaseImage, 1200) || heroBaseImage;
     const heroSrcSet = buildSrcSet(heroBaseImage, [400, 800, 1200, 1600]);

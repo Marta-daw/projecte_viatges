@@ -6,6 +6,7 @@ import CardExperience from '@/Components/CardExperience/CardExperience.jsx';
 import Hero from '@/Components/Hero/Hero.jsx';
 
 export default function HomeViatges({ llista = [], pagination = {} }) {
+    // L'estat d'autenticació determina si activem la càrrega progressiva.
     const { auth } = usePage().props;
     const isAuthenticated = Boolean(auth?.user);
 
@@ -24,6 +25,7 @@ export default function HomeViatges({ llista = [], pagination = {} }) {
     }, [llista, pagination?.current_page, pagination?.has_more_pages]);
 
     const loadMore = useCallback(async () => {
+        // Evitem peticions duplicades i bloquegem la paginació per visitants.
         if (!isAuthenticated || isLoading || !hasMore) return;
 
         const nextPage = currentPage + 1;
@@ -45,6 +47,7 @@ export default function HomeViatges({ llista = [], pagination = {} }) {
             const incoming = data?.data ?? [];
 
             setExperiences((prev) => {
+                // Eliminem possibles duplicats si hi ha solapament entre pàgines.
                 const existingIds = new Set(prev.map((item) => item.id));
                 const uniqueIncoming = incoming.filter((item) => !existingIds.has(item.id));
                 return [...prev, ...uniqueIncoming];
@@ -60,6 +63,7 @@ export default function HomeViatges({ llista = [], pagination = {} }) {
     }, [currentPage, hasMore, isLoading, isAuthenticated, perPage]);
 
     useEffect(() => {
+        // Observer del sentinel per disparar l'infinite scroll abans d'arribar al final.
         if (!loaderRef.current || !hasMore) return;
 
         const observer = new IntersectionObserver(

@@ -1,6 +1,7 @@
 import { Link } from '@inertiajs/react';
 
 export default function Footer() {
+    // Any dinàmic per evitar manteniment manual del peu de pàgina.
     const currentYear = new Date().getFullYear();
 
     return (

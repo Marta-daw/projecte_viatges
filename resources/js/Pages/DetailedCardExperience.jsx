@@ -7,11 +7,13 @@ import ReactMarkdown from 'react-markdown';
 import remarkBreaks from 'remark-breaks';
 
 const withCloudinaryWidth = (url, width) => {
+    // Apliquem transformació només a URLs Cloudinary (optimització transparent).
     if (!url || !url.includes('res.cloudinary.com') || !url.includes('/upload/')) return url;
     return url.replace('/upload/', `/upload/q_auto,f_auto,w_${width}/`);
 };
 
 const buildSrcSet = (url, widths) => {
+    // Generem srcSet per adaptar pes/definició a cada dispositiu.
     if (!url || !url.includes('res.cloudinary.com') || !url.includes('/upload/')) return undefined;
     return widths.map((w) => `${withCloudinaryWidth(url, w)} ${w}w`).join(', ');
 };
@@ -50,6 +52,7 @@ export default function DetailedCardExperience({
         .join(', ');
 
     const handleVote = (value) => {
+        // Flux de votació idempotent: repetir vot = retirar vot.
         if (!isAutenticated) return setError('Cal iniciar sessió per votar aquesta experiència.');
         if (votesLoading) return;
 
@@ -90,6 +93,7 @@ export default function DetailedCardExperience({
     }
 
     const handleReport = () => {
+        // Modal de report amb validació mínima i feedback visual.
         if (!isAutenticated) return setError('Cal iniciar sessió per reportar aquesta experiència.');
         if (reportLoading) return;
 
@@ -226,6 +230,7 @@ export default function DetailedCardExperience({
             </article>
 
             {relatedExperiences.length > 0 && (
+                // Bloc de descoberta: millora retenció mostrant contingut similar.
                 <section className={styles.relatedSection}>
                     <div className={styles.relatedHeader}>
                         <h3>Experiències relacionades</h3>
