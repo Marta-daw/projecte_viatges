@@ -2,8 +2,6 @@ import styles from './CardExperience.module.scss';
 import { Link, router } from '@inertiajs/react';
 import { FaRegThumbsUp, FaRegThumbsDown } from 'react-icons/fa';
 import PropTypes from 'prop-types';
-import ReactMarkdown from 'react-markdown';
-import remarkBreaks from 'remark-breaks';
 
 function CardExperience({ experience, isAuthenticated, showActions = true, compact = false }) {
     return (
@@ -33,10 +31,8 @@ function CardExperience({ experience, isAuthenticated, showActions = true, compa
                 <Link href={`/experiencia/${experience.id}`} className="block hover:no-underline">
                     <div className={styles.textCard}>
                         <h5 className={styles.cardTitle}> {experience.title} </h5>
-                        <div className={styles.cardDescription}>
-                            <ReactMarkdown remarkPlugins={[remarkBreaks]}>
-                                {experience.body || ''}
-                            </ReactMarkdown>
+                        <div className={`text-justify ${styles.cardDescription}`}>
+                            {experience.body || ''}
                         </div>
                     </div>
                 </Link>
