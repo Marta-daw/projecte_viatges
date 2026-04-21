@@ -15,6 +15,12 @@ class ExperienceController extends Controller
 
     public function index() {}
 
+    /**
+     * Llista d'experiències pròpies de l'usuari autenticat.
+     *
+     * Retorna només publicades o esborrany, amb comptadors de vots i permisos
+     * d'acció precomputats per simplificar el renderitzat al frontend.
+     */
     public function myExperiences()
     {
         $user = Auth::user();
@@ -52,6 +58,11 @@ class ExperienceController extends Controller
         ]);
     }
 
+    /**
+     * Crea una nova experiència a partir del formulari Inertia.
+     *
+     * També resol la pujada d'imatge i l'enllaç opcional de categoria.
+     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -95,6 +106,13 @@ class ExperienceController extends Controller
             ->with('success', 'Experiència creada correctament! 🎉');
     }
 
+    /**
+     * Mostra el detall d'una experiència i prepara dades derivades:
+     * - vot de l'usuari autenticat
+     * - recompte de vots positius/negatius
+     * - estat de report
+     * - experiències relacionades (mateixa categoria + fallback)
+     */
     public function show($id)
     {
         // Busquem l'experiència o llançem un error 404 si no existeix
@@ -175,6 +193,9 @@ class ExperienceController extends Controller
         return redirect()->route('experiences.index');
     }
 
+    /**
+     * Carrega dades per al formulari d'edició d'una experiència existent.
+     */
     public function edit($id)
     {
         // Busquem l'experiència o llançem un error 404 si no existeix
@@ -197,6 +218,9 @@ class ExperienceController extends Controller
         ]);
     }
 
+    /**
+     * Actualitza una experiència existent validant camps i imatge opcional.
+     */
     public function update(Request $request, Experiencia $experiencia)
     {
         // Busquem l'experiència o llançem un error 404 si no existeix
@@ -228,6 +252,9 @@ class ExperienceController extends Controller
             ->with('success', 'Experiència actualitzada correctament!');
     }
 
+    /**
+     * Elimina una experiència pròpia.
+     */
     public function destroy($id)
     {
         // Busquem l'experiència o llançem un error 404 si no existeix

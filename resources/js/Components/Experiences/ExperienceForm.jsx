@@ -12,6 +12,7 @@ import SelectOption from '../SelectOption';
 import styles from './ExperienceForm.module.scss';
 
 export default function ExperienceForm() {
+    // Referència directa a l'input natiu per poder reiniciar-lo després d'enviar.
     const fileInputRef = useRef(null);
     const [fileName, setFileName] = useState('Cap arxiu seleccionat');
 
@@ -57,6 +58,7 @@ export default function ExperienceForm() {
     }
 
     function handleSubmit(e) {
+        // Punt únic d'enviament: mapegem claus del formulari a claus backend.
         e.preventDefault();
 
         // Abans d'enviar, transformem els noms de les propietats 
@@ -196,6 +198,7 @@ export default function ExperienceForm() {
                 </div >
 
                 {/* Buttons wrapper */}
+                {/* Dos fluxos de publicació amb el mateix formulari: esborrany o publicada. */}
                 <div className="flex flex-wrap justify-end gap-4 mt-6">
                     <SecondaryButton
                         type="submit"

@@ -4,6 +4,7 @@ import AuthDropdown from '../AuthDropdown/AuthDropdown';
 import styles from './Header.module.scss';
 
 function Header() {
+    // Header global de la zona pública: logo + menú contextual d'autenticació.
     const { auth } = usePage().props;
 
     return (

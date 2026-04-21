@@ -4,6 +4,7 @@ import GuestLayout from '@/Layouts/GuestLayout.jsx';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
 export default function PublicUserProfile({ profileUser, experiences = [], stats = {} }) {
+    // Aquesta vista s'adapta al context: layout privat si hi ha sessió, guest si no.
     const { auth } = usePage().props;
     const isAuthenticated = !!auth?.user;
     const publishedCount = stats?.published_count ?? experiences.length;
@@ -114,6 +115,7 @@ export default function PublicUserProfile({ profileUser, experiences = [], stats
 }
 
 PublicUserProfile.layout = (page) => {
+    // Seleccionem layout segons context d'autenticació per reutilitzar la mateixa pàgina.
     if (page.props.auth?.user) {
         return (
             <AuthenticatedLayout

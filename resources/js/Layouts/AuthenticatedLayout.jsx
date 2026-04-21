@@ -8,12 +8,14 @@ import Footer from '@/Components/Footer/Footer.jsx';
 import { useFlashToast } from '@/hooks/useFlashToast';
 
 export default function AuthenticatedLayout({ header, children }) {
+    // Layout principal de zona privada: navegació, contingut i footer.
     const user = usePage().props.auth?.user;
     useFlashToast();
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     const getInitials = (name) => {
+        // Fallback visual quan l'usuari no té avatar.
         return name
             .split(' ')
             .map(n => n[0])
