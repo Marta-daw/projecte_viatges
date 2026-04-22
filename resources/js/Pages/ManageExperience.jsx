@@ -5,6 +5,7 @@ import styles from './ManageExperience.module.scss';
 import { usePage } from '@inertiajs/react';
 
 export default function ManageExperience() {
+    // Dades injectades pel controlador: experiències pròpies + flag d'autenticació.
     const { experiencies = [], isAuthenticated } = usePage().props;
 
     return (
@@ -21,6 +22,7 @@ export default function ManageExperience() {
                 </div>
 
                 {experiencies.length > 0 ? (
+                    // Grid compacta orientada a gestió ràpida (editar/eliminar).
                     <div className={styles.manageGrid}>
                         {experiencies.map(exp => (
                             <div key={exp.id} className={styles.gridItem}>

@@ -13,8 +13,7 @@ export default function Header() {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        < nav className="border-b border-gray-200 dark:border-zinc-800 transition-colors duration-300" style={{ backgroundColor: 'var(--ivory-beige)' }
-        }>
+        <nav className="border-b border-gray-200 dark:border-zinc-800 transition-colors duration-300" style={{ backgroundColor: 'var(--ivory-beige)' }}>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-20 justify-between">
                     <div className="flex">
@@ -60,6 +59,6 @@ export default function Header() {
                     <AuthDropdown user={user} />
                 </div>
             </div>
-        </nav >
+        </nav>
     );
 }

@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
-use App\Models\Experiencia;
-use App\Models\User;
 
 class ReportSeeder extends Seeder
 {
@@ -14,28 +12,48 @@ class ReportSeeder extends Seeder
     {
         DB::table('reports')->delete();
 
-        // Assegurem que l'experiència 1 està marcada com a reportada
-        DB::table('experiences')->where('id', 1)->update(['is_reported' => true]);
+        $users = DB::table('users')->pluck('id')->all();
+        $publishedExperienceIds = DB::table('experiences')
+            ->where('status', 'publicada')
+            ->pluck('id')
+            ->all();
 
-        $reports = [
-            [
-                'user_id' => 3,
-                'experience_id' => 1,
-                'reason' => 'Aquesta ruta és perillosa i la descripció no ho avisa.',
-                'status' => 'pending',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'user_id' => 1, // Admin (per exemple)
-                'experience_id' => 1,
-                'reason' => 'He rebut diverses queixes externes.',
-                'status' => 'pending',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ]
+        if (count($users) < 1 || count($publishedExperienceIds) < 1) {
+            return;
+        }
+
+        // Reset flag i marquem algunes experiències com reportades
+        DB::table('experiences')->update(['is_reported' => false]);
+
+        $reportedIds = collect($publishedExperienceIds)->shuffle()->take(min(5, count($publishedExperienceIds)))->values();
+
+        $sampleReasons = [
+            'Contingut confús o amb informació incompleta.',
+            'El text inclou dades que poden no ser correctes.',
+            'Descripció massa breu per entendre bé la ruta.',
+            'Possible contingut duplicat d’una altra experiència.',
+            'Llenguatge poc adequat en alguns fragments.',
         ];
 
-        DB::table('reports')->insert($reports);
+        $now = Carbon::now();
+        $rows = [];
+
+        foreach ($reportedIds as $experienceId) {
+            $reporterId = $users[array_rand($users)];
+
+            $rows[] = [
+                'user_id' => $reporterId,
+                'experience_id' => $experienceId,
+                'reason' => $sampleReasons[array_rand($sampleReasons)],
+                'status' => random_int(1, 100) <= 75 ? 'pending' : 'reviewed',
+                'created_at' => $now->copy()->subHours(random_int(1, 72)),
+                'updated_at' => $now,
+            ];
+        }
+
+        if (!empty($rows)) {
+            DB::table('reports')->insert($rows);
+            DB::table('experiences')->whereIn('id', $reportedIds->all())->update(['is_reported' => true]);
+        }
     }
 }

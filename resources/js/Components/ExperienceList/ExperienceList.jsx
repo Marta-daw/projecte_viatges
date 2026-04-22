@@ -3,10 +3,12 @@ import CardExperience from '../CardExperience/CardExperience.jsx';
 import { usePage } from '@inertiajs/react';
 
 function ExperienceList({ experiences, showActions = true }) {
+    // Mostrem només publicades en aquest llistat comunitari.
     const published = experiences.filter(e => e.status === 'publicada');
     const isCentered = published.length < 3;
 
     const { auth } = usePage().props;
+    // El to del títol i accions canvia segons autenticació.
     const isAuthenticated = !!auth?.user;
 
     return (

@@ -1,6 +1,7 @@
 import { Link, usePage } from '@inertiajs/react';
 
 export default function Footer() {
+    // Any dinàmic per evitar manteniment manual del peu de pàgina.
     const currentYear = new Date().getFullYear();
     const user = usePage().props.auth?.user;
 

@@ -16,6 +16,7 @@ const opcionsOrdenar = [
 ];
 
 export default function Dashboard({ llista, categories }) {
+    // Usuari autenticat per personalitzar el Hero i accions del dashboard.
     const { auth } = usePage().props;
     const authUser = auth?.user;
 
@@ -31,6 +32,7 @@ export default function Dashboard({ llista, categories }) {
     const isLoadingRef = useRef(false); // Evita disparaments múltiples ràpids
 
     const filteredExperiences = llista.filter(exp => {
+        // Filtre combinat: categoria + text lliure.
         const matchesCategory = categoryId
             ? (
                 // Comparem com a string per evitar mismatch de tipus
@@ -48,6 +50,7 @@ export default function Dashboard({ llista, categories }) {
     });
 
     const sortedExperiences = [...filteredExperiences].sort((a, b) => {
+        // Ordenació client-side per resposta immediata de la UI.
         if (!sortOption) return 0;
 
         switch (sortOption) {
@@ -74,6 +77,7 @@ export default function Dashboard({ llista, categories }) {
     });
 
     // Derivats de llista per a fer el Lazy Loading
+    // Mostrem trams de resultats per millorar rendiment i percepció de fluïdesa.
     const visibleExperiences = sortedExperiences.slice(0, visibleCount);
     const canLoadMore = visibleCount < sortedExperiences.length;
 

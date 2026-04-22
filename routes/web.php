@@ -15,6 +15,7 @@ use Inertia\Inertia;
 
 // Rutes públiques
 Route::get('/', [HomeController::class, 'index'])->name('HomeViatges');
+Route::get('/experiencies/load-more', [HomeController::class, 'loadMore'])->name('experiences.loadMore');
 Route::get('/usuari/{user}', [PublicUserController::class, 'show'])->name('users.public.show');
 Route::get('/politica-privacitat', function () {
     return Inertia::render('PrivacyPolicy');
