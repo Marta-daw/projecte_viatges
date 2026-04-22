@@ -1,0 +1,210 @@
+$color-bg: #E8E3D9;
+$color-text: #7F5539;
+
+.userDropdownContainer {
+    position: relative;
+}
+
+.userButton {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.avatarImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatarFallback {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #2563eb;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.2;
+}
+
+.userName {
+    font-weight: 500;
+    color: #374151;
+}
+
+.userRole {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #ca8a04;
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    z-index: 50;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+
+.dropdownItem {
+    display: block;
+    padding: 10px 16px;
+    color: #374151;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: #f3f4f6;
+    }
+}
+
+.dropdownItemLogout {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px 16px;
+    color: #dc2626;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: #fef2f2;
+    }
+}
+
+.authButtons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 999;
+}
+
+.sideDrawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 400px;
+    background-color: $color-bg;
+    z-index: 1000;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.drawerHeader {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba($color-text, 0.1);
+
+    h2 {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: $color-text;
+    }
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+
+    svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        color: #333;
+    }
+}
+
+.drawerTabs {
+    display: flex;
+    padding: 1rem 1.5rem 0;
+    gap: 0.5rem;
+    background: rgba(0, 0, 0, 0.02);
+
+    .tabButton {
+        flex: 1;
+        padding: 0.75rem;
+        border: none;
+        background: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #666;
+        cursor: pointer;
+        border-radius: 8px 8px 0 0;
+        transition: all 0.2s;
+
+        &:hover {
+            color: $color-text;
+        }
+    }
+
+    .activeTab {
+        background-color: $color-bg;
+        color: $color-text;
+        box-shadow: 0 -2px 0 $color-text inset;
+    }
+}
+
+.drawerContent {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem 1.5rem;
+}

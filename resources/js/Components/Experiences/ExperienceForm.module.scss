@@ -1,0 +1,77 @@
+.formWrapper {
+    @media (max-width: 768px) {
+        padding: 1.5rem 1.25rem;
+        margin: 1rem 0.5rem;
+    }
+
+    h2 {
+        @media (max-width: 768px) {
+            font-size: var(--font-size-xl);
+            margin-bottom: 1.25rem;
+        }
+    }
+}
+
+.fieldGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-bottom: 1.25rem;
+}
+
+.fileInputLabel {
+    font-family: var(--font-secundaria);
+    font-size: var(--font-size-small);
+    font-weight: 600;
+    color: var(--ivory-beige);
+    background-color: var(--red-needle);
+    border: none;
+    border-radius: 8px;
+    padding: 0.55rem 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    white-space: nowrap;
+
+    &:hover {
+        background-color: var(--brown-compass);
+        transform: translateY(-1px);
+    }
+}
+
+.submitBtn {
+    font-family: var(--font-principal);
+    font-size: var(--font-size-medium);
+    font-weight: 700;
+    color: var(--ivory-beige);
+    background-color: var(--red-needle);
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 2rem;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    letter-spacing: 0.04em;
+    transition: background-color 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
+
+    &:hover:not(:disabled) {
+        background-color: var(--brown-compass);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(107, 58, 42, 0.25);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+.buttonsContainer {
+    @media (max-width: 768px) {
+        flex-direction: column;
+
+        button {
+            width: 100% !important;
+            justify-content: center;
+        }
+    }
+}

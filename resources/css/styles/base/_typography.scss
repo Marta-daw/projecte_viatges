@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;500;600&display=swap');
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-principal);
+    //color: var(--blue-needle);
+    color: var(--brown-compass);
+    font-weight: bold;
+}
+
+header,
+footer {
+    background-color: var(--warm-sand-darker);
+    color: var(--brown-compass);
+    font-family: var(--font-principal);
+    //font-size: var(--font-size-xxl);
+}
+
+body {
+    background-color: var(--ivory-beige);
+}
+
+p {
+    font-family: var(--font-secundaria);
+    color: var(--blackt-text);
+    font-size: var(--font-size-medium);
+}
+
+.containerLoginRegister {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 85%;
+    margin: 0 auto 12px auto;
+    gap: 2rem;
+}

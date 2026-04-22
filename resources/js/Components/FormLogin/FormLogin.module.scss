@@ -1,0 +1,94 @@
+$color-text: #7F5539;
+$color-btn-bg: #282F3B;
+$color-btn-text: #ffffff;
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 1rem;
+
+    h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #111;
+    }
+
+    p {
+        color: #666;
+        font-size: 0.9rem;
+        margin-top: 0.25rem;
+    }
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: $color-text;
+}
+
+.input {
+    padding: 0.75rem !important;
+    border: 1px solid #ddd !important;
+    border-radius: 8px !important;
+    background: #fff !important;
+    font-size: 0.95rem !important;
+
+    &:focus {
+        border-color: #3B82F6 !important;
+        ring: 2px rgba(59, 130, 246, 0.1) !important;
+    }
+}
+
+.error {
+    color: #dc2626;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.rememberMe {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #666;
+    cursor: pointer;
+
+    label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+    }
+
+    input {
+        cursor: pointer;
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.submitBtn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.85rem !important;
+    background: $color-btn-bg !important;
+    color: $color-btn-text !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+    transition: background 0.2s !important;
+
+    &:hover {
+        background: #1e293b !important;
+    }
+}

@@ -1,0 +1,37 @@
+.grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1280px) {
+    .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.centered {
+    justify-content: center;
+}
+
+.homeViatgesH1 {
+    font-size: var(--font-size-h1);
+    color: var(--brown-compass);
+    text-align: center;
+    margin: 24px auto 12px auto;
+    padding: 10px 20px;
+    width: fit-content;
+    border: 1px solid var(--medium-bronze);
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}

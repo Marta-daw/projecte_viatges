@@ -6,6 +6,7 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { useRef, useState } from 'react';
+import styles from './Partials.module.scss';
 
 export default function DeleteUserForm({ className = '' }) {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
@@ -46,41 +47,42 @@ export default function DeleteUserForm({ className = '' }) {
     };
 
     return (
-        <section className={`space-y-6 ${className}`}>
-            <header>
-                <h2 className="text-lg font-medium text-gray-900">
-                    Delete Account
+        <section className={` ${styles.updateProfile}`}>
+            <header className={styles.headerSection}>
+                <h2 className={`text-lg font-medium text-gray-900 ${styles.titleSection}`}>
+                    Eliminar el compte
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-600">
-                    Once your account is deleted, all of its resources and data
-                    will be permanently deleted. Before deleting your account,
-                    please download any data or information that you wish to
-                    retain.
+                    Un cop eliminada el teu compte, tots els recursos i dades
+                    s'eliminaràn permanentment. Abans d'eliminar el teu compte,
+                    descarrega qualsevol dada o informació que desitgis conservar.
                 </p>
             </header>
 
-            <DangerButton onClick={confirmUserDeletion}>
-                Delete Account
-            </DangerButton>
-
+            {/* <div className="ml-6 mb-6" style={{ marginBottom: '1rem' }}> */}
+            <div className={`pt-0 px-6 space-y-6 ${styles.deleteSection}`}>
+                <DangerButton onClick={confirmUserDeletion}>
+                    Eliminar el compte
+                </DangerButton>
+            </div>
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
                 <form onSubmit={deleteUser} className="p-6">
                     <h2 className="text-lg font-medium text-gray-900">
-                        Are you sure you want to delete your account?
+                        Estàs segur que vols eliminar el teu compte?
                     </h2>
 
                     <p className="mt-1 text-sm text-gray-600">
-                        Once your account is deleted, all of its resources and
-                        data will be permanently deleted. Please enter your
-                        password to confirm you would like to permanently delete
-                        your account.
+                        Un cop eliminada el teu compte, tots els recursos i dades
+                        s'eliminaràn permanentment. Si us plau, introdueix la teva
+                        contrasenya per confirmar que vols eliminar permanentment
+                        el teu compte.
                     </p>
 
                     <div className="mt-6">
                         <InputLabel
                             htmlFor="password"
-                            value="Password"
+                            value="Contrasenya"
                             className="sr-only"
                         />
 
@@ -106,11 +108,11 @@ export default function DeleteUserForm({ className = '' }) {
 
                     <div className="mt-6 flex justify-end">
                         <SecondaryButton onClick={closeModal}>
-                            Cancel
+                            Cancelar
                         </SecondaryButton>
 
                         <DangerButton className="ms-3" disabled={processing}>
-                            Delete Account
+                            Eliminar el compte
                         </DangerButton>
                     </div>
                 </form>

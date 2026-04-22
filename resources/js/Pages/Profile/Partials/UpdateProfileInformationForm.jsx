@@ -3,7 +3,9 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
-import { Link, useForm, usePage } from '@inertiajs/react';
+import { Link, useForm, usePage, router } from '@inertiajs/react';
+import styles from './Partials.module.scss';
+
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -16,29 +18,34 @@ export default function UpdateProfileInformation({
         useForm({
             name: user.name,
             email: user.email,
+            bio: user.bio || "",
+            avatar_url: user.avatar_url || "",
+            avatar: null,
+            remove_avatar: false,
         });
 
     const submit = (e) => {
         e.preventDefault();
 
-        patch(route('profile.update'));
+        patch(route('profile.update'), {
+            forceFromData: true,
+        });
     };
 
     return (
-        <section className={className}>
-            <header>
-                <h2 className="text-lg font-medium text-gray-900">
-                    Profile Information
+        <section className={styles.updateProfile}>
+            <header className={styles.headerSection}>
+                <h2 className={`text-lg font-medium text-gray-900 ${styles.titleSection}`}>
+                    Informació del perfil
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-600">
-                    Update your account's profile information and email address.
+                    Actualitza la teva informació del perfil, la direcció de correu, la biografia i la imatge per l'avatar.
                 </p>
             </header>
-
-            <form onSubmit={submit} className="mt-6 space-y-6">
+            <form onSubmit={submit} className={`pt-6 px-6 space-y-6 ${styles.formSection}`}>
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="name" value="Nom" />
 
                     <TextInput
                         id="name"
@@ -69,31 +76,115 @@ export default function UpdateProfileInformation({
                     <InputError className="mt-2" message={errors.email} />
                 </div>
 
+                <div>
+                    <InputLabel htmlFor="bio" value="Bio" />
+
+                    <textarea
+                        id="bio"
+                        type="text"
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        value={data.bio}
+                        onChange={(e) => setData('bio', e.target.value)}
+                        autoComplete="bio"
+                    />
+
+                    <InputError className="mt-2" message={errors.bio} />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="avatar_url" value="Avatar URL" />
+
+                    <TextInput
+                        id="avatar_url"
+                        type="text"
+                        className="mt-1 block w-full"
+                        value={data.avatar_url}
+                        onChange={(e) => setData('avatar_url', e.target.value)}
+                        readOnly={data.avatar !== null}
+                        Placeholder="Es generarà automàticament en pujar un fitxer"
+                    />
+
+                    <InputError
+                        className="mt-2"
+                        message={errors.avatar_url}
+                    />
+                </div>
+                <div>
+                    <InputLabel htmlFor="avatar" value="Avatar (fitxer)" />
+                    <div className="flex flex-row items-center">
+                        <input
+                            id="avatar"
+                            type="file"
+                            accept="image/*"
+                            className="mt-1 block w-full"
+                            onChange={(e) => {
+                                const file = e.target.files?.[0] ?? null;
+                                setData('avatar', file);
+                                if (file) {
+                                    setData('avatar_url', URL.createObjectURL(file));
+                                } else {
+                                    setData('avatar_url', '');
+                                }
+                            }}
+                        />
+                        <InputError className="mt-2" message={errors.avatar} />
+
+                        <PrimaryButton
+                            className="mr-4"
+                            onClick={() => {
+                                setData('avatar', null);
+                                document.getElementById('avatar').value = '';
+                            }}
+                        >
+                            Eliminar fitxer
+                        </PrimaryButton>
+
+                        <PrimaryButton type="button" className={`text-lg text-red-600 ${styles.deleteAvatarBtn}`}
+                            onClick={() => {
+                                router.post(route('profile.update'), {
+                                    name: data.name,
+                                    email: data.email,
+                                    bio: data.bio,
+                                    remove_avatar: 1,
+                                    _method: 'PATCH',
+                                }, {
+                                    onSuccess: () => {
+                                        setData('avatar_url', '');
+                                        setData('avatar', null);
+                                        setData('remove_avatar', false);
+                                    }
+                                });
+                            }}
+                        >
+                            Eliminar foto
+                        </PrimaryButton>
+                    </div>
+                </div>
+
                 {mustVerifyEmail && user.email_verified_at === null && (
                     <div>
                         <p className="mt-2 text-sm text-gray-800">
-                            Your email address is unverified.
+                            El teu coorreu no està verificat.
                             <Link
                                 href={route('verification.send')}
                                 method="post"
                                 as="button"
                                 className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             >
-                                Click here to re-send the verification email.
+                                Fes clic aquí per reenviar el correu de verificació.
                             </Link>
                         </p>
 
                         {status === 'verification-link-sent' && (
                             <div className="mt-2 text-sm font-medium text-green-600">
-                                A new verification link has been sent to your
-                                email address.
+                                S'ha enviat un nou enllaç de verificació al teu correu.
                             </div>
                         )}
                     </div>
                 )}
 
-                <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                <div className="flex items-center gap-4 ">
+                    <PrimaryButton className="mb-6" disabled={processing}>Guarda</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
@@ -103,11 +194,11 @@ export default function UpdateProfileInformation({
                         leaveTo="opacity-0"
                     >
                         <p className="text-sm text-gray-600">
-                            Saved.
+                            Guardat.
                         </p>
                     </Transition>
                 </div>
             </form>
-        </section>
+        </section >
     );
 }

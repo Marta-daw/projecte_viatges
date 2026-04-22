@@ -1,18 +1,22 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
+import ApplicationLogo from '@/Components/AppLogo/AppLogo';
 import { Link } from '@inertiajs/react';
+import Header from '@/Components/Header/Header.jsx';
+import Footer from '@/Components/Footer/Footer.jsx';
 
-export default function GuestLayout({ children }) {
+export default function GuestLayout({ children, fullWidth = false }) {
     return (
-        <div className="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
-            <div>
-                <Link href="/">
-                    <ApplicationLogo className="h-20 w-20 fill-current text-gray-500" />
-                </Link>
-            </div>
+        <div className="flex flex-col min-h-screen bg-gray-100">
+            <Header />
 
-            <div className="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg">
-                {children}
-            </div>
+            <main className={fullWidth ? 'flex-grow' : 'flex-grow flex flex-col items-center pt-10 sm:pt-20'}>
+                {fullWidth ? children :
+                    <div className="w-full sm:max-w-md mt-6 px-6 py-8 bg-white shadow-md overflow-hidden sm:rounded-lg">
+                        {children}
+                    </div>
+                }
+            </main>
+
+            <Footer />
         </div>
     );
 }

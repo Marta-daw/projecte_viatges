@@ -8,6 +8,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+
+use Illuminate\Support\Facades\Storage;
+
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -29,15 +32,43 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+        $data = $request->validated();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        // Eliminar avatar si es demana
+        if (!empty($data['remove_avatar'])) {
+            if ($user->avatar) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+            $data['avatar'] = null;
+            $data['avatar_url'] = null;
         }
 
-        $request->user()->save();
+        // Pujar nou avatar
+        if ($request->hasFile('avatar')) {
+            if ($user->avatar) {
+                Storage::disk('public')->delete($user->avatar); // elimina l'anterior
+            }
+            $path = $request->file('avatar')->store('avatars', 'public');
+            $data['avatar'] = $path;
+            $data['avatar_url'] = '/storage/' . $path;
+        }
 
-        return Redirect::route('profile.edit');
+        $user->fill([
+            'name'       => $data['name'] ?? $user->name,
+            'email'      => $data['email'] ?? $user->email,
+            'bio'        => $data['bio'] ?? $user->bio,
+            'avatar_url' => array_key_exists('avatar_url', $data) ? $data['avatar_url'] : $user->avatar_url,
+            'avatar'     => array_key_exists('avatar', $data) ? $data['avatar'] : $user->avatar,
+        ]);
+
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
+        
+        $user->save();
+
+        return back()->with('success', 'Perfil actualitzat correctament.');
     }
 
     /**

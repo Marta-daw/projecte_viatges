@@ -22,6 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_banned',
+        'bio',
+        'avatar_url',
     ];
 
     /**
@@ -45,5 +48,23 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // Un usuari pot crear moltes experiències
+    public function experiences()
+    {
+        return $this->hasMany(Experiencia::class);
+    }
+
+    // Un usuari pot votar moltes experiències (i viceversa)
+    public function votes()
+    {
+        return $this->belongsToMany(Experiencia::class, 'votes', 'user_id', 'experience_id')->withTimestamps();
+    }
+
+    // Un usuari pot reportar moltes experiències
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'user_id');
     }
 }
