@@ -65,6 +65,9 @@ export default function AuthDropdown({ user }) {
                         <Link href={route('profile.edit')} className={styles.dropdownItem}>
                             Perfil
                         </Link>
+                        <Link href={route('experiences.myExperiencies')} className={styles.dropdownItem}>
+                            Les meves experiències
+                        </Link>
                         {user?.role === "admin" && (
                             <Link href={route('admin.dashboard')} className={styles.dropdownItem}>
                                 Admin Dashboard
