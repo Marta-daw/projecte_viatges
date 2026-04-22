@@ -98,3 +98,38 @@ $color-focus: #3B82F6;
     overflow-y: auto;
     padding: 2rem 1.5rem;
 }
+
+:global(.dark) .panelContainer {
+    background: #1e1e1b !important;
+}
+
+:global(.dark) .title {
+    color: #f4f4f5 !important;
+}
+
+:global(.dark) .closeButton {
+    color: #a1a1aa !important;
+}
+
+:global(.dark) .closeButton:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+}
+
+:global(.dark) .tabs {
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+:global(.dark) .tabButton {
+    color: #a1a1aa !important;
+}
+
+:global(.dark) .tabButton:hover {
+    color: #f4f4f5 !important;
+}
+
+:global(.dark) .tabButton.active {
+    background: #1e1e1b !important;
+    color: #f4f4f5 !important;
+    box-shadow: 0 -2px 0 #e2b39a inset !important;
+}

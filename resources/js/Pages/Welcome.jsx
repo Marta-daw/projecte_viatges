@@ -5,7 +5,7 @@ import CardExperience from '@/Components/CardExperience/CardExperience.jsx';
 
 export default function Welcome({ experiences }) {
     return (
-        <div className="flex flex-col min-h-screen bg-gray-50">
+        <div className="flex flex-col min-h-screen bg-gray-50 transition-colors duration-300 dark:bg-zinc-900">
             <Head title="Inici" />
 
             <Header />
@@ -17,16 +17,20 @@ export default function Welcome({ experiences }) {
                         alt="Hero Destino Incierto"
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70"
                     />
-                    <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4">
-                        <h2 className="text-5xl font-bold mb-4 drop-shadow-lg">Benvinguts a Destino Incierto</h2>
-                        <p className="text-xl drop-shadow-md max-w-2xl">
-                            Descobreix racons amagats, comparteix les teves rutes i inspira't amb la nostra comunitat de viatgers.
+                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 bg-black/30">
+                        <h2 className="text-5xl font-bold mb-4 drop-shadow-lg !text-white">
+                            Benvingut a Destino Incierto
+                        </h2>
+                        <p className="text-xl drop-shadow-md max-w-2xl !text-gray-100">
+                            Descobreix experiències úniques i viatges extraordinaris.
                         </p>
                     </div>
                 </div>
 
                 <div className="max-w-7xl mx-auto px-4 py-12">
-                    <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">Últimes Experiències Publicades</h3>
+                    <h3 className="text-3xl font-bold text-gray-900 dark:text-white transition-colors duration-300 mb-8 text-center">
+                        Últimes Experiències Publicades
+                    </h3>
 
                     {experiences && experiences.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -39,7 +43,7 @@ export default function Welcome({ experiences }) {
                             ))}
                         </div>
                     ) : (
-                        <p className="text-center text-gray-500">Encara no hi ha experiències publicades.</p>
+                        <p className="text-center text-gray-500 dark:text-gray-400">Encara no hi ha experiències publicades.</p>
                     )}
                 </div>
             </main>

@@ -4,34 +4,36 @@ import Footer from '@/Components/Footer/Footer.jsx';
 
 export default function TermsOfUse() {
     return (
-        <div className="min-h-screen flex flex-col" style={{ backgroundColor: 'var(--ivory-beige)' }}>
+        <div className="min-h-screen flex flex-col bg-transparent transition-colors duration-300">
             <Head title="Condicions d'Ús" />
             <Header />
 
             <main className="flex-grow px-4 py-10 sm:px-6 lg:px-8">
-                <section className="mx-auto w-full max-w-4xl rounded-2xl border p-6 sm:p-10" style={{
-                    backgroundColor: 'rgba(255,255,255,0.72)',
-                    borderColor: 'rgba(45,74,107,0.15)',
-                    boxShadow: '0 16px 34px rgba(61, 32, 16, 0.10)'
-                }}>
+                <section className="mx-auto w-full max-w-4xl rounded-2xl border p-6 sm:p-10 
+                                  bg-white/80 dark:bg-[#1e1e1b] 
+                                  border-blue-900/10 dark:border-zinc-800 
+                                  shadow-[0_16px_34px_rgba(61,32,16,0.1)] dark:shadow-none 
+                                  transition-colors duration-300">
+
                     <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
                         <h1 className="text-3xl sm:text-4xl font-bold" style={{ color: 'var(--brown-compass)' }}>
                             Condicions d'Ús
                         </h1>
+
+                        {/* AQUÍ ESTABA EL ERROR: Restaurado a HomeViatges */}
                         <Link
                             href={route('HomeViatges')}
-                            className="inline-flex items-center rounded-full border px-4 py-2 text-sm font-semibold transition"
-                            style={{
-                                color: 'var(--blue-needle)',
-                                borderColor: 'rgba(45,74,107,0.25)',
-                                backgroundColor: 'rgba(45,74,107,0.06)'
-                            }}
+                            className="inline-flex items-center rounded-full border px-4 py-2 text-sm font-semibold transition
+                                     text-[#2D4A6B] dark:text-blue-400 
+                                     border-[#2D4A6B]/25 dark:border-blue-500/30 
+                                     bg-[#2D4A6B]/5 dark:bg-blue-500/10
+                                     hover:bg-[#2D4A6B]/10 dark:hover:bg-blue-500/20"
                         >
                             Tornar a l'inici
                         </Link>
                     </div>
 
-                    <p className="mb-8 leading-7" style={{ color: 'var(--earth-grey)' }}>
+                    <p className="mb-8 leading-7 text-gray-500 dark:text-gray-400">
                         Aquest document és un text demostratiu per a la pàgina de condicions d'ús. Pots substituir-lo més endavant
                         per condicions legals reals adaptades al teu projecte.
                     </p>

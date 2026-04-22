@@ -54,7 +54,7 @@
 .benvingutH1 {
     font-size: var(--font-size-h1);
     margin-bottom: var(--spacing-medium);
-    color: var(--ivory-beige);
+    color: #ffffff;
 
     @media (max-width: 768px) {
         font-size: var(--font-size-xxl);
@@ -63,7 +63,7 @@
 
 .heroParagraf,
 .pgfUserLog {
-    color: var(--ivory-beige);
+    color: #f3f4f6;
     font-size: var(--font-size-large);
 
     @media (max-width: 768px) {
@@ -107,4 +107,15 @@
         background-color: var(--red-needle);
         color: var(--ivory-beige);
     }
+}
+
+:global(.dark) .ctaButton {
+    background-color: #2d2d2a !important;
+    color: #ffffff !important;
+    border: 1px solid #3f3f46 !important;
+}
+
+:global(.dark) .ctaButton:hover {
+    background-color: var(--red-needle) !important;
+    color: #ffffff !important;
 }

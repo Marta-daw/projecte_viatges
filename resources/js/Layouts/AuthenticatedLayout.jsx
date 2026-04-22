@@ -1,182 +1,23 @@
-import ApplicationLogo from '@/Components/AppLogo/AppLogo';
-import Dropdown from '@/Components/Dropdown';
-import NavLink from '@/Components/NavLink';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Link, usePage } from '@inertiajs/react';
-import { useState } from 'react';
+import Header from '@/Components/Header/Header.jsx';
 import Footer from '@/Components/Footer/Footer.jsx';
 import { useFlashToast } from '@/hooks/useFlashToast';
 
 export default function AuthenticatedLayout({ header, children }) {
-    const user = usePage().props.auth?.user;
     useFlashToast();
 
-    const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
-
-    const getInitials = (name) => {
-        return name
-            .split(' ')
-            .map(n => n[0])
-            .join('')
-            .toUpperCase()
-            .slice(0, 2);
-    };
-
     return (
-        <div className="min-h-screen" style={{ backgroundColor: 'var(--ivory-beige)' }}>
-            <nav className="border-b border-gray-100 bg-white">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="flex h-20 justify-between">
-                        <div className="flex">
-                            <div className="flex shrink-0 items-center">
-                                <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
-                                </Link>
-                            </div>
+        <div className="min-h-screen bg-gray-100 dark:bg-[#121210] flex flex-col transition-colors duration-300">
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
-                                    href={route('dashboard')}
-                                    active={route().current('dashboard')}
-                                >
-                                    Dashboard
-                                </NavLink>
-                            </div>
-                        </div>
-
-                        <div className="hidden sm:ms-6 sm:flex sm:items-center">
-                            <div className="relative ms-3">
-                                <Dropdown>
-                                    <Dropdown.Trigger>
-                                        <span className="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
-                                            >
-                                                {user?.avatar_url ? (
-                                                    <img
-                                                        src={user.avatar_url}
-                                                        alt="Avatar"
-                                                        className="h-12 w-12 mr-5 rounded-full object-cover"
-                                                        loading="lazy"
-                                                        decoding="async"
-                                                    />
-                                                ) : (
-                                                    <div className="h-12 w-12 rounded-full me-2 flex items-center justify-center text-white text-sm font-bold"
-                                                        style={{ backgroundColor: 'var(--blue-needle)' }}
-                                                    >
-                                                        {getInitials(user?.name || 'A')}
-                                                    </div>
-                                                )}
-
-                                                <div className="flex flex-col leading-tight">
-                                                    <span>{user?.name}</span>
-                                                    {user?.role && (
-                                                        <span className="text-xs uppercase" style={{ color: 'var(--gold)' }}>
-                                                            {user.role}
-                                                        </span>
-                                                    )}
-                                                </div>
-                                                <svg
-                                                    className="-me-0.5 ms-2 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fillRule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clipRule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </Dropdown.Trigger>
-
-                                    <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')}>
-                                            Perfil
-                                        </Dropdown.Link>
-
-                                        {user.role === "admin" &&
-                                            <Dropdown.Link href={route('admin.dashboard')}>
-                                                Admin Dashboard
-                                            </Dropdown.Link>
-                                        }
-
-                                        <Dropdown.Link href={route('experiences.myExperiencies')}>
-                                            Les meves experiencies
-                                        </Dropdown.Link>
-
-                                        <Dropdown.Link href={route('logout')} method="post" as="button">
-                                            Tancar la sessió
-                                        </Dropdown.Link>
-                                    </Dropdown.Content>
-                                </Dropdown>
-                            </div>
-                        </div>
-
-                        <div className="-me-2 flex items-center sm:hidden">
-                            <button
-                                onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
-                                className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
-                            >
-                                <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                    <path
-                                        className={!showingNavigationDropdown ? 'inline-flex' : 'hidden'}
-                                        strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                    <path
-                                        className={showingNavigationDropdown ? 'inline-flex' : 'hidden'}
-                                        strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
-                    <div className="space-y-1 pb-3 pt-2">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
-
-                    <div className="border-t border-gray-200 pb-1 pt-4">
-                        <div className="px-4">
-                            <div className="text-base font-medium text-gray-800">{user?.name}</div>
-                            <div className="text-sm font-medium text-gray-500">{user?.email}</div>
-                        </div>
-
-                        <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
-
-                            {user.role === "admin" &&
-                                <ResponsiveNavLink href={route('admin.dashboard')}>
-                                    Admin Dashboard
-                                </ResponsiveNavLink>
-                            }
-
-                            <ResponsiveNavLink href={route('experiences.myExperiencies')}>
-                                Les meves experiencies
-                            </ResponsiveNavLink>
-
-                            <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                                Log Out
-                            </ResponsiveNavLink>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+            <Header />
 
             {header && (
-                <header className="bg-white shadow">
-                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                < header className="bg-white dark:bg-[#1e1e1b] shadow transition-colors duration-300">
+                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 text-gray-800 dark:text-white">
                         {header}
                     </div>
                 </header>
-            )}
+            )
+            }
 
             <main className="flex-grow">
                 <div>
@@ -185,6 +26,6 @@ export default function AuthenticatedLayout({ header, children }) {
             </main>
 
             <Footer />
-        </div>
+        </div >
     );
 }

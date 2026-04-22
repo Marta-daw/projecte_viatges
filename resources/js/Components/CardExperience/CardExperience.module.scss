@@ -9,10 +9,22 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-
     background-color: var(--bg-color-white);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     margin: 20px auto;
+    transition: background-color 0.3s ease;
+}
+
+:global(.dark) .card {
+    background-color: #1e1e1b !important;
+}
+
+:global(.dark) .cardTitle {
+    color: #e2b39a !important;
+}
+
+:global(.dark) .cardDescription {
+    color: #f4f4f5 !important;
 }
 
 .compact {
