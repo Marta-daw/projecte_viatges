@@ -19,7 +19,7 @@ export default function TermsOfUse() {
                             Condicions d'Ús
                         </h1>
                         <Link
-                            href={route('home')}
+                            href={route('HomeViatges')}
                             className="inline-flex items-center rounded-full border px-4 py-2 text-sm font-semibold transition
                                      text-[#2D4A6B] dark:text-blue-400 
                                      border-[#2D4A6B]/25 dark:border-blue-500/30 
