@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import styles from './MapInput.module.scss';
 
 let DefaultIcon = L.icon({
     iconUrl: icon,
@@ -74,7 +75,7 @@ export default function MapInput({ onChange, defaultPosition = null }) {
             <button
                 type="button" // IMPORTANTE: type="button" para que no envíe el formulario al pulsarlo
                 onClick={trobam}
-                className="mb-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                className={styles.findMeButton}
             >
                 📍 Troba'm
             </button>

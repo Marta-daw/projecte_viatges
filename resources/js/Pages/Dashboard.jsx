@@ -117,7 +117,7 @@ export default function Dashboard({ llista, categories }) {
     return (
         <AuthenticatedLayout
             header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800">
+                <h2 className="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
                     Inicio / Dashboard
                 </h2>
             }

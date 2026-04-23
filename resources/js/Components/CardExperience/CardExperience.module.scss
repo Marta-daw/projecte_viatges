@@ -15,7 +15,6 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-
     background-color: var(--bg-color-white);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
     border: 1px solid rgba(45, 74, 107, 0.08);
@@ -33,6 +32,25 @@
         border-color: rgba(45, 74, 107, 0.25);
         background-color: #fffdf9;
     }
+}
+
+/* --- MODO OSCURO --- */
+:global(.dark) .card {
+    background-color: #1e1e1b !important;
+    border-color: #2d2d2a !important;
+}
+
+:global(.dark) .card:hover {
+    background-color: #252522 !important;
+    border-color: rgba(96, 165, 250, 0.2) !important;
+}
+
+:global(.dark) .cardTitle {
+    color: #e2b39a !important;
+}
+
+:global(.dark) .cardDescription {
+    color: #f4f4f5 !important;
 }
 
 .compact {

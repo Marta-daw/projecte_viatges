@@ -1,0 +1,24 @@
+.findMeButton {
+    font-family: var(--font-principal);
+    font-size: var(--font-size-small);
+    font-weight: 700;
+    color: var(--ivory-beige);
+    background-color: var(--red-needle);
+    border: 1px solid var(--brown-compass);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    margin-bottom: 0.65rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.12s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        background-color: var(--brown-compass);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(107, 58, 42, 0.2);
+    }
+
+    &:focus-visible {
+        outline: 3px solid rgba(192, 99, 74, 0.35);
+        outline-offset: 2px;
+    }
+}
